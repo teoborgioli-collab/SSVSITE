@@ -7,23 +7,20 @@
   },
   "blocks": [
     {
-      "_template": "pageHeader",
       "enabled": true,
       "badge": "Mitmachen",
       "title": "Mach mit!",
       "intro": "Die SSV lebt von den Ideen und dem Engagement der Bewohner:innen.",
       "image": "",
       "imageAlt": "",
-      "color": "lime"
+      "color": "lime",
+      "_template": "pageHeader"
     },
     {
-      "_template": "features",
       "enabled": true,
       "badge": "",
       "heading": "So kannst du dich einbringen",
       "intro": "",
-      "style": "light",
-      "columns": "3",
       "cards": [
         {
           "title": "Komm zur Sitzung",
@@ -38,24 +35,26 @@
           "accent": "blue"
         },
         {
-          "title": "Lass dich wählen",
-          "text": "Bei der nächsten Wahl kannst du selbst für die SSV kandidieren.",
+          "title": "Entscheide mit",
+          "text": "Stimme mit bei Entscheidungen im Wohnheim",
           "icon": "vote",
           "accent": "lime"
         }
-      ]
+      ],
+      "style": "light",
+      "columns": "3",
+      "_template": "features"
     },
     {
-      "_template": "richText",
       "enabled": true,
       "badge": "",
       "heading": "Arbeitsgruppen (AGs)",
+      "body": "\\[Platzhalter] Hier die aktuellen AGs auflisten, zum Beispiel:\n\n* Event-AG\n* Garten-AG\n* Technik-AG\n\nInteresse? [Schreib uns](/kontakt)!\n",
       "width": "narrow",
       "color": "white",
-      "body": "\\[Platzhalter] Hier die aktuellen AGs auflisten, zum Beispiel:\n\n* Event-AG\n* Garten-AG\n* Technik-AG\n\nInteresse? [Schreib uns](/kontakt)!\n"
+      "_template": "richText"
     },
     {
-      "_template": "upcomingEvents",
       "enabled": true,
       "badge": "",
       "heading": "Nächste Gelegenheiten",
@@ -63,10 +62,10 @@
       "count": 3,
       "emptyText": "",
       "buttonLabel": "Alle Termine",
-      "buttonHref": "/veranstaltungen"
+      "buttonHref": "/veranstaltungen",
+      "_template": "upcomingEvents"
     },
     {
-      "_template": "cta",
       "enabled": true,
       "badge": "",
       "heading": "Fragen? Ideen?",
@@ -80,7 +79,8 @@
       ],
       "color": "black",
       "image": "",
-      "imageAlt": ""
+      "imageAlt": "",
+      "_template": "cta"
     }
   ]
 }
