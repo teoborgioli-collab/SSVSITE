@@ -48,8 +48,8 @@
     {
       "enabled": true,
       "badge": "",
-      "heading": "Arbeitsgruppen (AGs)",
-      "body": "\\[Platzhalter] Hier die aktuellen AGs auflisten, zum Beispiel:\n\n* Event-AG\n* Garten-AG\n* Technik-AG\n\nInteresse? [Schreib uns](/kontakt)!\n",
+      "heading": "Du willst Mietglied werden?",
+      "body": "COME FIND US AT OUR WEEKLY OR AT AN EVENT.\n\nFILL OUT THE\n\n[APPLICATION FORM](https://member.ssvpotsdamerstr.de/)\n",
       "width": "narrow",
       "color": "white",
       "_template": "richText"
