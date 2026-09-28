@@ -1,0 +1,29 @@
+---
+import CmsImage from './CmsImage.astro';
+import Icon from './Icon.astro';
+import { formatDate } from '../../lib/dates';
+interface Props { post: any; labels: Record<string, string>; headingLevel?: 'h2' | 'h3' }
+const { post, labels, headingLevel: H = 'h3' } = Astro.props;
+const d = post.data;
+const href = `/aktuelles/${post.id}`;
+---
+<article class="group relative flex h-full flex-col bg-white brutal-border brutal-press" data-reveal>
+  <div class="relative aspect-[16/10] overflow-hidden border-b-[3px] border-ink bg-ink">
+    {d.image ? (
+      <CmsImage src={d.image} alt={d.imageAlt} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" maxWidth={960} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+    ) : (
+      <div class="flex h-full items-center justify-center bg-ssv-blue text-ssv-lime"><Icon name="megaphone" size={64} /></div>
+    )}
+    {d.featured && <span class="absolute left-3 top-3 bg-ssv-lime px-2.5 py-1 text-xs font-bold uppercase tracking-wider brutal-border">{labels.featured}</span>}
+  </div>
+  <div class="flex flex-1 flex-col p-6">
+    <time datetime={d.date.toISOString()} class="mb-4 inline-block w-max bg-ink px-3 py-1 text-sm font-bold text-white">{formatDate(d.date)}</time>
+    <H class="mb-3 text-2xl font-bold uppercase leading-tight tracking-tight">
+      <a href={href} class="after:absolute after:inset-0 focus-visible:outline-none">{d.title}</a>
+    </H>
+    {d.excerpt && <p class="mb-6 font-medium text-ink/80">{d.excerpt}</p>}
+    <span class="mt-auto inline-flex items-center gap-2 font-bold uppercase tracking-wider text-ssv-blue group-hover:underline" aria-hidden="true">
+      {labels.readMore} <Icon name="arrow-right" size={18} class="transition-transform group-hover:translate-x-1" />
+    </span>
+  </div>
+</article>

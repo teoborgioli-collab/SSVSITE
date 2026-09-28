@@ -1,0 +1,47 @@
+---
+import Button from '../ui/Button.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
+import { fill, isExternal } from '../../lib/content';
+interface Props { settings: any }
+const { settings } = Astro.props;
+const f = settings.footer || {};
+const ext = (href: string) => (isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+---
+<footer class="border-t-[3px] border-ink bg-ink text-white">
+  <div class="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-2">
+      <p class="display mb-5 text-4xl text-ssv-lime md:text-5xl">{settings.siteName}</p>
+      {f.text && <p class="mb-6 max-w-md text-lg font-medium text-white/75">{f.text}</p>}
+      <p class="mb-6">
+        <a href={`mailto:${settings.email}`} class="break-all text-lg font-bold underline decoration-ssv-lime decoration-2 underline-offset-4 hover:text-ssv-lime">{settings.email}</a>
+      </p>
+      {settings.address && <address class="mb-6 whitespace-pre-line text-white/75 not-italic">{settings.address}</address>}
+      <div class="flex flex-wrap items-center gap-4">
+        {f.ctaLabel && f.ctaHref && <Button href={f.ctaHref} variant="secondary">{f.ctaLabel}</Button>}
+        <SocialLinks social={settings.social} invert />
+      </div>
+    </div>
+    {(f.columns || []).map((col: any) => (
+      <nav aria-label={col.title || 'Links'}>
+        {col.title && <p class="mb-5 text-lg font-bold uppercase tracking-wide">{col.title}</p>}
+        <ul class="space-y-3 font-medium text-white/75">
+          {(col.links || []).filter((l: any) => l?.label && l?.href).map((l: any) => (
+            <li><a href={l.href} {...ext(l.href)} class="hover:text-ssv-lime hover:underline">{l.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    ))}
+  </div>
+  <div class="border-t border-white/15">
+    <div class="container-page flex flex-col gap-4 py-6 text-sm font-bold uppercase tracking-widest text-white/60 md:flex-row md:items-center md:justify-between">
+      <p>{fill(f.copyright || `© {jahr} ${settings.siteName}`)}</p>
+      {f.legalLinks?.length > 0 && (
+        <ul class="flex flex-wrap gap-6">
+          {f.legalLinks.filter((l: any) => l?.label && l?.href).map((l: any) => (
+            <li><a href={l.href} class="hover:text-ssv-lime hover:underline">{l.label}</a></li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </div>
+</footer>

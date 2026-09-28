@@ -1,0 +1,29 @@
+{
+  "title": "Datenschutz",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Datenschutzerklärung der SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "",
+      "title": "Datenschutzerklärung",
+      "intro": "",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "",
+      "width": "narrow",
+      "color": "white",
+      "body": "**⚠️ Platzhalter – diese Datenschutzerklärung muss vor der Veröffentlichung an die tatsächlich genutzten Dienste angepasst und rechtlich geprüft werden.**\n\n## 1. Verantwortliche Stelle\n\n\\[Platzhalter: Name, Anschrift, E-Mail]\n\n## 2. Hosting\n\n\\[Platzhalter] Diese Website wird bei Vercel gehostet. Beim Aufruf werden technisch notwendige Daten (z. B. IP-Adresse, Zeitpunkt) verarbeitet.\n\n## 3. Kontaktformular und E-Mail\n\n\\[Platzhalter] Angaben aus dem Kontaktformular werden ausschließlich zur Bearbeitung deiner Anfrage verwendet.\n\n## 4. Schriftarten\n\nDie auf dieser Website verwendeten Schriften werden lokal ausgeliefert. Es findet keine Verbindung zu Servern von Google statt.\n\n## 5. Deine Rechte\n\n\\[Platzhalter] Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerspruch, Beschwerde bei einer Aufsichtsbehörde.\n"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+---
+import { richTextToHtml } from '../../lib/richtext';
+interface Props { value?: unknown; invert?: boolean; class?: string }
+const { value, invert = false, class: cls = '' } = Astro.props;
+const html = richTextToHtml(value);
+---
+{html ? <div class={`prose-ssv ${invert ? 'prose-invert-ssv' : ''} ${cls}`} set:html={html} /> : <div class={`prose-ssv ${invert ? 'prose-invert-ssv' : ''} ${cls}`}><slot /></div>}

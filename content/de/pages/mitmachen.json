@@ -1,0 +1,86 @@
+{
+  "title": "Mitmachen",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "So kannst du dich in der SSV Potsdamer Straße engagieren."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Mitmachen",
+      "title": "Mach mit!",
+      "intro": "Die SSV lebt von den Ideen und dem Engagement der Bewohner:innen.",
+      "image": "",
+      "imageAlt": "",
+      "color": "lime"
+    },
+    {
+      "_template": "features",
+      "enabled": true,
+      "badge": "",
+      "heading": "So kannst du dich einbringen",
+      "intro": "",
+      "style": "light",
+      "columns": "3",
+      "cards": [
+        {
+          "title": "Komm zur Sitzung",
+          "text": "Unsere Sitzungen sind offen. [Platzhalter] Wann und wo sie stattfinden, hier eintragen.",
+          "icon": "users",
+          "accent": "lime"
+        },
+        {
+          "title": "Hilf bei Events",
+          "text": "Auf- und Abbau, Deko, Musik – für jede Veranstaltung brauchen wir helfende Hände.",
+          "icon": "party-popper",
+          "accent": "blue"
+        },
+        {
+          "title": "Lass dich wählen",
+          "text": "Bei der nächsten Wahl kannst du selbst für die SSV kandidieren.",
+          "icon": "vote",
+          "accent": "lime"
+        }
+      ]
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "Arbeitsgruppen (AGs)",
+      "width": "narrow",
+      "color": "white",
+      "body": "\\[Platzhalter] Hier die aktuellen AGs auflisten, zum Beispiel:\n\n* Event-AG\n* Garten-AG\n* Technik-AG\n\nInteresse? [Schreib uns](/kontakt)!\n"
+    },
+    {
+      "_template": "upcomingEvents",
+      "enabled": true,
+      "badge": "",
+      "heading": "Nächste Gelegenheiten",
+      "intro": "",
+      "count": 3,
+      "emptyText": "",
+      "buttonLabel": "Alle Termine",
+      "buttonHref": "/veranstaltungen"
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "",
+      "heading": "Fragen? Ideen?",
+      "text": "Schreib uns einfach – wir freuen uns über jede Nachricht.",
+      "buttons": [
+        {
+          "label": "Kontakt aufnehmen",
+          "href": "/kontakt",
+          "variant": "secondary"
+        }
+      ],
+      "color": "black",
+      "image": "",
+      "imageAlt": ""
+    }
+  ]
+}

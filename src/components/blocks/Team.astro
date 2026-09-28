@@ -1,0 +1,39 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import CmsImage from '../ui/CmsImage.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { getTeam } from '../../lib/content';
+const { block } = Astro.props as { block: any };
+let members = await getTeam();
+if (block.limit) members = members.slice(0, block.limit);
+---
+<section id={block.anchor || undefined} class="bg-paper py-16 md:py-24">
+  <div class="container-page">
+    <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} />
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {members.map((m) => (
+        <li data-reveal>
+          <article class="group flex h-full flex-col bg-white p-5 brutal-border brutal-press transition-colors hover:bg-ssv-lime">
+            <div class="mb-5 aspect-square overflow-hidden bg-ink brutal-border">
+              {m.data.image ? (
+                <CmsImage src={m.data.image} alt={m.data.imageAlt || m.data.name} sizes="(min-width: 1280px) 22vw, (min-width: 640px) 45vw, 100vw" maxWidth={640} class="h-full w-full object-cover grayscale transition duration-300 group-hover:grayscale-0" />
+              ) : (
+                <div class="flex h-full items-center justify-center text-white/40"><Icon name="users" size={72} /></div>
+              )}
+            </div>
+            <h3 class="text-xl font-bold uppercase leading-tight tracking-tight">{m.data.name}</h3>
+            {m.data.role && <p class="mb-3 font-bold text-ssv-blue">{m.data.role}</p>}
+            {m.data.bio && <p class="font-medium text-ink/80">{m.data.bio}</p>}
+            {m.data.email && (
+              <a href={`mailto:${m.data.email}`} class="mt-4 inline-flex items-center gap-2 break-all font-bold underline decoration-2 underline-offset-4">
+                <Icon name="mail" size={18} /> {m.data.email}
+              </a>
+            )}
+          </article>
+        </li>
+      ))}
+    </ul>
+    {block.buttonLabel && block.buttonHref && <div class="mt-12"><Button href={block.buttonHref} variant="outline" arrow>{block.buttonLabel}</Button></div>}
+  </div>
+</section>

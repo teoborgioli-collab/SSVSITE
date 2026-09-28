@@ -1,0 +1,44 @@
+---
+import CmsImage from '../ui/CmsImage.astro';
+import Icon from '../ui/Icon.astro';
+import { getNews, getSettings } from '../../lib/content';
+import { formatDate } from '../../lib/dates';
+const { block } = Astro.props as { block: any };
+const { labels } = await getSettings();
+const posts = await getNews();
+const H = block.heading ? 'h3' : 'h2';
+---
+<section id={block.anchor || undefined} class="bg-paper py-16 md:py-20">
+  <div class="container-page max-w-5xl">
+    {block.heading && <h2 class="display mb-10 text-4xl md:text-5xl">{block.heading}</h2>}
+    {posts.length === 0 && <p class="text-lg font-medium">{block.emptyText || labels.noNews}</p>}
+    <ul class="space-y-10">
+      {posts.map((post) => (
+        <li>
+          <article class="group relative flex flex-col gap-6 bg-white p-5 brutal-border brutal-press sm:p-6 md:flex-row md:gap-8" data-reveal>
+            <div class="aspect-video shrink-0 overflow-hidden bg-ink brutal-border md:aspect-square md:w-1/3">
+              {post.data.image ? (
+                <CmsImage src={post.data.image} alt={post.data.imageAlt} sizes="(min-width: 768px) 30vw, 100vw" maxWidth={960} class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              ) : (
+                <div class="flex h-full items-center justify-center bg-ssv-blue text-ssv-lime"><Icon name="megaphone" size={64} /></div>
+              )}
+            </div>
+            <div class="flex flex-col justify-center">
+              <div class="mb-4 flex flex-wrap items-center gap-3">
+                <time datetime={post.data.date.toISOString()} class="bg-ink px-3 py-1 text-sm font-bold text-white">{formatDate(post.data.date)}</time>
+                {post.data.featured && <span class="bg-ssv-lime px-2.5 py-1 text-xs font-bold uppercase tracking-wider brutal-border">{labels.featured}</span>}
+              </div>
+              <H class="mb-3 text-2xl font-bold uppercase leading-tight tracking-tight md:text-3xl">
+                <a href={`/aktuelles/${post.id}`} class="after:absolute after:inset-0">{post.data.title}</a>
+              </H>
+              {post.data.excerpt && <p class="mb-5 text-lg font-medium text-ink/80">{post.data.excerpt}</p>}
+              <span class="inline-flex items-center gap-2 font-bold uppercase tracking-wider text-ssv-blue" aria-hidden="true">
+                {labels.readMore} <Icon name="arrow-right" size={18} class="transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

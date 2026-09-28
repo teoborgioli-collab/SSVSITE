@@ -1,0 +1,21 @@
+{
+  "title": "Kontakt",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "So erreichst du die SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "contact",
+      "enabled": true,
+      "badge": "Kontakt",
+      "heading": "Sag hallo",
+      "text": "Du hast eine Frage, ein Problem oder eine Idee? Schreib uns eine E-Mail oder nutze das Formular.",
+      "showDetails": true,
+      "showSocial": true,
+      "showForm": true,
+      "formHeading": "Schreib uns"
+    }
+  ]
+}

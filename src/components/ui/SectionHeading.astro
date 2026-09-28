@@ -1,0 +1,11 @@
+---
+interface Props { badge?: string | null; heading?: string | null; intro?: string | null; as?: 'h1' | 'h2' | 'h3'; class?: string; invert?: boolean; align?: 'left' | 'center' }
+const { badge, heading, intro, as: Tag = 'h2', class: cls = '', invert = false, align = 'left' } = Astro.props;
+---
+{(badge || heading || intro) && (
+  <div class={`mb-10 max-w-3xl md:mb-14 ${align === 'center' ? 'mx-auto text-center' : ''} ${cls}`}>
+    {badge && <p class="eyebrow mb-5">{badge}</p>}
+    {heading && <Tag class={`display text-4xl sm:text-5xl md:text-6xl ${invert ? 'text-white' : ''}`}>{heading}</Tag>}
+    {intro && <p class={`mt-5 text-lg font-medium md:text-xl ${invert ? 'text-white/80' : 'text-ink/80'}`}>{intro}</p>}
+  </div>
+)}

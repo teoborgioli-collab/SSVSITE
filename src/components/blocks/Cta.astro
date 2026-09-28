@@ -1,0 +1,29 @@
+---
+import Buttons from '../ui/Buttons.astro';
+import CmsImage from '../ui/CmsImage.astro';
+const { block } = Astro.props as { block: any };
+const colors: Record<string, string> = {
+  blue: 'bg-ssv-blue text-white', lime: 'bg-ssv-lime text-ink', black: 'bg-ink text-white', white: 'bg-white text-ink', light: 'bg-paper text-ink',
+};
+const c = colors[block.color] || colors.blue;
+const dark = ['blue', 'black'].includes(block.color || 'blue');
+---
+<section id={block.anchor || undefined} class="py-12 md:py-16">
+  <div class="container-page">
+    <div class={`relative grid overflow-hidden brutal-border shadow-brutal-lg ${c} ${block.image ? 'md:grid-cols-[1.4fr_1fr]' : ''}`} data-reveal>
+      <div class="relative z-10 p-8 sm:p-10 md:p-14">
+        {block.badge && <p class={`eyebrow mb-6 ${block.color === 'lime' ? 'bg-white' : ''}`}>{block.badge}</p>}
+        {block.heading && <h2 class="display text-4xl sm:text-5xl md:text-6xl text-balance">{block.heading}</h2>}
+        {block.text && <p class={`mt-6 max-w-2xl text-lg font-medium md:text-xl ${dark ? 'text-white/90' : 'text-ink/85'}`}>{block.text}</p>}
+        <Buttons buttons={block.buttons} class="mt-8" />
+      </div>
+      {block.image ? (
+        <div class="min-h-64 border-t-[3px] border-ink md:border-l-[3px] md:border-t-0">
+          <CmsImage src={block.image} alt={block.imageAlt} sizes="(min-width: 768px) 40vw, 100vw" maxWidth={1280} class="h-full w-full object-cover" />
+        </div>
+      ) : (
+        <div class={`pointer-events-none absolute -right-10 -top-10 hidden h-48 w-48 rounded-full border-[3px] border-ink md:block ${block.color === 'lime' ? 'bg-ssv-blue' : 'bg-ssv-lime'}`} aria-hidden="true"></div>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+---
+import EventCard from '../ui/EventCard.astro';
+import { getEvents, getSettings } from '../../lib/content';
+const { block } = Astro.props as { block: any };
+const { labels } = await getSettings();
+const { upcoming, past } = await getEvents();
+const pastList = block.pastCount ? past.slice(0, block.pastCount) : past;
+---
+<div id={block.anchor || undefined} data-events-archive>
+  <section class="bg-paper py-16 md:py-20" aria-labelledby="upcoming-heading">
+    <div class="container-page">
+      <h2 id="upcoming-heading" class="display mb-10 text-4xl md:text-5xl">{block.upcomingHeading || 'Kommende Veranstaltungen'}</h2>
+      <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-upcoming-list>
+        {upcoming.map((event) => <li data-event-item><EventCard event={event} labels={labels} headingLevel="h3" /></li>)}
+      </ul>
+      <p class={`bg-white p-6 text-lg font-medium brutal-border ${upcoming.length ? 'hidden' : ''}`} data-empty>{block.emptyText || labels.noEvents}</p>
+    </div>
+  </section>
+  {block.showPast !== false && (
+    <section class="border-t-[3px] border-ink bg-white py-16 md:py-20" aria-labelledby="past-heading">
+      <div class="container-page">
+        <h2 id="past-heading" class="display mb-10 text-3xl md:text-4xl">{block.pastHeading || 'Vergangene Veranstaltungen'}</h2>
+        <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-past-list>
+          {pastList.map((event) => <li data-event-item><EventCard event={event} labels={labels} past headingLevel="h3" /></li>)}
+        </ul>
+      </div>
+    </section>
+  )}
+</div>

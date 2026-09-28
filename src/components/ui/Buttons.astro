@@ -1,0 +1,15 @@
+---
+import Button from './Button.astro';
+interface Props { buttons?: { label?: string; href?: string; variant?: string }[] | null; class?: string; size?: 'sm' | 'md' | 'lg' }
+const { buttons, class: cls = '', size = 'lg' } = Astro.props;
+const list = (buttons || []).filter((b) => b?.label && b?.href);
+---
+{list.length > 0 && (
+  <div class={`flex flex-wrap gap-4 ${cls}`}>
+    {list.map((b, i) => (
+      <Button href={b.href} variant={b.variant || (i === 0 ? 'primary' : 'outline')} size={size} arrow={i === 0}>
+        {b.label}
+      </Button>
+    ))}
+  </div>
+)}

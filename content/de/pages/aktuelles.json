@@ -1,0 +1,26 @@
+{
+  "title": "Aktuelles",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Neuigkeiten und Ankündigungen der SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "News",
+      "title": "Aktuelles",
+      "intro": "Neuigkeiten, Infos und Ankündigungen aus dem Wohnheim.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "newsList",
+      "enabled": true,
+      "heading": "",
+      "emptyText": "Noch keine Beiträge vorhanden."
+    }
+  ]
+}

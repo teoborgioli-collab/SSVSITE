@@ -1,0 +1,29 @@
+{
+  "title": "Impressum",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Impressum der SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "",
+      "title": "Impressum",
+      "intro": "",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "",
+      "width": "narrow",
+      "color": "white",
+      "body": "**⚠️ Platzhalter – bitte vor der Veröffentlichung vollständig ausfüllen und rechtlich prüfen lassen.**\n\n## Angaben gemäß § 5 DDG\n\nSSV Potsdamer Straße\n\n\\[Platzhalter: vollständige, ladungsfähige Anschrift]\n\n## Vertreten durch\n\n\\[Platzhalter: Name(n) der vertretungsberechtigten Person(en)]\n\n## Kontakt\n\nE-Mail: info\\@ssvpotsdamerstr.de\n\n## Verantwortlich für den Inhalt\n\n\\[Platzhalter: Name und Anschrift der verantwortlichen Person]\n"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+---
+import Section from '../ui/Section.astro';
+import Prose from '../ui/Prose.astro';
+const { block } = Astro.props as { block: any };
+const invert = ['blue', 'black'].includes(block.color);
+---
+<Section color={block.color || 'white'} id={block.anchor}>
+  <div class={`container-page ${block.width === 'wide' ? '' : 'max-w-3xl'}`}>
+    {block.badge && <p class="eyebrow mb-5">{block.badge}</p>}
+    {block.heading && <h2 class="display mb-8 text-4xl md:text-5xl">{block.heading}</h2>}
+    <Prose value={block.body} invert={invert} />
+  </div>
+</Section>

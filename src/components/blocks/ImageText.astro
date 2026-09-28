@@ -1,0 +1,26 @@
+---
+import Section from '../ui/Section.astro';
+import Prose from '../ui/Prose.astro';
+import Buttons from '../ui/Buttons.astro';
+import CmsImage from '../ui/CmsImage.astro';
+const { block } = Astro.props as { block: any };
+const invert = ['blue', 'black'].includes(block.color);
+const left = block.imagePosition === 'left';
+---
+<Section color={block.color || 'light'} id={block.anchor}>
+  <div class="container-page grid items-center gap-10 md:grid-cols-2 md:gap-16">
+    <div class={left ? 'md:order-2' : ''} data-reveal>
+      {block.badge && <p class="eyebrow mb-5">{block.badge}</p>}
+      {block.heading && <h2 class="display mb-8 text-4xl md:text-5xl">{block.heading}</h2>}
+      <Prose value={block.body} invert={invert} class="prose-xl" />
+      <Buttons buttons={block.buttons} class="mt-8" size="md" />
+    </div>
+    {block.image && (
+      <div class={`relative ${left ? 'md:order-1' : ''}`} data-reveal>
+        <div class="aspect-[4/3] overflow-hidden bg-ink brutal-border shadow-brutal-lg">
+          <CmsImage src={block.image} alt={block.imageAlt} sizes="(min-width: 768px) 50vw, 100vw" class="h-full w-full object-cover grayscale-[35%] transition duration-500 hover:grayscale-0" />
+        </div>
+      </div>
+    )}
+  </div>
+</Section>

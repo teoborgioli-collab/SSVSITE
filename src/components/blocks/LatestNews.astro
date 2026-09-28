@@ -1,0 +1,26 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import NewsCard from '../ui/NewsCard.astro';
+import Button from '../ui/Button.astro';
+import { getNews, getSettings } from '../../lib/content';
+const { block } = Astro.props as { block: any };
+const { labels } = await getSettings();
+let posts = await getNews();
+if (block.onlyFeatured) posts = posts.filter((p) => p.data.featured);
+posts = posts.slice(0, block.count || 3);
+---
+<section id={block.anchor || undefined} class="bg-paper py-16 md:py-24">
+  <div class="container-page">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} />
+      {block.buttonLabel && block.buttonHref && <Button href={block.buttonHref} variant="outline" arrow class="mb-10 md:mb-14">{block.buttonLabel}</Button>}
+    </div>
+    {posts.length ? (
+      <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post) => <li><NewsCard post={post} labels={labels} /></li>)}
+      </ul>
+    ) : (
+      <p class="text-lg font-medium">{labels.noNews}</p>
+    )}
+  </div>
+</section>

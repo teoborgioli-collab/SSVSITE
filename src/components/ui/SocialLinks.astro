@@ -1,0 +1,26 @@
+---
+import Icon from './Icon.astro';
+interface Props { social?: any[]; invert?: boolean; showLabels?: boolean }
+const { social = [], invert = false, showLabels = false } = Astro.props;
+const names: Record<string, string> = { instagram: 'Instagram', facebook: 'Facebook', mastodon: 'Mastodon', telegram: 'Telegram', whatsapp: 'WhatsApp', signal: 'Signal', discord: 'Discord', youtube: 'YouTube', tiktok: 'TikTok', linkedin: 'LinkedIn', website: 'Website' };
+const list = (social || []).filter((s) => s?.url);
+---
+{list.length > 0 && (
+  <ul class="flex flex-wrap gap-3">
+    {list.map((s) => (
+      <li>
+        <a
+          href={s.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={`inline-flex items-center gap-2 font-bold brutal-border transition-colors ${showLabels ? 'px-3 py-2' : 'h-11 w-11 justify-center'} ${invert ? 'border-white bg-transparent text-white hover:bg-ssv-lime hover:text-ink' : 'bg-white text-ink hover:bg-ssv-lime'}`}
+          aria-label={showLabels ? undefined : `${names[s.platform] || s.label || 'Link'} (öffnet in neuem Tab)`}
+        >
+          <Icon name={s.platform || 'website'} size={20} />
+          {showLabels && <span>{s.label || names[s.platform] || s.url}</span>}
+          {showLabels && <span class="sr-only">(öffnet in neuem Tab)</span>}
+        </a>
+      </li>
+    ))}
+  </ul>
+)}

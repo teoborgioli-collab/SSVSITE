@@ -1,0 +1,84 @@
+---
+/**
+ * Kontaktformular. Die Ziel-Adresse wird im CMS festgelegt
+ * (Standard /api/contact). Keine Geheimnisse im Frontend.
+ */
+import Button from './Button.astro';
+interface Props { settings: any; heading?: string | null }
+const { settings, heading } = Astro.props;
+const f = settings.contactForm || {};
+const endpoint = f.endpoint || '/api/contact';
+---
+<div class="bg-ssv-lime p-6 brutal-border shadow-brutal-lg sm:p-8 md:p-10">
+  {heading && <h2 class="display mb-6 text-3xl md:text-4xl">{heading}</h2>}
+  <form class="space-y-5" action={endpoint} method="post" data-contact-form data-success={f.successMessage} data-error={f.errorMessage} novalidate>
+    <div class="grid gap-5 sm:grid-cols-2">
+      <div>
+        <label for="cf-name" class="mb-2 block font-bold">{f.nameLabel || 'Name'} <span aria-hidden="true">*</span></label>
+        <input id="cf-name" name="name" type="text" autocomplete="name" required maxlength="200" class="w-full bg-white p-4 brutal-border outline-none focus:ring-4 focus:ring-ssv-blue" />
+      </div>
+      <div>
+        <label for="cf-email" class="mb-2 block font-bold">{f.emailLabel || 'E-Mail'} <span aria-hidden="true">*</span></label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" required maxlength="320" class="w-full bg-white p-4 brutal-border outline-none focus:ring-4 focus:ring-ssv-blue" />
+      </div>
+    </div>
+    <div>
+      <label for="cf-subject" class="mb-2 block font-bold">{f.subjectLabel || 'Betreff'} <span aria-hidden="true">*</span></label>
+      <input id="cf-subject" name="subject" type="text" required maxlength="300" class="w-full bg-white p-4 brutal-border outline-none focus:ring-4 focus:ring-ssv-blue" />
+    </div>
+    <div>
+      <label for="cf-message" class="mb-2 block font-bold">{f.messageLabel || 'Nachricht'} <span aria-hidden="true">*</span></label>
+      <textarea id="cf-message" name="message" rows="6" required maxlength="10000" class="w-full resize-y bg-white p-4 brutal-border outline-none focus:ring-4 focus:ring-ssv-blue"></textarea>
+    </div>
+    <!-- Spam-Schutz: für Menschen unsichtbar -->
+    <div class="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+      <label for="cf-website">Website</label>
+      <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <input type="hidden" name="startedAt" value="" />
+    {f.privacyNote && <p class="text-sm font-medium">{f.privacyNote} <a href="/datenschutz" class="font-bold underline underline-offset-4">Datenschutz</a></p>}
+    <p class="text-sm font-medium"><span aria-hidden="true">*</span> Pflichtfeld</p>
+    <Button type="submit" variant="primary" size="lg" class="w-full" arrow>{f.submitLabel || 'Absenden'}</Button>
+    <div role="status" aria-live="polite" class="hidden p-4 font-bold brutal-border" data-form-status></div>
+  </form>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    const started = form.querySelector<HTMLInputElement>('input[name="startedAt"]');
+    if (started) started.value = String(Date.now());
+    const status = form.querySelector<HTMLElement>('[data-form-status]')!;
+    const show = (msg: string, ok: boolean) => {
+      status.textContent = msg;
+      status.classList.remove('hidden', 'bg-white', 'bg-ink', 'text-white');
+      status.classList.add(...(ok ? ['bg-white'] : ['bg-ink', 'text-white']));
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      btn?.setAttribute('disabled', '');
+      btn?.setAttribute('aria-busy', 'true');
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        if (started) started.value = String(Date.now());
+        show(form.dataset.success || 'Danke für deine Nachricht!', true);
+      } catch {
+        show(form.dataset.error || 'Senden fehlgeschlagen.', false);
+      } finally {
+        btn?.removeAttribute('disabled');
+        btn?.removeAttribute('aria-busy');
+      }
+    });
+  });
+</script>

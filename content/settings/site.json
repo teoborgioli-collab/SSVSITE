@@ -1,0 +1,151 @@
+{
+  "siteName": "SSV Potsdamer Straße",
+  "tagline": "Die studentische Selbstverwaltung im Wohnheim Potsdamer Straße, Berlin.",
+  "email": "info@ssvpotsdamerstr.de",
+  "address": "",
+  "contactNote": "[Platzhalter] Hier z. B. Sprechzeiten oder den Ort des SSV-Briefkastens eintragen.",
+  "navigation": [
+    {
+      "label": "Über uns",
+      "href": "/ueber-uns"
+    },
+    {
+      "label": "Aktuelles",
+      "href": "/aktuelles"
+    },
+    {
+      "label": "Veranstaltungen",
+      "href": "/veranstaltungen"
+    },
+    {
+      "label": "Wohnheim",
+      "href": "/wohnheim"
+    },
+    {
+      "label": "Dokumente",
+      "href": "/dokumente"
+    },
+    {
+      "label": "FAQ",
+      "href": "/faq"
+    },
+    {
+      "label": "Kontakt",
+      "href": "/kontakt"
+    }
+  ],
+  "navCta": {
+    "enabled": true,
+    "label": "Mitmachen",
+    "href": "/mitmachen"
+  },
+  "social": [
+    {
+      "platform": "instagram",
+      "label": "@platzhalter",
+      "url": "https://www.instagram.com/"
+    }
+  ],
+  "footer": {
+    "text": "Gemeinsam wohnen. Gemeinsam gestalten. Wir sind die gewählte Vertretung der Bewohner:innen.",
+    "ctaLabel": "Schreib uns",
+    "ctaHref": "/kontakt",
+    "columns": [
+      {
+        "title": "Entdecken",
+        "links": [
+          {
+            "label": "Über uns",
+            "href": "/ueber-uns"
+          },
+          {
+            "label": "Aktuelles",
+            "href": "/aktuelles"
+          },
+          {
+            "label": "Veranstaltungen",
+            "href": "/veranstaltungen"
+          },
+          {
+            "label": "Wohnheim",
+            "href": "/wohnheim"
+          }
+        ]
+      },
+      {
+        "title": "Service",
+        "links": [
+          {
+            "label": "Mitmachen",
+            "href": "/mitmachen"
+          },
+          {
+            "label": "Dokumente",
+            "href": "/dokumente"
+          },
+          {
+            "label": "FAQ",
+            "href": "/faq"
+          },
+          {
+            "label": "Kontakt",
+            "href": "/kontakt"
+          }
+        ]
+      }
+    ],
+    "legalLinks": [
+      {
+        "label": "Impressum",
+        "href": "/impressum"
+      },
+      {
+        "label": "Datenschutz",
+        "href": "/datenschutz"
+      }
+    ],
+    "copyright": "© {jahr} SSV Potsdamer Straße"
+  },
+  "seo": {
+    "siteUrl": "https://www.ssvpotsdamerstr.de",
+    "titleTemplate": "%s | SSV Potsdamer Straße",
+    "description": "Die SSV Potsdamer Straße vertritt die Interessen der Bewohner:innen, organisiert Veranstaltungen und gestaltet das Leben im Wohnheim gemeinsam.",
+    "image": "/uploads/bilder/og-standard.jpg"
+  },
+  "contactForm": {
+    "endpoint": "/api/contact",
+    "nameLabel": "Name",
+    "emailLabel": "E-Mail",
+    "subjectLabel": "Betreff",
+    "messageLabel": "Nachricht",
+    "submitLabel": "Absenden",
+    "privacyNote": "Mit dem Absenden werden deine Angaben zur Beantwortung deiner Anfrage verarbeitet. Mehr dazu in der Datenschutzerklärung.",
+    "successMessage": "Danke! Deine Nachricht ist bei uns angekommen. Wir melden uns so schnell wie möglich.",
+    "errorMessage": "Das hat leider nicht geklappt. Bitte versuche es später noch einmal oder schreib uns direkt eine E-Mail."
+  },
+  "labels": {
+    "readMore": "Weiterlesen",
+    "backToNews": "Alle Beiträge",
+    "backToEvents": "Alle Veranstaltungen",
+    "featured": "Highlight",
+    "noNews": "Noch keine Beiträge vorhanden.",
+    "noEvents": "Gerade stehen keine Termine an – schau bald wieder vorbei!",
+    "time": "Uhrzeit",
+    "location": "Ort",
+    "date": "Datum",
+    "oClock": "Uhr",
+    "register": "Zur Anmeldung",
+    "details": "Details",
+    "past": "Vergangen",
+    "allCategories": "Alle",
+    "download": "Herunterladen",
+    "openLink": "Öffnen",
+    "noDocuments": "In dieser Kategorie gibt es noch keine Dokumente.",
+    "menu": "Menü",
+    "closeMenu": "Menü schließen",
+    "skipToContent": "Zum Inhalt springen",
+    "notFoundTitle": "Seite nicht gefunden",
+    "notFoundText": "Diese Seite gibt es leider nicht (mehr). Vielleicht findest du über die Navigation, was du suchst.",
+    "backHome": "Zur Startseite"
+  }
+}

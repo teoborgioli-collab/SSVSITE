@@ -1,0 +1,10 @@
+{
+  "name": "[Platzhalter] Person 4",
+  "role": "Veranstaltungen (Platzhalter)",
+  "image": "/uploads/bilder/team-platzhalter.jpg",
+  "imageAlt": "Platzhalter – hier ein Foto der Person einsetzen",
+  "bio": "Platzhalter-Eintrag. Im CMS unter „Team“ durch echte Angaben ersetzen – nur mit Einverständnis der Person.",
+  "email": "",
+  "order": 4,
+  "hidden": false
+}

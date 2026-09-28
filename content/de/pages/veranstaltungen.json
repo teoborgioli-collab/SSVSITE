@@ -1,0 +1,29 @@
+{
+  "title": "Veranstaltungen",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Kommende und vergangene Veranstaltungen im Wohnheim Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Termine",
+      "title": "Veranstaltungen",
+      "intro": "Alle Termine im Überblick – komm vorbei, bring Freund:innen mit!",
+      "image": "",
+      "imageAlt": "",
+      "color": "blue"
+    },
+    {
+      "_template": "eventsArchive",
+      "enabled": true,
+      "upcomingHeading": "Kommende Veranstaltungen",
+      "emptyText": "Gerade stehen keine Termine an – schau bald wieder vorbei!",
+      "showPast": true,
+      "pastHeading": "Vergangene Veranstaltungen",
+      "pastCount": 6
+    }
+  ]
+}

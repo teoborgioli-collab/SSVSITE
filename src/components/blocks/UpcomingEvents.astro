@@ -1,0 +1,24 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import EventCard from '../ui/EventCard.astro';
+import Button from '../ui/Button.astro';
+import { getEvents, getSettings } from '../../lib/content';
+const { block } = Astro.props as { block: any };
+const { labels } = await getSettings();
+const { upcoming } = await getEvents();
+// Ein paar Reserve-Termine mitschicken: Das Skript blendet bereits beendete aus.
+const count = block.count || 3;
+const list = upcoming.slice(0, count + 2);
+---
+<section id={block.anchor || undefined} class="border-y-[3px] border-ink bg-white py-16 md:py-24" data-events-limit={count}>
+  <div class="container-page">
+    <div class="flex flex-wrap items-end justify-between gap-6">
+      <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} />
+      {block.buttonLabel && block.buttonHref && <Button href={block.buttonHref} variant="outline" arrow class="mb-10 md:mb-14">{block.buttonLabel}</Button>}
+    </div>
+    <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-upcoming-list>
+      {list.map((event, i) => <li class={i >= count ? 'hidden' : ''} data-event-item><EventCard event={event} labels={labels} /></li>)}
+    </ul>
+    <p class={`text-lg font-medium ${list.length ? 'hidden' : ''}`} data-empty>{block.emptyText || labels.noEvents}</p>
+  </div>
+</section>

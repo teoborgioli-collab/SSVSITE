@@ -1,0 +1,42 @@
+---
+import Icon from '../ui/Icon.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
+import ContactForm from '../ui/ContactForm.astro';
+import { getSettings } from '../../lib/content';
+const { block, isFirst } = Astro.props as { block: any; isFirst?: boolean };
+const settings = await getSettings();
+const H = isFirst ? 'h1' : 'h2';
+---
+<section id={block.anchor || undefined} class="bg-paper py-14 md:py-20">
+  <div class="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
+    <div>
+      {block.badge && <p class="eyebrow mb-6">{block.badge}</p>}
+      {block.heading && <H class="display mb-6 text-5xl md:text-7xl">{block.heading}</H>}
+      {block.text && <p class="mb-10 text-xl font-medium md:text-2xl">{block.text}</p>}
+      {block.showDetails !== false && (
+        <ul class="space-y-5 text-lg font-bold">
+          <li class="flex items-start gap-4">
+            <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center bg-ssv-blue text-white brutal-border"><Icon name="mail" size={20} /></span>
+            <a href={`mailto:${settings.email}`} class="self-center break-all underline decoration-2 underline-offset-4 hover:bg-ssv-lime">{settings.email}</a>
+          </li>
+          {settings.address && (
+            <li class="flex items-start gap-4">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center bg-ssv-blue text-white brutal-border"><Icon name="map-pin" size={20} /></span>
+              <address class="self-center whitespace-pre-line not-italic">{settings.address}</address>
+            </li>
+          )}
+          {settings.contactNote && (
+            <li class="flex items-start gap-4">
+              <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center bg-ssv-lime text-ink brutal-border"><Icon name="info" size={20} /></span>
+              <span class="self-center whitespace-pre-line font-medium">{settings.contactNote}</span>
+            </li>
+          )}
+        </ul>
+      )}
+      {block.showSocial && settings.social?.length > 0 && (
+        <div class="mt-10"><SocialLinks social={settings.social} showLabels /></div>
+      )}
+    </div>
+    {block.showForm !== false && <ContactForm settings={settings} heading={block.formHeading} />}
+  </div>
+</section>

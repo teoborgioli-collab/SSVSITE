@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Seo from '../components/layout/Seo.astro';
+import { getSettings } from '../lib/content';
+
+interface Props {
+  title?: string | null;
+  description?: string | null;
+  image?: string | null;
+  noindex?: boolean | null;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  /** Unsichtbare Hauptüberschrift, falls die Seite selbst keine h1 hat */
+  srOnlyH1?: string | null;
+}
+const props = Astro.props;
+const settings = await getSettings();
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#CCFF00" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <Seo {...props} settings={settings} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#inhalt" class="sr-only z-[100] bg-ssv-lime px-4 py-3 font-bold brutal-border focus:not-sr-only focus:fixed focus:left-4 focus:top-4">{settings.labels.skipToContent}</a>
+    <Header settings={settings} />
+    <main id="inhalt" class="flex-1" tabindex="-1">
+      {props.srOnlyH1 && <h1 class="sr-only">{props.srOnlyH1}</h1>}
+      <slot />
+    </main>
+    <Footer settings={settings} />
+
+    <script>
+      // Dezente Einblend-Animation
+      const els = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+          }),
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // Veranstaltungen, die seit dem letzten Build vorbei sind, sofort umsortieren.
+      const now = Date.now();
+      document.querySelectorAll<HTMLElement>('[data-upcoming-list]').forEach((list) => {
+        const section = list.closest<HTMLElement>('[data-events-limit]');
+        const archive = list.closest<HTMLElement>('[data-events-archive]');
+        const pastList = archive?.querySelector('[data-past-list]');
+        const items = Array.from(list.querySelectorAll<HTMLElement>('[data-event-item]'));
+        items.forEach((li) => {
+          const end = li.querySelector<HTMLElement>('[data-end]')?.dataset.end;
+          if (end && new Date(end).getTime() < now) {
+            if (pastList) pastList.prepend(li);
+            else li.remove();
+          }
+        });
+        const remaining = Array.from(list.querySelectorAll<HTMLElement>('[data-event-item]'));
+        const limit = Number(section?.dataset.eventsLimit || 0);
+        if (limit) remaining.forEach((li, i) => li.classList.toggle('hidden', i >= limit));
+        const empty = (section || archive)?.querySelector('[data-empty]');
+        empty?.classList.toggle('hidden', remaining.length > 0);
+      });
+    </script>
+  </body>
+</html>

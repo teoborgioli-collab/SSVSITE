@@ -1,0 +1,33 @@
+---
+import Icon from '../ui/Icon.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+const { block } = Astro.props as { block: any };
+const dark = block.style !== 'light';
+const cards = (block.cards || []).filter((c: any) => c?.title);
+const cols: Record<string, string> = { '2': 'sm:grid-cols-2', '3': 'sm:grid-cols-2 lg:grid-cols-3', '4': 'sm:grid-cols-2 lg:grid-cols-4' };
+const accentBg: Record<string, string> = { lime: 'bg-ssv-lime text-ink', blue: 'bg-ssv-blue text-white', white: 'bg-white text-ink' };
+---
+<section id={block.anchor || undefined} class={dark ? 'border-y-[3px] border-ink bg-ink py-16 text-white md:py-24' : 'bg-paper py-16 md:py-24'}>
+  <div class="container-page">
+    <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} invert={dark} />
+    <ul class={`grid gap-6 md:gap-8 ${cols[block.columns] || cols['4']}`}>
+      {cards.map((card: any) => {
+        const Tag = card.href ? 'a' : 'div';
+        return (
+          <li data-reveal>
+            <Tag
+              href={card.href || undefined}
+              class={`flex h-full flex-col gap-4 p-6 md:p-7 ${dark ? 'border-[3px] border-white/20 bg-white/5 transition-colors hover:border-ssv-lime' : 'bg-white brutal-border brutal-press'} ${card.href ? 'group' : ''}`}
+            >
+              <span class={`inline-flex h-14 w-14 items-center justify-center brutal-border ${accentBg[card.accent] || accentBg.lime} ${dark ? 'border-white' : ''}`}>
+                <Icon name={card.icon} size={28} />
+              </span>
+              <h3 class={`text-2xl font-bold uppercase leading-tight tracking-tight ${dark && card.accent === 'lime' ? 'text-ssv-lime' : ''}`}>{card.title}</h3>
+              {card.text && <p class={`text-lg font-medium ${dark ? 'text-white/75' : 'text-ink/75'}`}>{card.text}</p>}
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>

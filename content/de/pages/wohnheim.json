@@ -1,0 +1,99 @@
+{
+  "title": "Wohnheim",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Informationen rund ums Wohnen im Wohnheim Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Wohnheim",
+      "title": "Unser Zuhause",
+      "intro": "Alles Wichtige rund ums Wohnen – besonders für alle, die neu eingezogen sind.",
+      "image": "/uploads/bilder/wohnheim.jpg",
+      "imageAlt": "Platzhalterbild – Außenansicht des Wohnheims",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "Neu hier?",
+      "heading": "Willkommen im Wohnheim!",
+      "width": "narrow",
+      "color": "white",
+      "body": "Schön, dass du da bist! Hier sammeln wir Infos, die dir den Start erleichtern.\n\n\\[Platzhalter] Bitte hier die wichtigsten Punkte für neue Bewohner\\:innen ergänzen, z. B. Ansprechpersonen, Hausordnung, Mülltrennung.\n"
+    },
+    {
+      "_template": "features",
+      "enabled": true,
+      "badge": "",
+      "heading": "Gemeinschaftliche Angebote",
+      "intro": "[Platzhalter] Passe die Karten an die tatsächlich vorhandenen Räume und Angebote an.",
+      "style": "light",
+      "columns": "3",
+      "cards": [
+        {
+          "title": "Gemeinschaftsraum",
+          "text": "[Platzhalter] Beschreibung und Nutzungsregeln.",
+          "icon": "coffee",
+          "accent": "lime"
+        },
+        {
+          "title": "Waschen",
+          "text": "[Platzhalter] Wo und wie die Waschmaschinen funktionieren.",
+          "icon": "washing-machine",
+          "accent": "blue"
+        },
+        {
+          "title": "Fahrräder",
+          "text": "[Platzhalter] Infos zu Fahrradstellplätzen.",
+          "icon": "bike",
+          "accent": "lime"
+        }
+      ]
+    },
+    {
+      "_template": "faq",
+      "enabled": true,
+      "badge": "",
+      "heading": "Fragen zum Wohnheim",
+      "intro": "",
+      "category": "Wohnheim",
+      "limit": 0,
+      "groupByCategory": false,
+      "buttonLabel": "Alle Fragen",
+      "buttonHref": "/faq"
+    },
+    {
+      "_template": "gallery",
+      "enabled": true,
+      "badge": "",
+      "heading": "Eindrücke",
+      "intro": "",
+      "images": [
+        {
+          "image": "/uploads/bilder/galerie-1.jpg",
+          "alt": "Platzhalterbild 1",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-2.jpg",
+          "alt": "Platzhalterbild 2",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-3.jpg",
+          "alt": "Platzhalterbild 3",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-4.jpg",
+          "alt": "Platzhalterbild 4",
+          "caption": ""
+        }
+      ]
+    }
+  ]
+}

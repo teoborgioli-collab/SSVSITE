@@ -1,0 +1,23 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import CmsImage from '../ui/CmsImage.astro';
+const { block } = Astro.props as { block: any };
+const images = (block.images || []).filter((i: any) => i?.image);
+---
+<section id={block.anchor || undefined} class="bg-white py-16 md:py-24">
+  <div class="container-page">
+    <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} />
+    <ul class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+      {images.map((img: any, i: number) => (
+        <li class={i % 5 === 0 ? 'col-span-2 row-span-2' : ''} data-reveal>
+          <figure class="h-full">
+            <div class={`overflow-hidden bg-ink brutal-border ${i % 5 === 0 ? 'aspect-square' : 'aspect-[4/3]'}`}>
+              <CmsImage src={img.image} alt={img.alt} sizes={i % 5 === 0 ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 25vw, 50vw'} maxWidth={1280} class="h-full w-full object-cover transition duration-500 hover:scale-105" />
+            </div>
+            {img.caption && <figcaption class="mt-2 text-sm font-medium">{img.caption}</figcaption>}
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

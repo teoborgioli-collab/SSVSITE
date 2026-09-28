@@ -1,0 +1,23 @@
+---
+import CmsImage from '../ui/CmsImage.astro';
+const { block } = Astro.props as { block: any };
+const colors: Record<string, string> = {
+  blue: 'bg-ssv-blue text-white', lime: 'bg-ssv-lime text-ink', black: 'bg-ink text-white', white: 'bg-white text-ink', light: 'bg-paper text-ink',
+};
+const c = colors[block.color] || colors.white;
+const dark = ['blue', 'black'].includes(block.color);
+---
+<header id={block.anchor || undefined} class={`border-b-[3px] border-ink ${c}`}>
+  <div class={`container-page grid gap-10 py-14 md:py-20 ${block.image ? 'md:grid-cols-[1.2fr_1fr] md:items-center' : ''}`}>
+    <div class="max-w-4xl">
+      {block.badge && <p class={`eyebrow mb-6 ${block.color === 'lime' ? 'bg-white' : ''}`}>{block.badge}</p>}
+      <h1 class="display text-5xl sm:text-6xl md:text-7xl text-balance">{block.title}</h1>
+      {block.intro && <p class={`mt-6 max-w-2xl text-lg font-medium md:text-2xl ${dark ? 'text-white/85' : 'text-ink/80'}`}>{block.intro}</p>}
+    </div>
+    {block.image && (
+      <div class="aspect-[4/3] overflow-hidden bg-ink brutal-border shadow-brutal">
+        <CmsImage src={block.image} alt={block.imageAlt} eager sizes="(min-width: 768px) 45vw, 100vw" class="h-full w-full object-cover" />
+      </div>
+    )}
+  </div>
+</header>

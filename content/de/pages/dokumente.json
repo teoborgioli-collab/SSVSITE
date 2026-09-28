@@ -1,0 +1,30 @@
+{
+  "title": "Dokumente",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Satzung, Protokolle und Formulare der SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Downloads",
+      "title": "Dokumente",
+      "intro": "Satzung, Protokolle, Formulare und weitere Informationen zum Herunterladen.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "documents",
+      "enabled": true,
+      "heading": "",
+      "intro": "",
+      "showFilters": true,
+      "limit": 0,
+      "buttonLabel": "",
+      "buttonHref": ""
+    }
+  ]
+}

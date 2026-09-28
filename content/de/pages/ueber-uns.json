@@ -1,0 +1,97 @@
+{
+  "title": "Über uns",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Wer die SSV Potsdamer Straße ist, was sie tut und wie Bewohner:innen vertreten werden."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Über uns",
+      "title": "Wer wir sind",
+      "intro": "Die SSV ist die studentische Selbstverwaltung des Wohnheims Potsdamer Straße – von Bewohner:innen für Bewohner:innen.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "Was ist die SSV?",
+      "width": "narrow",
+      "color": "white",
+      "body": "Die Studentische Selbstverwaltung (SSV) ist das gewählte Gremium der Bewohner\\:innen. Alle, die im Wohnheim wohnen, können mitreden, mitentscheiden und sich zur Wahl stellen.\n\n\\[Platzhalter] Hier kurz ergänzen, seit wann es die SSV gibt und auf welcher Grundlage (z. B. Satzung) sie arbeitet.\n"
+    },
+    {
+      "_template": "features",
+      "enabled": true,
+      "badge": "",
+      "heading": "Was wir tun",
+      "intro": "",
+      "style": "light",
+      "columns": "3",
+      "cards": [
+        {
+          "title": "Ansprechpartner sein",
+          "text": "Wir sind erste Anlaufstelle bei Fragen, Problemen und Ideen rund ums Wohnen.",
+          "icon": "message-circle",
+          "accent": "lime"
+        },
+        {
+          "title": "Räume betreuen",
+          "text": "Wir kümmern uns um Gemeinschaftsräume und deren Ausstattung.",
+          "icon": "house",
+          "accent": "blue"
+        },
+        {
+          "title": "Feste feiern",
+          "text": "Wir organisieren Veranstaltungen für alle Bewohner:innen.",
+          "icon": "party-popper",
+          "accent": "lime"
+        }
+      ]
+    },
+    {
+      "_template": "imageText",
+      "enabled": true,
+      "badge": "Vertretung",
+      "heading": "Wie ihr vertreten werdet",
+      "body": "Die Mitglieder der SSV werden von den Bewohner\\:innen gewählt. \\[Platzhalter] Hier beschreiben, wann und wie gewählt wird (z. B. auf der Vollversammlung) und wie lange eine Amtszeit dauert.\n\n* Regelmäßige, offene Sitzungen\n* Protokolle im Bereich [Dokumente](/dokumente)\n* Vollversammlung für alle Bewohner\\:innen\n",
+      "buttons": [],
+      "image": "/uploads/bilder/versammlung.jpg",
+      "imageAlt": "Platzhalterbild – Vollversammlung",
+      "imagePosition": "left",
+      "color": "light"
+    },
+    {
+      "_template": "team",
+      "enabled": true,
+      "badge": "Team",
+      "heading": "Die Crew",
+      "intro": "Diese Menschen engagieren sich aktuell in der SSV.",
+      "limit": 0,
+      "buttonLabel": "",
+      "buttonHref": ""
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "",
+      "heading": "Lust mitzumachen?",
+      "text": "Komm zu einer offenen Sitzung oder schreib uns.",
+      "buttons": [
+        {
+          "label": "Mitmachen",
+          "href": "/mitmachen",
+          "variant": "secondary"
+        }
+      ],
+      "color": "blue",
+      "image": "",
+      "imageAlt": ""
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import { getDocuments, getSettings, DOCUMENT_CATEGORIES, isExternal } from '../../lib/content';
+import { formatShort } from '../../lib/dates';
+import { statSync } from 'node:fs';
+import { join } from 'node:path';
+const { block } = Astro.props as { block: any };
+const { labels } = await getSettings();
+let docs = await getDocuments();
+if (block.category) docs = docs.filter((d) => d.data.category === block.category);
+if (block.limit) docs = docs.slice(0, block.limit);
+const cats = DOCUMENT_CATEGORIES.filter((c) => docs.some((d) => d.data.category === c));
+const others = [...new Set(docs.map((d) => d.data.category).filter((c) => c && !DOCUMENT_CATEGORIES.includes(c!)))] as string[];
+const categories = [...cats, ...others];
+
+const fileInfo = (file?: string | null) => {
+  if (!file || isExternal(file)) return '';
+  const ext = (file.split('.').pop() || '').toUpperCase();
+  try {
+    const bytes = statSync(join(process.cwd(), 'public', decodeURIComponent(file))).size;
+    const size = bytes > 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1).replace('.', ',')} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;
+    return `${ext}, ${size}`;
+  } catch {
+    return ext;
+  }
+};
+const uid = `docs-${block.anchor || 'lib'}`;
+---
+<section id={block.anchor || undefined} class="bg-paper py-16 md:py-20" data-doc-library>
+  <div class="container-page">
+    <SectionHeading heading={block.heading} intro={block.intro} />
+    {block.showFilters !== false && categories.length > 1 && (
+      <div class="mb-8 flex flex-wrap gap-3" role="group" aria-label="Nach Kategorie filtern" data-doc-filters>
+        <button type="button" class="doc-filter bg-ink px-4 py-2 text-sm font-bold uppercase tracking-wider text-white brutal-border" aria-pressed="true" data-filter="">{labels.allCategories}</button>
+        {categories.map((c) => (
+          <button type="button" class="doc-filter bg-white px-4 py-2 text-sm font-bold uppercase tracking-wider brutal-border hover:bg-ssv-lime" aria-pressed="false" data-filter={c}>{c}</button>
+        ))}
+      </div>
+    )}
+    <p class="sr-only" aria-live="polite" data-doc-status></p>
+    <ul class="space-y-4" id={uid}>
+      {docs.map((doc) => {
+        const href = doc.data.file || doc.data.externalUrl || '';
+        const info = fileInfo(doc.data.file);
+        const ext = !doc.data.file && !!doc.data.externalUrl;
+        return (
+          <li data-category={doc.data.category}>
+            <article class="flex flex-col gap-4 bg-white p-5 brutal-border shadow-brutal-sm transition-colors hover:bg-ssv-lime/40 md:flex-row md:items-center md:justify-between md:p-6">
+              <div class="flex items-start gap-4">
+                <span class="hidden h-12 w-12 shrink-0 items-center justify-center bg-ssv-blue text-white brutal-border sm:inline-flex"><Icon name="file-text" size={24} /></span>
+                <div>
+                  <p class="mb-1 text-xs font-bold uppercase tracking-widest text-ink/60">
+                    {doc.data.category}{doc.data.date instanceof Date && <> · <time datetime={doc.data.date.toISOString()}>{formatShort(doc.data.date)}</time></>}
+                  </p>
+                  <h3 class="text-xl font-bold leading-tight">{doc.data.title}</h3>
+                  {doc.data.description && <p class="mt-1 font-medium text-ink/75">{doc.data.description}</p>}
+                </div>
+              </div>
+              {href && (
+                <Button href={href} variant="primary" size="sm" class="shrink-0" {...(ext ? {} : { download: '' })}>
+                  <Icon name={ext ? 'external-link' : 'download'} size={16} />
+                  {ext ? labels.openLink : labels.download}
+                  {info && <span class="font-medium normal-case opacity-80">({info})</span>}
+                  <span class="sr-only">: {doc.data.title}</span>
+                </Button>
+              )}
+            </article>
+          </li>
+        );
+      })}
+    </ul>
+    <p class={`bg-white p-6 text-lg font-medium brutal-border ${docs.length ? 'hidden' : ''}`} data-doc-empty>{labels.noDocuments}</p>
+    {block.buttonLabel && block.buttonHref && <div class="mt-10"><Button href={block.buttonHref} variant="outline" arrow>{block.buttonLabel}</Button></div>}
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-doc-library]').forEach((lib) => {
+    const buttons = lib.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const items = lib.querySelectorAll<HTMLElement>('li[data-category]');
+    const status = lib.querySelector('[data-doc-status]');
+    const empty = lib.querySelector('[data-doc-empty]');
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const f = btn.dataset.filter || '';
+        let shown = 0;
+        items.forEach((li) => {
+          const match = !f || li.dataset.category === f;
+          li.hidden = !match;
+          if (match) shown++;
+        });
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.setAttribute('aria-pressed', String(active));
+          b.classList.toggle('bg-ink', active);
+          b.classList.toggle('text-white', active);
+          b.classList.toggle('bg-white', !active);
+        });
+        empty?.classList.toggle('hidden', shown > 0);
+        if (status) status.textContent = `${shown} Dokument${shown === 1 ? '' : 'e'} angezeigt`;
+      }),
+    );
+  });
+</script>

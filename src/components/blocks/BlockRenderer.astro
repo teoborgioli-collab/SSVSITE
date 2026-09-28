@@ -1,0 +1,36 @@
+---
+/**
+ * Rendert die im CMS angelegten Abschnitte in der dort festgelegten Reihenfolge.
+ * Ausgeblendete Abschnitte („Sichtbar“ aus) werden übersprungen.
+ */
+import Hero from './Hero.astro';
+import PageHeader from './PageHeader.astro';
+import RichText from './RichText.astro';
+import ImageText from './ImageText.astro';
+import Features from './Features.astro';
+import Cta from './Cta.astro';
+import LatestNews from './LatestNews.astro';
+import NewsList from './NewsList.astro';
+import UpcomingEvents from './UpcomingEvents.astro';
+import EventsArchive from './EventsArchive.astro';
+import Team from './Team.astro';
+import Faq from './Faq.astro';
+import Documents from './Documents.astro';
+import Contact from './Contact.astro';
+import Gallery from './Gallery.astro';
+import { visibleBlocks, type Block } from '../../lib/content';
+
+interface Props { blocks?: Block[] | null }
+const blocks = visibleBlocks(Astro.props.blocks);
+
+const map: Record<string, any> = {
+  hero: Hero, pageHeader: PageHeader, richText: RichText, imageText: ImageText, features: Features, cta: Cta,
+  latestNews: LatestNews, newsList: NewsList, upcomingEvents: UpcomingEvents, eventsArchive: EventsArchive,
+  team: Team, faq: Faq, documents: Documents, contact: Contact, gallery: Gallery,
+};
+const templateOf = (b: Block) => (b._template || '').replace(/^.*[.:]/, '');
+---
+{blocks.map((block, i) => {
+  const Component = map[templateOf(block)];
+  return Component ? <Component block={block} isFirst={i === 0} /> : null;
+})}

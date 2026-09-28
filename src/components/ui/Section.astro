@@ -1,0 +1,16 @@
+---
+/** Einheitlicher Abschnitts-Rahmen mit Hintergrundfarbe aus dem CMS. */
+interface Props { color?: string | null; id?: string | null; class?: string; tight?: boolean; bordered?: boolean }
+const { color = 'light', id, class: cls = '', tight = false, bordered = false } = Astro.props;
+const colors: Record<string, string> = {
+  blue: 'bg-ssv-blue text-white',
+  lime: 'bg-ssv-lime text-ink',
+  black: 'bg-ink text-white',
+  white: 'bg-white text-ink',
+  light: 'bg-paper text-ink',
+};
+const c = colors[color || 'light'] || colors.light;
+---
+<section id={id || undefined} class={`${c} ${tight ? 'py-12 md:py-16' : 'py-16 md:py-24'} ${bordered ? 'border-y-[3px] border-ink' : ''} ${cls}`}>
+  <slot />
+</section>

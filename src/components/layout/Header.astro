@@ -1,0 +1,95 @@
+---
+import Icon from '../ui/Icon.astro';
+import Button from '../ui/Button.astro';
+import { isExternal } from '../../lib/content';
+interface Props { settings: any }
+const { settings } = Astro.props;
+const nav = (settings.navigation || []).filter((n: any) => n?.label && n?.href);
+const cta = settings.navCta?.enabled && settings.navCta?.label && settings.navCta?.href ? settings.navCta : null;
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  const h = href.replace(/\/$/, '') || '/';
+  return h === '/' ? path === '/' : path === h || path.startsWith(`${h}/`);
+};
+const extAttrs = (href: string) => (isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+---
+<header class="sticky top-0 z-50 border-b-[3px] border-ink bg-white" data-site-header>
+  <div class="container-page flex h-18 items-center justify-between gap-4 md:h-20">
+    <a href="/" class="group flex items-center gap-3 font-bold uppercase tracking-tighter" aria-label={`${settings.siteName} – Startseite`}>
+      <span class="inline-flex h-10 w-10 items-center justify-center bg-ssv-lime text-lg brutal-border shadow-brutal-sm transition-transform group-hover:-rotate-6" aria-hidden="true">S</span>
+      <span class="text-lg leading-none sm:text-xl xl:text-2xl">{settings.siteName}</span>
+    </a>
+
+    <nav aria-label="Hauptnavigation" class="hidden xl:block">
+      <ul class="flex items-center gap-1">
+        {nav.map((item: any) => (
+          <li>
+            <a
+              href={item.href}
+              {...extAttrs(item.href)}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              class="block px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors hover:bg-ssv-lime aria-[current=page]:bg-ink aria-[current=page]:text-white aria-[current=page]:hover:text-ink"
+            >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      {cta && <span class="hidden sm:block"><Button href={cta.href} variant="secondary" size="sm">{cta.label}</Button></span>}
+      <button
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center bg-white brutal-border xl:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <span class="sr-only" data-menu-label data-open={settings.labels.menu} data-close={settings.labels.closeMenu}>{settings.labels.menu}</span>
+        <span data-icon-open><Icon name="menu" /></span>
+        <span data-icon-close class="hidden"><Icon name="x" /></span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" aria-label="Hauptnavigation (mobil)" class="hidden border-t-[3px] border-ink bg-white xl:hidden" data-mobile-menu>
+    <ul class="container-page flex max-h-[calc(100dvh-5rem)] flex-col overflow-y-auto py-4">
+      {nav.map((item: any) => (
+        <li>
+          <a
+            href={item.href}
+            {...extAttrs(item.href)}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+            class="flex items-center justify-between border-b-2 border-ink/10 px-2 py-4 text-2xl font-bold uppercase tracking-tight hover:bg-ssv-lime aria-[current=page]:text-ssv-blue"
+          >{item.label}<Icon name="arrow-right" size={22} /></a>
+        </li>
+      ))}
+      {cta && (
+        <li class="pt-6"><Button href={cta.href} variant="secondary" size="lg" class="w-full">{cta.label}</Button></li>
+      )}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const label = document.querySelector<HTMLElement>('[data-menu-label]');
+  if (toggle && menu) {
+    const set = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('hidden', !open);
+      toggle.querySelector('[data-icon-open]')?.classList.toggle('hidden', open);
+      toggle.querySelector('[data-icon-close]')?.classList.toggle('hidden', !open);
+      if (label) label.textContent = (open ? label.dataset.close : label.dataset.open) || '';
+      document.body.classList.toggle('overflow-hidden', open);
+    };
+    toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        set(false);
+        toggle.focus();
+      }
+    });
+    window.matchMedia('(min-width: 80rem)').addEventListener('change', (e) => e.matches && set(false));
+  }
+</script>

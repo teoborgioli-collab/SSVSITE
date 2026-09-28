@@ -1,0 +1,49 @@
+{
+  "title": "FAQ",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Häufige Fragen rund um die SSV und das Wohnheim Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "FAQ",
+      "title": "Häufige Fragen",
+      "intro": "Antworten auf die Fragen, die uns am häufigsten erreichen.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "faq",
+      "enabled": true,
+      "badge": "",
+      "heading": "",
+      "intro": "",
+      "category": "",
+      "limit": 0,
+      "groupByCategory": true,
+      "buttonLabel": "",
+      "buttonHref": ""
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "",
+      "heading": "Deine Frage ist nicht dabei?",
+      "text": "Schreib uns – wir helfen gern weiter.",
+      "buttons": [
+        {
+          "label": "Zum Kontakt",
+          "href": "/kontakt",
+          "variant": "secondary"
+        }
+      ],
+      "color": "blue",
+      "image": "",
+      "imageAlt": ""
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+---
+import CmsImage from '../ui/CmsImage.astro';
+import Buttons from '../ui/Buttons.astro';
+const { block } = Astro.props as { block: any };
+---
+<section id={block.anchor || undefined} class="relative overflow-hidden border-b-[3px] border-ink bg-paper">
+  <div class="container-page grid items-center gap-10 py-12 md:grid-cols-2 md:gap-12 md:py-20 lg:py-24">
+    <div class="relative z-10 space-y-7">
+      {block.badge && <p class="eyebrow">{block.badge}</p>}
+      <h1 class="display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-balance">{block.title}</h1>
+      {block.text && <p class="max-w-xl text-lg font-medium sm:text-xl md:text-2xl">{block.text}</p>}
+      <Buttons buttons={block.buttons} class="pt-2" />
+    </div>
+    {block.image && (
+      <div class="relative">
+        <div class="absolute -right-4 -top-4 hidden h-24 w-24 bg-ssv-lime brutal-border md:block" aria-hidden="true"></div>
+        <div class="relative aspect-[4/5] overflow-hidden bg-ink brutal-border shadow-brutal-lg md:aspect-square">
+          <CmsImage src={block.image} alt={block.imageAlt} eager sizes="(min-width: 768px) 50vw, 100vw" class="h-full w-full object-cover" />
+          <div class="pointer-events-none absolute inset-0 border-8 border-ssv-blue/70" aria-hidden="true"></div>
+        </div>
+      </div>
+    )}
+  </div>
+</section>

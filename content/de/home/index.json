@@ -1,0 +1,181 @@
+{
+  "title": "Startseite",
+  "seo": {
+    "title": "SSV Potsdamer Straße – Gemeinsam wohnen. Gemeinsam gestalten.",
+    "description": ""
+  },
+  "blocks": [
+    {
+      "enabled": true,
+      "badge": "SSV Potsdamer Straße",
+      "title": "Gemeinsam wohnen. Gemeinsam gestalten.",
+      "text": "Wir vertreten die Interessen der Bewohner:innen, organisieren Veranstaltungen und gestalten das Leben im Wohnheim gemeinsam.",
+      "buttons": [
+        {
+          "label": "Mehr über uns",
+          "href": "/ueber-uns",
+          "variant": "primary"
+        },
+        {
+          "label": "Aktuelles",
+          "href": "/aktuelles",
+          "variant": "outline"
+        }
+      ],
+      "image": "/uploads/bilder/hero.jpg",
+      "imageAlt": "Platzhalterbild – hier ein Foto aus dem Wohnheim einsetzen",
+      "_template": "hero"
+    },
+    {
+      "enabled": true,
+      "badge": "Über uns",
+      "heading": "Wer ist die SSV?",
+      "body": "Die **Studentische Selbstverwaltung (SSV)** ist die gewählte Vertretung aller Bewohner:innen des Wohnheims Potsdamer Straße. Wir sind selbst Studierende, wohnen hier und engagieren uns ehrenamtlich.\n\nWir sprechen für euch gegenüber der Wohnheimverwaltung, kümmern uns um Gemeinschaftsräume und sorgen dafür, dass aus Nachbar:innen eine Community wird.\n",
+      "buttons": [
+        {
+          "label": "Mehr über uns",
+          "href": "/ueber-uns",
+          "variant": "outline"
+        }
+      ],
+      "image": "/uploads/bilder/gemeinschaft.jpg",
+      "imageAlt": "Platzhalterbild – Gruppenfoto der SSV",
+      "imagePosition": "right",
+      "color": "light",
+      "_template": "imageText"
+    },
+    {
+      "enabled": true,
+      "badge": "Was wir machen",
+      "heading": "Vier Dinge, die uns wichtig sind",
+      "intro": "",
+      "cards": [
+        {
+          "title": "Interessen vertreten",
+          "text": "Wir bringen eure Anliegen gegenüber der Wohnheimverwaltung ein – von Reparaturen bis zu Hausregeln.",
+          "icon": "megaphone",
+          "accent": "lime"
+        },
+        {
+          "title": "Community stärken",
+          "text": "Wir schaffen Orte und Anlässe, an denen sich Bewohner:innen kennenlernen.",
+          "icon": "users",
+          "accent": "white"
+        },
+        {
+          "title": "Veranstaltungen organisieren",
+          "text": "Semesterstart, Spieleabende, Sommerfest: Wir planen das ganze Jahr über.",
+          "icon": "party-popper",
+          "accent": "lime"
+        },
+        {
+          "title": "Wohnheim gestalten",
+          "text": "Gemeinschaftsräume, Garten, Werkstatt – wir entwickeln das Haus gemeinsam weiter.",
+          "icon": "house",
+          "accent": "white"
+        }
+      ],
+      "style": "dark",
+      "columns": "4",
+      "_template": "features"
+    },
+    {
+      "enabled": true,
+      "badge": "News",
+      "heading": "Aktuelles",
+      "intro": "",
+      "count": 3,
+      "buttonLabel": "Alle Beiträge",
+      "buttonHref": "/aktuelles",
+      "_template": "latestNews"
+    },
+    {
+      "enabled": true,
+      "badge": "Termine",
+      "heading": "Nächste Veranstaltungen",
+      "intro": "",
+      "count": 3,
+      "emptyText": "Gerade stehen keine Termine an – schau bald wieder vorbei!",
+      "buttonLabel": "Alle Veranstaltungen",
+      "buttonHref": "/veranstaltungen",
+      "_template": "upcomingEvents"
+    },
+    {
+      "enabled": true,
+      "badge": "Neu hier?",
+      "heading": "Neu im Wohnheim?",
+      "text": "Hier findest du die wichtigsten Informationen rund um die SSV, Veranstaltungen und Möglichkeiten, andere Bewohner:innen kennenzulernen.",
+      "buttons": [
+        {
+          "label": "Mehr erfahren",
+          "href": "/wohnheim",
+          "variant": "dark"
+        }
+      ],
+      "color": "lime",
+      "image": "",
+      "imageAlt": "",
+      "_template": "cta"
+    },
+    {
+      "enabled": true,
+      "badge": "Engagement",
+      "heading": "Mach mit!",
+      "text": "Die SSV lebt von den Ideen und dem Engagement der Bewohner:innen. Ob einmal mit anpacken oder dauerhaft in einer AG – jede Hilfe zählt.",
+      "buttons": [
+        {
+          "label": "So kannst du mitmachen",
+          "href": "/mitmachen",
+          "variant": "secondary"
+        },
+        {
+          "label": "Kontakt",
+          "href": "/kontakt",
+          "variant": "outline"
+        }
+      ],
+      "color": "blue",
+      "image": "/uploads/bilder/mitmachen.jpg",
+      "imageAlt": "Platzhalterbild – Bewohner:innen bei einer Aktion",
+      "_template": "cta"
+    },
+    {
+      "enabled": false,
+      "heading": "Häufige Fragen",
+      "intro": "",
+      "limit": 4,
+      "groupByCategory": false,
+      "buttonLabel": "Alle Fragen",
+      "buttonHref": "/faq",
+      "_template": "faq"
+    },
+    {
+      "enabled": false,
+      "heading": "Eindrücke",
+      "intro": "",
+      "images": [
+        {
+          "image": "/uploads/bilder/galerie-1.jpg",
+          "alt": "Platzhalterbild 1",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-2.jpg",
+          "alt": "Platzhalterbild 2",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-3.jpg",
+          "alt": "Platzhalterbild 3",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-4.jpg",
+          "alt": "Platzhalterbild 4",
+          "caption": ""
+        }
+      ],
+      "_template": "gallery"
+    }
+  ]
+}

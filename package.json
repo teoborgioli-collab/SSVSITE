@@ -1,0 +1,49 @@
+{
+  "name": "ssv-potsdamer-str",
+  "version": "1.0.0",
+  "description": "Website der SSV Potsdamer Straße – Astro + TinaCMS (self-hosted)",
+  "scripts": {
+    "dev": "cross-env TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"astro dev\"",
+    "dev:site": "astro dev",
+    "build": "tinacms build && astro build",
+    "build:local": "cross-env TINA_PUBLIC_IS_LOCAL=true tinacms build && astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "cms:user": "node scripts/create-cms-user.mjs",
+    "cms:secret": "node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\""
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "@tinacms/cli": "^3.1.0",
+    "@tinacms/datalayer": "^2.0.30",
+    "@upstash/redis": "^1.39.0",
+    "@vercel/node": "^16.0.1",
+    "astro": "^7.3.5",
+    "bcryptjs": "^3.0.3",
+    "cross-env": "^10.1.0",
+    "jose": "^6.2.12",
+    "lucide-static": "^1.48.0",
+    "marked": "^18.0.14",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3",
+    "tinacms": "^3.14.1",
+    "tinacms-gitprovider-github": "^4.1.17",
+    "upstash-redis-level": "^1.1.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/react": "^19.3.0",
+    "typescript": "^6.0.3"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22.x"
+  }
+}
