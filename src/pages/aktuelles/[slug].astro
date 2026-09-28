@@ -1,0 +1,53 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CmsImage from '../../components/ui/CmsImage.astro';
+import Icon from '../../components/ui/Icon.astro';
+import NewsCard from '../../components/ui/NewsCard.astro';
+import { getNews, getSettings } from '../../lib/content';
+import { formatDate } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const posts = await getNews();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+const { post } = Astro.props as { post: any };
+const { labels } = await getSettings();
+const { Content } = await render(post);
+const d = post.data;
+const more = (await getNews()).filter((p) => p.id !== post.id).slice(0, 3);
+---
+<BaseLayout title={d.seo?.title || d.title} description={d.seo?.description || d.excerpt} image={d.seo?.image || d.image} noindex={d.seo?.noindex} type="article" publishedTime={d.date}>
+  <article>
+    <header class="border-b-[3px] border-ink bg-white">
+      <div class="container-page max-w-4xl py-12 md:py-16">
+        <a href="/aktuelles" class="mb-8 inline-flex items-center gap-2 font-bold uppercase tracking-wider hover:underline"><Icon name="arrow-left" size={18} /> {labels.backToNews}</a>
+        <div class="mb-6 flex flex-wrap items-center gap-3">
+          <time datetime={d.date.toISOString()} class="bg-ink px-3 py-1 text-sm font-bold text-white">{formatDate(d.date)}</time>
+          {d.featured && <span class="bg-ssv-lime px-2.5 py-1 text-xs font-bold uppercase tracking-wider brutal-border">{labels.featured}</span>}
+          {d.author && <span class="text-sm font-bold uppercase tracking-wider text-ink/60">{d.author}</span>}
+        </div>
+        <h1 class="display text-4xl sm:text-5xl md:text-6xl text-balance">{d.title}</h1>
+        {d.excerpt && <p class="mt-6 text-xl font-medium text-ink/80 md:text-2xl">{d.excerpt}</p>}
+      </div>
+    </header>
+    {d.image && (
+      <div class="container-page max-w-5xl pt-10 md:pt-14">
+        <div class="aspect-video overflow-hidden bg-ink brutal-border shadow-brutal-lg">
+          <CmsImage src={d.image} alt={d.imageAlt} eager sizes="(min-width: 1024px) 1024px, 100vw" class="h-full w-full object-cover" />
+        </div>
+      </div>
+    )}
+    <div class="container-page max-w-3xl py-12 md:py-16">
+      <div class="prose-ssv"><Content /></div>
+    </div>
+  </article>
+  {more.length > 0 && (
+    <section class="border-t-[3px] border-ink bg-paper py-16" aria-labelledby="more-news">
+      <div class="container-page">
+        <h2 id="more-news" class="display mb-10 text-3xl md:text-4xl">Weitere Beiträge</h2>
+        <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">{more.map((p) => <li><NewsCard post={p} labels={labels} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+/** Alle im CMS unter „Seiten“ angelegten Seiten – z. B. /ueber-uns, /wohnheim. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlockRenderer from '../components/blocks/BlockRenderer.astro';
+import { getPages, blocksProvideH1 } from '../lib/content';
+
+export async function getStaticPaths() {
+  const pages = await getPages();
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+const { page } = Astro.props as { page: any };
+---
+<BaseLayout
+  title={page.seo?.title || page.title}
+  description={page.seo?.description}
+  image={page.seo?.image}
+  noindex={page.seo?.noindex}
+  srOnlyH1={blocksProvideH1(page.blocks) ? null : page.title}
+>
+  <BlockRenderer blocks={page.blocks} />
+</BaseLayout>

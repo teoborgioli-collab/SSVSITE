@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlockRenderer from '../components/blocks/BlockRenderer.astro';
+import { getHome, blocksProvideH1, getSettings } from '../lib/content';
+const home = await getHome();
+const settings = await getSettings();
+---
+<BaseLayout
+  title={home?.seo?.title || settings.siteName}
+  description={home?.seo?.description}
+  image={home?.seo?.image}
+  noindex={home?.seo?.noindex}
+  srOnlyH1={blocksProvideH1(home?.blocks) ? null : settings.siteName}
+>
+  <BlockRenderer blocks={home?.blocks} />
+</BaseLayout>

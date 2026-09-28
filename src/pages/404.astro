@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/ui/Button.astro';
+import { getSettings } from '../lib/content';
+const { labels } = await getSettings();
+---
+<BaseLayout title={labels.notFoundTitle} noindex>
+  <section class="container-page flex min-h-[60vh] flex-col items-start justify-center py-20">
+    <p class="eyebrow mb-6">404</p>
+    <h1 class="display mb-6 text-5xl md:text-7xl">{labels.notFoundTitle}</h1>
+    <p class="mb-10 max-w-xl text-xl font-medium">{labels.notFoundText}</p>
+    <Button href="/" variant="primary" arrow size="lg">{labels.backHome}</Button>
+  </section>
+</BaseLayout>
