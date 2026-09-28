@@ -10,7 +10,7 @@
       "enabled": true,
       "badge": "Mitmachen",
       "title": "Mach mit!",
-      "intro": "Die SSV lebt von den Ideen und dem Engagement der Bewohner:innen.",
+      "intro": "Die SSV lebt von den Ideen und dem Engagement der Bewohner:innen",
       "image": "",
       "imageAlt": "",
       "color": "lime",
@@ -35,8 +35,8 @@
           "accent": "blue"
         },
         {
-          "title": "Entscheide mit",
-          "text": "Stimme mit bei Entscheidungen im Wohnheim",
+          "title": "Lass dich wählen",
+          "text": "Bei der nächsten Wahl kannst du selbst für die SSV kandidieren.",
           "icon": "vote",
           "accent": "lime"
         }
@@ -48,8 +48,8 @@
     {
       "enabled": true,
       "badge": "",
-      "heading": "Du willst Mietglied werden?",
-      "body": "COME FIND US AT OUR WEEKLY OR AT AN EVENT.\n\nFILL OUT THE\n\n[APPLICATION FORM](https://member.ssvpotsdamerstr.de/)\n",
+      "heading": "Arbeitsgruppen (AGs)",
+      "body": "\\[Platzhalter] Hier die aktuellen AGs auflisten, zum Beispiel:\n\n* Event-AG\n* Garten-AG\n* Technik-AG\n\nInteresse? [Schreib uns](/kontakt)!\n",
       "width": "narrow",
       "color": "white",
       "_template": "richText"
