@@ -6,10 +6,9 @@
   },
   "blocks": [
     {
-      "_template": "hero",
       "enabled": true,
       "badge": "SSV Potsdamer Straße",
-      "title": "Living together. Shaping together",
+      "title": "Living together. Shaping together.",
       "text": "We represent the interests of the residents, organise events and shape life in the residence together.",
       "buttons": [
         {
@@ -24,10 +23,10 @@
         }
       ],
       "image": "/uploads/bilder/hero.jpg",
-      "imageAlt": "Placeholder image – add a photo of the residence here"
+      "imageAlt": "Placeholder image – add a photo of the residence here",
+      "_template": "hero"
     },
     {
-      "_template": "imageText",
       "enabled": true,
       "badge": "About us",
       "heading": "Who is the SSV?",
@@ -42,16 +41,14 @@
       "image": "/uploads/bilder/gemeinschaft.jpg",
       "imageAlt": "Placeholder image – group photo of the SSV",
       "imagePosition": "right",
-      "color": "light"
+      "color": "light",
+      "_template": "imageText"
     },
     {
-      "_template": "features",
       "enabled": true,
       "badge": "What we do",
       "heading": "Four things that matter to us",
       "intro": "",
-      "style": "dark",
-      "columns": "4",
       "cards": [
         {
           "title": "Representing interests",
@@ -77,20 +74,22 @@
           "icon": "house",
           "accent": "white"
         }
-      ]
+      ],
+      "style": "dark",
+      "columns": "4",
+      "_template": "features"
     },
     {
-      "_template": "latestNews",
       "enabled": true,
       "badge": "News",
       "heading": "Latest news",
       "intro": "",
       "count": 3,
       "buttonLabel": "All posts",
-      "buttonHref": "/en/news"
+      "buttonHref": "/en/news",
+      "_template": "latestNews"
     },
     {
-      "_template": "upcomingEvents",
       "enabled": true,
       "badge": "Dates",
       "heading": "Upcoming events",
@@ -98,10 +97,10 @@
       "count": 3,
       "emptyText": "No upcoming events right now – check back soon!",
       "buttonLabel": "All events",
-      "buttonHref": "/en/events"
+      "buttonHref": "/en/events",
+      "_template": "upcomingEvents"
     },
     {
-      "_template": "cta",
       "enabled": true,
       "badge": "New here?",
       "heading": "New to the residence?",
@@ -115,10 +114,10 @@
       ],
       "color": "lime",
       "image": "",
-      "imageAlt": ""
+      "imageAlt": "",
+      "_template": "cta"
     },
     {
-      "_template": "cta",
       "enabled": true,
       "badge": "Get involved",
       "heading": "Join us!",
@@ -137,20 +136,20 @@
       ],
       "color": "blue",
       "image": "/uploads/bilder/mitmachen.jpg",
-      "imageAlt": "Placeholder image – residents at an event"
+      "imageAlt": "Placeholder image – residents at an event",
+      "_template": "cta"
     },
     {
-      "_template": "faq",
       "enabled": false,
       "heading": "Frequently asked questions",
       "intro": "",
       "limit": 4,
       "groupByCategory": false,
       "buttonLabel": "All questions",
-      "buttonHref": "/en/faq"
+      "buttonHref": "/en/faq",
+      "_template": "faq"
     },
     {
-      "_template": "gallery",
       "enabled": false,
       "heading": "Impressions",
       "intro": "",
@@ -175,7 +174,8 @@
           "alt": "Placeholder image 4",
           "caption": ""
         }
-      ]
+      ],
+      "_template": "gallery"
     }
   ]
 }
