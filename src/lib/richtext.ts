@@ -3,7 +3,10 @@
  * Tina speichert Rich-Text in JSON-Dateien als Baumstruktur (AST),
  * in Markdown-Dateien als Markdown-Text. Beides wird hier unterstützt.
  */
-import { marked } from 'marked';
+import { Marked } from 'marked';
+
+// Markdown aus dem CMS: rohes HTML wird nicht übernommen (Schutz vor eingeschleustem Code).
+const md = new Marked({ renderer: { html: () => '' } });
 
 type Node = { type?: string; text?: string; children?: Node[]; [k: string]: any };
 
@@ -62,7 +65,7 @@ function renderNode(n: Node): string {
 
 export function richTextToHtml(value: unknown): string {
   if (!value) return '';
-  if (typeof value === 'string') return marked.parse(value, { async: false }) as string;
+  if (typeof value === 'string') return md.parse(value, { async: false }) as string;
   if (typeof value === 'object') return renderNode(value as Node);
   return '';
 }

@@ -10,18 +10,27 @@ const site = (process.env.PUBLIC_SITE_URL || settings?.seo?.siteUrl || 'https://
 
 // Seiten, die im CMS als „nicht in der Sitemap“ markiert sind.
 import { readdirSync } from 'node:fs';
-const pagesDir = new URL('./content/de/pages/', import.meta.url);
-const hidden = readdirSync(pagesDir)
-  .filter((f) => f.endsWith('.json'))
-  .filter((f) => {
-    try {
-      const p = JSON.parse(readFileSync(new URL(f, pagesDir), 'utf-8'));
-      return p.hideFromSitemap || p.seo?.noindex;
-    } catch {
-      return false;
-    }
-  })
-  .map((f) => `${site}/${f.replace(/\.json$/, '')}/`);
+/** @param {string} lang @param {string} prefix */
+const hiddenIn = (lang, prefix) => {
+  const dir = new URL(`./content/${lang}/pages/`, import.meta.url);
+  try {
+    return readdirSync(dir)
+      .filter((f) => f.endsWith('.json'))
+      .filter((f) => {
+        try {
+          const p = JSON.parse(readFileSync(new URL(f, dir), 'utf-8'));
+          return p.hideFromSitemap || p.seo?.noindex;
+        } catch {
+          return false;
+        }
+      })
+      .map((f) => `${site}${prefix}/${f.replace(/\.json$/, '')}/`);
+  } catch {
+    return [];
+  }
+};
+const englishOn = settings.enableEnglish !== false;
+const hidden = [...hiddenIn('de', ''), ...hiddenIn('en', '/en')];
 
 export default defineConfig({
   site,
@@ -30,13 +39,12 @@ export default defineConfig({
   build: { format: 'directory' },
   i18n: {
     defaultLocale: 'de',
-    locales: ['de'],
+    locales: ['de', 'en'],
     routing: { prefixDefaultLocale: false },
   },
   integrations: [
     sitemap({
-      filter: (page) => !hidden.includes(page) && !page.includes('/404'),
-      i18n: { defaultLocale: 'de', locales: { de: 'de-DE' } },
+      filter: (page) => !hidden.includes(page) && !page.includes('/404') && (englishOn || !page.startsWith(`${site}/en/`)),
     }),
   ],
   vite: {

@@ -6,5 +6,9 @@
   "bio": "Platzhalter-Eintrag. Im CMS unter „Team“ durch echte Angaben ersetzen – nur mit Einverständnis der Person.",
   "email": "",
   "order": 4,
-  "hidden": false
+  "hidden": false,
+  "en": {
+    "role": "Events (placeholder)",
+    "bio": "Placeholder entry. Replace with real details under “Team” in the CMS – only with the person’s consent."
+  }
 }

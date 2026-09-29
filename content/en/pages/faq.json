@@ -1,0 +1,50 @@
+{
+  "title": "FAQ",
+  "dePage": "content/de/pages/faq.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Frequently asked questions about the SSV and the Potsdamer Straße residence."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "FAQ",
+      "title": "Frequently asked questions",
+      "intro": "Answers to the questions we hear most often.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "faq",
+      "enabled": true,
+      "badge": "",
+      "heading": "",
+      "intro": "",
+      "category": "",
+      "limit": 0,
+      "groupByCategory": true,
+      "buttonLabel": "",
+      "buttonHref": ""
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "",
+      "heading": "Your question is not listed?",
+      "text": "Write to us – we are happy to help.",
+      "buttons": [
+        {
+          "label": "Contact us",
+          "href": "/en/contact",
+          "variant": "secondary"
+        }
+      ],
+      "color": "blue",
+      "image": "",
+      "imageAlt": ""
+    }
+  ]
+}

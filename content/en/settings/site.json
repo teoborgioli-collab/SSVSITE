@@ -1,0 +1,149 @@
+{
+  "tagline": "The student self-government of the Potsdamer Straße residence in Berlin.",
+  "navigation": [
+    {
+      "label": "About us",
+      "href": "/en/about-us"
+    },
+    {
+      "label": "News",
+      "href": "/en/news"
+    },
+    {
+      "label": "Events",
+      "href": "/en/events"
+    },
+    {
+      "label": "Residence",
+      "href": "/en/residence"
+    },
+    {
+      "label": "Documents",
+      "href": "/en/documents"
+    },
+    {
+      "label": "FAQ",
+      "href": "/en/faq"
+    },
+    {
+      "label": "Contact",
+      "href": "/en/contact"
+    }
+  ],
+  "navCta": {
+    "enabled": true,
+    "label": "Get involved",
+    "href": "/en/get-involved"
+  },
+  "footer": {
+    "text": "Living together. Shaping together. We are the elected representatives of the residents.",
+    "ctaLabel": "Write to us",
+    "ctaHref": "/en/contact",
+    "columns": [
+      {
+        "title": "Explore",
+        "links": [
+          {
+            "label": "About us",
+            "href": "/en/about-us"
+          },
+          {
+            "label": "News",
+            "href": "/en/news"
+          },
+          {
+            "label": "Events",
+            "href": "/en/events"
+          },
+          {
+            "label": "Residence",
+            "href": "/en/residence"
+          }
+        ]
+      },
+      {
+        "title": "Service",
+        "links": [
+          {
+            "label": "Get involved",
+            "href": "/en/get-involved"
+          },
+          {
+            "label": "Documents",
+            "href": "/en/documents"
+          },
+          {
+            "label": "FAQ",
+            "href": "/en/faq"
+          },
+          {
+            "label": "Contact",
+            "href": "/en/contact"
+          }
+        ]
+      }
+    ],
+    "legalLinks": [
+      {
+        "label": "Legal notice",
+        "href": "/en/legal-notice"
+      },
+      {
+        "label": "Privacy",
+        "href": "/en/privacy"
+      }
+    ],
+    "copyright": "© {jahr} SSV Potsdamer Straße"
+  },
+  "seo": {
+    "titleTemplate": "%s | SSV Potsdamer Straße",
+    "description": "SSV Potsdamer Straße represents the residents, organises events and shapes life in the student residence together.",
+    "image": "/uploads/bilder/og-standard.jpg"
+  },
+  "contactForm": {
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "subjectLabel": "Subject",
+    "messageLabel": "Message",
+    "submitLabel": "Send",
+    "privacyNote": "By sending this form, your details are processed to answer your request. More in the privacy policy.",
+    "privacyHref": "/en/privacy",
+    "successMessage": "Thank you! Your message has reached us. We will get back to you as soon as possible.",
+    "errorMessage": "Something went wrong. Please try again later or email us directly."
+  },
+  "labels": {
+    "readMore": "Read more",
+    "backToNews": "All posts",
+    "backToEvents": "All events",
+    "featured": "Highlight",
+    "noNews": "No posts yet.",
+    "noEvents": "No upcoming events right now – check back soon!",
+    "time": "Time",
+    "location": "Location",
+    "date": "Date",
+    "oClock": "",
+    "register": "Register",
+    "details": "Details",
+    "past": "Past",
+    "allCategories": "All",
+    "download": "Download",
+    "openLink": "Open",
+    "noDocuments": "No documents in this category yet.",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to content",
+    "notFoundTitle": "Page not found",
+    "notFoundText": "This page doesn't exist (anymore). Maybe the navigation helps you find what you are looking for.",
+    "backHome": "Back to the homepage",
+    "moreNews": "More posts",
+    "addToCalendar": "Add to calendar",
+    "required": "Required field",
+    "privacyLink": "Privacy",
+    "onlyGerman": "This content is only available in German.",
+    "themeToggle": "Toggle light/dark mode",
+    "language": "Language",
+    "newTab": "(opens in a new tab)",
+    "upcoming": "Upcoming events",
+    "pastEvents": "Past events"
+  }
+}

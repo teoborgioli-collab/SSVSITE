@@ -1,0 +1,100 @@
+{
+  "title": "Residence",
+  "dePage": "content/de/pages/wohnheim.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Information about living in the Potsdamer Straße residence."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Residence",
+      "title": "Our home",
+      "intro": "Everything you need to know about living here – especially if you just moved in.",
+      "image": "/uploads/bilder/wohnheim.jpg",
+      "imageAlt": "Placeholder image – outside view of the residence",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "New here?",
+      "heading": "Welcome to the residence!",
+      "width": "narrow",
+      "color": "white",
+      "body": "Great to have you here! We collect information to make your start easier.\n\n[Placeholder] Add the most important points for new residents here, e.g. contacts, house rules, waste separation.\n"
+    },
+    {
+      "_template": "features",
+      "enabled": true,
+      "badge": "",
+      "heading": "Shared facilities",
+      "intro": "[Placeholder] Adjust the cards to the rooms and offers that actually exist.",
+      "style": "light",
+      "columns": "3",
+      "cards": [
+        {
+          "title": "Common room",
+          "text": "[Placeholder] Description and rules of use.",
+          "icon": "coffee",
+          "accent": "lime"
+        },
+        {
+          "title": "Laundry",
+          "text": "[Placeholder] Where the washing machines are and how they work.",
+          "icon": "washing-machine",
+          "accent": "blue"
+        },
+        {
+          "title": "Bikes",
+          "text": "[Placeholder] Information about bike parking.",
+          "icon": "bike",
+          "accent": "lime"
+        }
+      ]
+    },
+    {
+      "_template": "faq",
+      "enabled": true,
+      "badge": "",
+      "heading": "Questions about the residence",
+      "intro": "",
+      "category": "Wohnheim",
+      "limit": 0,
+      "groupByCategory": false,
+      "buttonLabel": "All questions",
+      "buttonHref": "/en/faq"
+    },
+    {
+      "_template": "gallery",
+      "enabled": true,
+      "badge": "",
+      "heading": "Impressions",
+      "intro": "",
+      "images": [
+        {
+          "image": "/uploads/bilder/galerie-1.jpg",
+          "alt": "Placeholder image 1",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-2.jpg",
+          "alt": "Placeholder image 2",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-3.jpg",
+          "alt": "Placeholder image 3",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-4.jpg",
+          "alt": "Placeholder image 4",
+          "caption": ""
+        }
+      ]
+    }
+  ]
+}

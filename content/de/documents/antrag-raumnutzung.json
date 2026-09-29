@@ -4,5 +4,9 @@
   "date": "2026-03-01T10:00:00.000Z",
   "description": "Beispiel-Eintrag für ein Formular.",
   "file": "/uploads/dokumente/platzhalter.pdf",
-  "externalUrl": ""
+  "externalUrl": "",
+  "en": {
+    "title": "Room booking request (placeholder)",
+    "description": "Sample entry for a form."
+  }
 }

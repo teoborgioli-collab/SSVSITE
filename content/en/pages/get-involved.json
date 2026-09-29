@@ -1,0 +1,87 @@
+{
+  "title": "Get involved",
+  "dePage": "content/de/pages/mitmachen.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "How you can get involved in SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Get involved",
+      "title": "Join us!",
+      "intro": "The SSV thrives on the ideas and commitment of the residents",
+      "image": "",
+      "imageAlt": "",
+      "color": "lime"
+    },
+    {
+      "_template": "features",
+      "enabled": true,
+      "badge": "",
+      "heading": "How you can get involved",
+      "intro": "",
+      "style": "light",
+      "columns": "3",
+      "cards": [
+        {
+          "title": "Come to a meeting",
+          "text": "Our meetings are open. [Placeholder] Add when and where they take place.",
+          "icon": "users",
+          "accent": "lime"
+        },
+        {
+          "title": "Help at events",
+          "text": "Setting up, decorating, music – every event needs helping hands.",
+          "icon": "party-popper",
+          "accent": "blue"
+        },
+        {
+          "title": "Stand for election",
+          "text": "At the next election you can run for the SSV yourself.",
+          "icon": "vote",
+          "accent": "lime"
+        }
+      ]
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "Want to become a member?",
+      "width": "narrow",
+      "color": "white",
+      "body": "Visit a meeting or find us at events.\n\nOr fill out [the form](https://member.ssvpotsdamerstr.de/).\n"
+    },
+    {
+      "_template": "upcomingEvents",
+      "enabled": true,
+      "badge": "",
+      "heading": "Next opportunities",
+      "intro": "",
+      "count": 3,
+      "emptyText": "",
+      "buttonLabel": "All events",
+      "buttonHref": "/en/events"
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "",
+      "heading": "Questions? Ideas?",
+      "text": "Just write to us – we are happy about every message.",
+      "buttons": [
+        {
+          "label": "Get in touch",
+          "href": "/en/contact",
+          "variant": "secondary"
+        }
+      ],
+      "color": "black",
+      "image": "",
+      "imageAlt": ""
+    }
+  ]
+}

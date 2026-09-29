@@ -23,7 +23,7 @@ Everything visitors see (texts, images, navigation, footer, homepage sections, n
 9. [Environment variables](#9-environment-variables)
 10. [Project structure](#10-project-structure)
 11. [Before going live – checklist](#11-before-going-live--checklist)
-12. [Adding English later](#12-adding-english-later)
+12. [English version & dark mode](#12-english-version--dark-mode)
 
 ---
 
@@ -82,6 +82,7 @@ Editor at /admin ──► /api/tina (Vercel function) ──► GitHub commit t
 | **Dokumente** | Files with categories Satzung / Protokolle / Formulare / Informationen / Sonstiges | `content/de/documents/*.json` |
 | **FAQ** | Questions and answers with category and order | `content/de/faq/*.md` |
 | **Website-Einstellungen** | Site name, email, address, navigation, "Mitmachen" button, social links, footer, default SEO, contact form texts, small UI labels | `content/settings/site.json` |
+| **🇬🇧 … (Englisch)** | English homepage, pages and site texts | `content/en/…` |
 
 ### Available sections (blocks)
 
@@ -95,6 +96,11 @@ Every section can be **added (+), reordered (drag the ⋮⋮ handle), switched o
 - Live: `https://<your-domain>/admin`. Sign in with an email and password from `CMS_USERS`.
 
 After saving, the change is committed to GitHub and Vercel rebuilds the site. It's **live after about 1–2 minutes**.
+
+### Helpers for editors
+
+- **Schnellzugriff (start screen):** `/admin` opens with big buttons for the most common tasks, plus a list of all areas with 🇩🇪/🇬🇧 buttons.
+- **"Seite bearbeiten" button on the website:** while you are logged in to `/admin` in the same browser, every page of the website shows a lime button in the bottom right corner. It opens exactly this page (or post/event) in the CMS. Visitors never see it. Locally (`npm run dev`) it is always shown.
 
 ## 5. Add a news post
 
@@ -219,11 +225,21 @@ All entries marked **`[Platzhalter]`** have to be replaced:
 - [ ] Set up and test the contact form backend
 - [ ] Check FAQ answers marked `[Platzhalter]`
 
-## 12. Adding English later
+## 12. English version & dark mode
 
-- The content lives under `content/de/…` and Astro i18n is already configured (`astro.config.mjs`, `defaultLocale: 'de'`).
-- To add English: copy the collections in `tina/collections.ts` with the path `content/en/…` (e.g. label "Aktuelles (EN)"), add `en` to `locales` in `astro.config.mjs`, and add `src/pages/en/…` routes that read the `en` collections (`LOCALE` in `src/content.config.ts`).
-- Small UI labels already come from the CMS (Website-Einstellungen → Beschriftungen), so they can be translated too.
+### English version (`/en/…`)
+
+- **Switch on/off:** Website-Einstellungen → "🇬🇧 Englische Version der Website aktivieren". When it's off, the DE/EN switch disappears and English pages are left out of the sitemap.
+- **English homepage and pages:** in the CMS under **🇬🇧 Startseite (Englisch)** and **🇬🇧 Seiten (Englisch)**. They use the same block system as the German pages. The filename is the address (`about-us` → `/en/about-us`). "Deutsche Version dieser Seite" links a page to its German counterpart, so the language switch jumps to the matching page.
+- **English menu, footer, form texts and labels:** **🇬🇧 Website-Einstellungen (Englisch)**. Name, email, address and social links come from the German settings.
+- **News, events, team, documents, FAQ:** there is one entry per item, not a separate English copy. Each entry has a collapsible group **"🇬🇧 Englische Version (optional)"**. Empty fields fall back to German; a post without an English text shows a short "only available in German" note. FAQ entries only appear on the English FAQ if they have an English question.
+- **Automatic URLs:** `/en/news/<slug>` and `/en/events/<slug>` (same slug as German).
+- **SEO:** `hreflang` links between the language versions, and `<html lang="…">` is set per page.
+
+### Dark mode
+
+- A moon/sun button in the header switches the theme. The choice is remembered in the browser; otherwise the site follows the visitor's system setting.
+- Colours are defined once in `src/styles/global.css` (`.dark { … }`). Neutral surfaces turn dark, while lime and blue areas keep their colours.
 
 ---
 

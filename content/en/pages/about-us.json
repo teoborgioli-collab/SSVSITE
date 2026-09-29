@@ -1,0 +1,98 @@
+{
+  "title": "About us",
+  "dePage": "content/de/pages/ueber-uns.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Who SSV Potsdamer Straße is, what it does and how residents are represented."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "About us",
+      "title": "Who we are",
+      "intro": "The SSV is the student self-government of the Potsdamer Straße residence – by residents, for residents.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "What is the SSV?",
+      "width": "narrow",
+      "color": "white",
+      "body": "The student self-government (SSV) is the elected body of the residents. Everyone living in the residence can have a say, take part in decisions and stand for election.\n\n[Placeholder] Add here since when the SSV exists and on what basis (e.g. statutes) it works.\n"
+    },
+    {
+      "_template": "features",
+      "enabled": true,
+      "badge": "",
+      "heading": "What we do",
+      "intro": "",
+      "style": "light",
+      "columns": "3",
+      "cards": [
+        {
+          "title": "Being your contact",
+          "text": "We are the first point of contact for questions, problems and ideas about living here.",
+          "icon": "message-circle",
+          "accent": "lime"
+        },
+        {
+          "title": "Looking after rooms",
+          "text": "We take care of the common rooms and their equipment.",
+          "icon": "house",
+          "accent": "blue"
+        },
+        {
+          "title": "Celebrating",
+          "text": "We organise events for all residents.",
+          "icon": "party-popper",
+          "accent": "lime"
+        }
+      ]
+    },
+    {
+      "_template": "imageText",
+      "enabled": true,
+      "badge": "Representation",
+      "heading": "How you are represented",
+      "body": "The members of the SSV are elected by the residents. [Placeholder] Describe when and how elections take place (e.g. at the general assembly) and how long a term lasts.\n\n* Regular, open meetings\n* Minutes in the [documents](/en/documents) section\n* General assembly for all residents\n",
+      "buttons": [],
+      "image": "/uploads/bilder/versammlung.jpg",
+      "imageAlt": "Placeholder image – general assembly",
+      "imagePosition": "left",
+      "color": "light"
+    },
+    {
+      "_template": "team",
+      "enabled": true,
+      "badge": "Team",
+      "heading": "The crew",
+      "intro": "These people are currently active in the SSV.",
+      "limit": 0,
+      "buttonLabel": "",
+      "buttonHref": ""
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "",
+      "heading": "Want to join?",
+      "text": "Come to an open meeting or write to us.",
+      "buttons": [
+        {
+          "label": "Get involved",
+          "href": "/en/get-involved",
+          "variant": "secondary"
+        }
+      ],
+      "color": "blue",
+      "image": "",
+      "imageAlt": ""
+    }
+  ]
+}

@@ -4,6 +4,7 @@
   "email": "info@ssvpotsdamerstr.de",
   "address": "",
   "contactNote": "[Platzhalter] Hier z. B. Sprechzeiten oder den Ort des SSV-Briefkastens eintragen.",
+  "enableEnglish": true,
   "navigation": [
     {
       "label": "Über uns",
@@ -121,7 +122,8 @@
     "submitLabel": "Absenden",
     "privacyNote": "Mit dem Absenden werden deine Angaben zur Beantwortung deiner Anfrage verarbeitet. Mehr dazu in der Datenschutzerklärung.",
     "successMessage": "Danke! Deine Nachricht ist bei uns angekommen. Wir melden uns so schnell wie möglich.",
-    "errorMessage": "Das hat leider nicht geklappt. Bitte versuche es später noch einmal oder schreib uns direkt eine E-Mail."
+    "errorMessage": "Das hat leider nicht geklappt. Bitte versuche es später noch einmal oder schreib uns direkt eine E-Mail.",
+    "privacyHref": "/datenschutz"
   },
   "labels": {
     "readMore": "Weiterlesen",
@@ -146,6 +148,16 @@
     "skipToContent": "Zum Inhalt springen",
     "notFoundTitle": "Seite nicht gefunden",
     "notFoundText": "Diese Seite gibt es leider nicht (mehr). Vielleicht findest du über die Navigation, was du suchst.",
-    "backHome": "Zur Startseite"
+    "backHome": "Zur Startseite",
+    "moreNews": "Weitere Beiträge",
+    "addToCalendar": "In den Kalender",
+    "required": "Pflichtfeld",
+    "privacyLink": "Datenschutz",
+    "onlyGerman": "Dieser Inhalt ist nur auf Deutsch verfügbar.",
+    "themeToggle": "Hell/Dunkel umschalten",
+    "language": "Sprache",
+    "newTab": "(öffnet in neuem Tab)",
+    "upcoming": "Kommende Veranstaltungen",
+    "pastEvents": "Vergangene Veranstaltungen"
   }
 }

@@ -1,0 +1,31 @@
+{
+  "title": "Documents",
+  "dePage": "content/de/pages/dokumente.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Statutes, minutes and forms of SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Downloads",
+      "title": "Documents",
+      "intro": "Statutes, minutes, forms and further information to download.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "documents",
+      "enabled": true,
+      "heading": "",
+      "intro": "Most documents are only available in German.",
+      "showFilters": true,
+      "limit": 0,
+      "buttonLabel": "",
+      "buttonHref": ""
+    }
+  ]
+}

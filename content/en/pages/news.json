@@ -1,0 +1,27 @@
+{
+  "title": "News",
+  "dePage": "content/de/pages/aktuelles.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "News and announcements from SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "News",
+      "title": "News",
+      "intro": "News, information and announcements from the residence.",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "newsList",
+      "enabled": true,
+      "heading": "",
+      "emptyText": "No posts yet."
+    }
+  ]
+}

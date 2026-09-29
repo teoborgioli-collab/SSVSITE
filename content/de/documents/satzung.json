@@ -4,5 +4,9 @@
   "date": "2026-01-01T10:00:00.000Z",
   "description": "Beispiel-Eintrag: hier die aktuelle Satzung als PDF hochladen.",
   "file": "/uploads/dokumente/platzhalter.pdf",
-  "externalUrl": ""
+  "externalUrl": "",
+  "en": {
+    "title": "SSV statutes (placeholder)",
+    "description": "Sample entry: upload the current statutes as a PDF here."
+  }
 }

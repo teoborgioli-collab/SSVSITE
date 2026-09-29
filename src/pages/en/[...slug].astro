@@ -1,0 +1,16 @@
+---
+/** English pages from the CMS collection “Seiten (Englisch)” – e.g. /en/about-us. */
+import PageView from '../../components/views/PageView.astro';
+import { getPages, getPageTranslations } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const pages = await getPages('en');
+  const { enToDe } = await getPageTranslations();
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page, de: enToDe.get(page.slug) },
+  }));
+}
+const { page, de } = Astro.props as { page: any; de?: string };
+---
+<PageView page={page} slug={page.slug} lang="en" alternates={{ en: `/en/${page.slug}`, de: de ? `/${de}` : undefined }} />

@@ -1,0 +1,22 @@
+{
+  "title": "Contact",
+  "dePage": "content/de/pages/kontakt.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "How to reach SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "contact",
+      "enabled": true,
+      "badge": "Contact",
+      "heading": "Say hello",
+      "text": "Do you have a question, a problem or an idea? Send us an email or use the form.",
+      "showDetails": true,
+      "showSocial": true,
+      "showForm": true,
+      "formHeading": "Write to us"
+    }
+  ]
+}

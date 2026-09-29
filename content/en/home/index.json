@@ -1,0 +1,181 @@
+{
+  "title": "Home",
+  "seo": {
+    "title": "SSV Potsdamer Straße – Living together. Shaping together.",
+    "description": ""
+  },
+  "blocks": [
+    {
+      "_template": "hero",
+      "enabled": true,
+      "badge": "SSV Potsdamer Straße",
+      "title": "Living together. Shaping together",
+      "text": "We represent the interests of the residents, organise events and shape life in the residence together.",
+      "buttons": [
+        {
+          "label": "About us",
+          "href": "/en/about-us",
+          "variant": "primary"
+        },
+        {
+          "label": "News",
+          "href": "/en/news",
+          "variant": "outline"
+        }
+      ],
+      "image": "/uploads/bilder/hero.jpg",
+      "imageAlt": "Placeholder image – add a photo of the residence here"
+    },
+    {
+      "_template": "imageText",
+      "enabled": true,
+      "badge": "About us",
+      "heading": "Who is the SSV?",
+      "body": "The **student self-government (SSV)** is the elected body representing all residents of the Potsdamer Straße residence. We are students ourselves, we live here and we volunteer.\n\nWe speak for you towards the residence management, look after the common rooms and make sure neighbours become a community.\n",
+      "buttons": [
+        {
+          "label": "More about us",
+          "href": "/en/about-us",
+          "variant": "outline"
+        }
+      ],
+      "image": "/uploads/bilder/gemeinschaft.jpg",
+      "imageAlt": "Placeholder image – group photo of the SSV",
+      "imagePosition": "right",
+      "color": "light"
+    },
+    {
+      "_template": "features",
+      "enabled": true,
+      "badge": "What we do",
+      "heading": "Four things that matter to us",
+      "intro": "",
+      "style": "dark",
+      "columns": "4",
+      "cards": [
+        {
+          "title": "Representing interests",
+          "text": "We bring your concerns to the residence management – from repairs to house rules.",
+          "icon": "megaphone",
+          "accent": "lime"
+        },
+        {
+          "title": "Building community",
+          "text": "We create places and occasions for residents to get to know each other.",
+          "icon": "users",
+          "accent": "white"
+        },
+        {
+          "title": "Organising events",
+          "text": "Semester start, game nights, summer party: we plan all year round.",
+          "icon": "party-popper",
+          "accent": "lime"
+        },
+        {
+          "title": "Shaping the residence",
+          "text": "Common rooms, garden, workshop – we develop the house together.",
+          "icon": "house",
+          "accent": "white"
+        }
+      ]
+    },
+    {
+      "_template": "latestNews",
+      "enabled": true,
+      "badge": "News",
+      "heading": "Latest news",
+      "intro": "",
+      "count": 3,
+      "buttonLabel": "All posts",
+      "buttonHref": "/en/news"
+    },
+    {
+      "_template": "upcomingEvents",
+      "enabled": true,
+      "badge": "Dates",
+      "heading": "Upcoming events",
+      "intro": "",
+      "count": 3,
+      "emptyText": "No upcoming events right now – check back soon!",
+      "buttonLabel": "All events",
+      "buttonHref": "/en/events"
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "New here?",
+      "heading": "New to the residence?",
+      "text": "Here you will find the most important information about the SSV, events and ways to meet other residents.",
+      "buttons": [
+        {
+          "label": "Learn more",
+          "href": "/en/residence",
+          "variant": "dark"
+        }
+      ],
+      "color": "lime",
+      "image": "",
+      "imageAlt": ""
+    },
+    {
+      "_template": "cta",
+      "enabled": true,
+      "badge": "Get involved",
+      "heading": "Join us!",
+      "text": "The SSV thrives on the ideas and commitment of the residents. Whether you help out once or join a working group – every contribution counts.",
+      "buttons": [
+        {
+          "label": "How to get involved",
+          "href": "/en/get-involved",
+          "variant": "secondary"
+        },
+        {
+          "label": "Contact",
+          "href": "/en/contact",
+          "variant": "outline"
+        }
+      ],
+      "color": "blue",
+      "image": "/uploads/bilder/mitmachen.jpg",
+      "imageAlt": "Placeholder image – residents at an event"
+    },
+    {
+      "_template": "faq",
+      "enabled": false,
+      "heading": "Frequently asked questions",
+      "intro": "",
+      "limit": 4,
+      "groupByCategory": false,
+      "buttonLabel": "All questions",
+      "buttonHref": "/en/faq"
+    },
+    {
+      "_template": "gallery",
+      "enabled": false,
+      "heading": "Impressions",
+      "intro": "",
+      "images": [
+        {
+          "image": "/uploads/bilder/galerie-1.jpg",
+          "alt": "Placeholder image 1",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-2.jpg",
+          "alt": "Placeholder image 2",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-3.jpg",
+          "alt": "Placeholder image 3",
+          "caption": ""
+        },
+        {
+          "image": "/uploads/bilder/galerie-4.jpg",
+          "alt": "Placeholder image 4",
+          "caption": ""
+        }
+      ]
+    }
+  ]
+}

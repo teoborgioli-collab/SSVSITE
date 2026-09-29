@@ -1,0 +1,30 @@
+{
+  "title": "Privacy",
+  "dePage": "content/de/pages/datenschutz.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Privacy policy of SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "",
+      "title": "Privacy policy",
+      "intro": "",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "",
+      "width": "narrow",
+      "color": "white",
+      "body": "**The legally binding version of the privacy policy is the [German one](/datenschutz).**\n\n[Placeholder] Optionally add an English translation here.\n"
+    }
+  ]
+}

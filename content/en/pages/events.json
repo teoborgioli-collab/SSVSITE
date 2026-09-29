@@ -1,0 +1,30 @@
+{
+  "title": "Events",
+  "dePage": "content/de/pages/veranstaltungen.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Upcoming and past events at the Potsdamer Straße residence."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "Dates",
+      "title": "Events",
+      "intro": "All dates at a glance – come along and bring your friends!",
+      "image": "",
+      "imageAlt": "",
+      "color": "blue"
+    },
+    {
+      "_template": "eventsArchive",
+      "enabled": true,
+      "upcomingHeading": "Upcoming events",
+      "emptyText": "No upcoming events right now – check back soon!",
+      "showPast": true,
+      "pastHeading": "Past events",
+      "pastCount": 6
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+---
+import PageView from '../../components/views/PageView.astro';
+import { getHome } from '../../lib/content';
+const home = await getHome('en');
+---
+<PageView page={home} lang="en" isHome alternates={{ de: '/', en: '/en/' }} />

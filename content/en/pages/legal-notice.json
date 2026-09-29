@@ -1,0 +1,30 @@
+{
+  "title": "Legal notice",
+  "dePage": "content/de/pages/impressum.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Legal notice of SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "_template": "pageHeader",
+      "enabled": true,
+      "badge": "",
+      "title": "Legal notice",
+      "intro": "",
+      "image": "",
+      "imageAlt": "",
+      "color": "white"
+    },
+    {
+      "_template": "richText",
+      "enabled": true,
+      "badge": "",
+      "heading": "",
+      "width": "narrow",
+      "color": "white",
+      "body": "**The legally binding version of the legal notice (Impressum) is the [German one](/impressum).**\n\n[Placeholder] Optionally add an English summary here.\n"
+    }
+  ]
+}

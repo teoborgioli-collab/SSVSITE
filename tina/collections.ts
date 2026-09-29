@@ -2,9 +2,19 @@ import type { Collection, TinaField } from 'tinacms';
 import { blocksField } from './blocks';
 import { seoField, imageField, altField, linkField, richTextField, slugify } from './fields';
 
-/** Sprache der Inhalte. Für Englisch später z. B. eine zweite Sammlung mit "content/en/..." anlegen. */
-export const LOCALE = 'de';
-const p = (folder: string) => `content/${LOCALE}/${folder}`;
+/** Inhalte liegen je Sprache in content/de/… und content/en/… */
+const p = (folder: string, lang: 'de' | 'en' = 'de') => `content/${lang}/${folder}`;
+
+/** Optionale englische Übersetzung als aufklappbare Gruppe. */
+const english = (fields: TinaField[], description?: string): TinaField => ({
+  type: 'object',
+  name: 'en',
+  label: '🇬🇧 Englische Version (optional)',
+  description:
+    description ??
+    'Für die englische Website. Leere Felder werden durch den deutschen Text ersetzt.',
+  fields,
+});
 
 const RESERVED_SLUGS = ['index', 'admin', 'api', 'uploads', '404', 'robots-txt', 'sitemap'];
 
@@ -16,16 +26,10 @@ const navLinkFields: TinaField[] = [
   linkField('href', 'Link'),
 ];
 
-export const settings: Collection = {
-  name: 'settings',
-  label: 'Website-Einstellungen',
-  path: 'content/settings',
-  format: 'json',
-  match: { include: 'site' },
-  ui: { allowedActions: { create: false, delete: false }, global: true },
-  fields: [
+const taglineField: TinaField = { type: 'string', name: 'tagline', label: 'Kurzer Slogan', description: 'Erscheint z. B. im Footer.' };
+
+const sharedSettingsFields: TinaField[] = [
     { type: 'string', name: 'siteName', label: 'Name der Website', required: true },
-    { type: 'string', name: 'tagline', label: 'Kurzer Slogan', description: 'Erscheint z. B. im Footer.' },
     { type: 'string', name: 'email', label: 'Allgemeine Kontakt-E-Mail', required: true },
     {
       type: 'string',
@@ -42,22 +46,10 @@ export const settings: Collection = {
       ui: { component: 'textarea' },
     },
     {
-      type: 'object',
-      name: 'navigation',
-      label: 'Hauptnavigation',
-      list: true,
-      ui: { itemProps: (item: any) => ({ label: item?.label || 'Menüpunkt' }) },
-      fields: navLinkFields,
-    },
-    {
-      type: 'object',
-      name: 'navCta',
-      label: 'Hervorgehobener Button in der Navigation',
-      fields: [
-        { type: 'boolean', name: 'enabled', label: 'Anzeigen' },
-        { type: 'string', name: 'label', label: 'Beschriftung' },
-        linkField('href', 'Link'),
-      ],
+      type: 'boolean',
+      name: 'enableEnglish',
+      label: '🇬🇧 Englische Version der Website aktivieren',
+      description: 'Zeigt den Sprachumschalter DE/EN und veröffentlicht die Seiten unter /en/…',
     },
     {
       type: 'object',
@@ -86,6 +78,27 @@ export const settings: Collection = {
         },
         { type: 'string', name: 'label', label: 'Anzeigename', description: 'z. B. @ssv_potsdamer' },
         { type: 'string', name: 'url', label: 'Adresse (https://…)', required: true },
+      ],
+    },
+];
+
+const languageSettingsFields: TinaField[] = [
+    {
+      type: 'object',
+      name: 'navigation',
+      label: 'Hauptnavigation',
+      list: true,
+      ui: { itemProps: (item: any) => ({ label: item?.label || 'Menüpunkt' }) },
+      fields: navLinkFields,
+    },
+    {
+      type: 'object',
+      name: 'navCta',
+      label: 'Hervorgehobener Button in der Navigation',
+      fields: [
+        { type: 'boolean', name: 'enabled', label: 'Anzeigen' },
+        { type: 'string', name: 'label', label: 'Beschriftung' },
+        linkField('href', 'Link'),
       ],
     },
     {
@@ -173,6 +186,7 @@ export const settings: Collection = {
           label: 'Datenschutz-Hinweis unter dem Formular',
           ui: { component: 'textarea' },
         },
+        linkField('privacyHref', 'Link zur Datenschutzerklärung'),
         { type: 'string', name: 'successMessage', label: 'Meldung nach erfolgreichem Senden' },
         { type: 'string', name: 'errorMessage', label: 'Meldung bei Fehler' },
       ],
@@ -206,8 +220,41 @@ export const settings: Collection = {
         ['notFoundTitle', 'Seite nicht gefunden (404)'],
         ['notFoundText', 'Text auf der 404-Seite'],
         ['backHome', 'Zur Startseite'],
+        ['moreNews', 'Weitere Beiträge'],
+        ['addToCalendar', 'In den Kalender'],
+        ['required', 'Pflichtfeld'],
+        ['privacyLink', 'Link-Text „Datenschutz“ im Formular'],
+        ['onlyGerman', 'Hinweis „nur auf Deutsch verfügbar“'],
+        ['themeToggle', 'Hell/Dunkel umschalten'],
+        ['language', 'Sprache'],
+        ['newTab', '(öffnet in neuem Tab)'],
+        ['upcoming', 'Kommende Veranstaltungen'],
+        ['pastEvents', 'Vergangene Veranstaltungen'],
       ].map(([name, label]) => ({ type: 'string', name, label }) as TinaField),
     },
+];
+
+export const settings: Collection = {
+  name: 'settings',
+  label: '🇩🇪 Einstellungen (Deutsch)',
+  path: 'content/settings',
+  format: 'json',
+  match: { include: 'site' },
+  ui: { allowedActions: { create: false, delete: false }, global: true },
+  fields: [...sharedSettingsFields.slice(0, 1), taglineField, ...sharedSettingsFields.slice(1), ...languageSettingsFields],
+};
+
+export const settingsEn: Collection = {
+  name: 'settingsEn',
+  label: '🇬🇧 Einstellungen (English)',
+  path: 'content/en/settings',
+  // Name, E-Mail, Adresse und Social-Media-Links kommen aus den deutschen Einstellungen.
+  format: 'json',
+  match: { include: 'site' },
+  ui: { allowedActions: { create: false, delete: false }, global: true },
+  fields: [
+    taglineField,
+    ...languageSettingsFields,
   ],
 };
 
@@ -216,8 +263,22 @@ export const settings: Collection = {
 /* ------------------------------------------------------------------ */
 export const home: Collection = {
   name: 'home',
-  label: 'Startseite',
+  label: '🇩🇪 Startseite (Deutsch)',
   path: p('home'),
+  format: 'json',
+  match: { include: 'index' },
+  ui: { allowedActions: { create: false, delete: false } },
+  fields: [
+    { type: 'string', name: 'title', label: 'Seitentitel', required: true, isTitle: true },
+    seoField,
+    blocksField,
+  ],
+};
+
+export const homeEn: Collection = {
+  name: 'homeEn',
+  label: '🇬🇧 Startseite (English)',
+  path: p('home', 'en'),
   format: 'json',
   match: { include: 'index' },
   ui: { allowedActions: { create: false, delete: false } },
@@ -230,7 +291,7 @@ export const home: Collection = {
 
 export const pages: Collection = {
   name: 'page',
-  label: 'Seiten',
+  label: '🇩🇪 Seiten (Deutsch)',
   path: p('pages'),
   format: 'json',
   ui: {
@@ -264,12 +325,48 @@ export const pages: Collection = {
   ],
 };
 
+export const pagesEn: Collection = {
+  name: 'pageEn',
+  label: '🇬🇧 Seiten (English)',
+  path: p('pages', 'en'),
+  format: 'json',
+  ui: {
+    filename: {
+      slugify: (values: any) => slugify(values?.title),
+      description: 'Der Dateiname ist die Adresse der Seite, z. B. „about-us“ → /en/about-us',
+    } as any,
+  },
+  fields: [
+    {
+      type: 'string',
+      name: 'title',
+      label: 'Seitentitel',
+      required: true,
+      isTitle: true,
+    },
+    {
+      type: 'reference',
+      name: 'dePage',
+      label: 'Deutsche Version dieser Seite',
+      description: 'Damit der Sprachumschalter DE/EN zur richtigen Seite springt.',
+      collections: ['page'],
+    } as TinaField,
+    {
+      type: 'boolean',
+      name: 'hideFromSitemap',
+      label: 'Nicht in der Sitemap aufführen',
+    },
+    seoField,
+    blocksField,
+  ],
+};
+
 /* ------------------------------------------------------------------ */
 /* Aktuelles                                                           */
 /* ------------------------------------------------------------------ */
 export const news: Collection = {
   name: 'news',
-  label: 'Aktuelles',
+  label: 'Aktuelles · DE + EN',
   path: p('news'),
   format: 'md',
   defaultItem: () => ({ date: new Date().toISOString(), featured: false }),
@@ -302,6 +399,12 @@ export const news: Collection = {
     { type: 'string', name: 'author', label: 'Autor:in / AG (optional)' },
     { type: 'boolean', name: 'draft', label: 'Entwurf (noch nicht veröffentlichen)' },
     richTextField('body', 'Beitragstext', true),
+    english([
+      { type: 'string', name: 'title', label: 'Title' },
+      { type: 'string', name: 'excerpt', label: 'Teaser', ui: { component: 'textarea' } },
+      richTextField('body', 'Text'),
+      { type: 'string', name: 'imageAlt', label: 'Image description (alt text)' },
+    ]),
     seoField,
   ],
 };
@@ -314,7 +417,7 @@ const timeValidate = (value?: string) =>
 
 export const events: Collection = {
   name: 'event',
-  label: 'Veranstaltungen',
+  label: 'Veranstaltungen · DE + EN',
   path: p('events'),
   format: 'md',
   ui: {
@@ -361,6 +464,14 @@ export const events: Collection = {
     { type: 'string', name: 'registrationLabel', label: 'Beschriftung für den Link (optional)', description: 'Standard: „Zur Anmeldung“' },
     { type: 'boolean', name: 'draft', label: 'Entwurf (noch nicht veröffentlichen)' },
     richTextField('body', 'Ausführliche Beschreibung', true),
+    english([
+      { type: 'string', name: 'title', label: 'Title' },
+      { type: 'string', name: 'location', label: 'Location' },
+      { type: 'string', name: 'excerpt', label: 'Short description', ui: { component: 'textarea' } },
+      { type: 'string', name: 'registrationLabel', label: 'Link label' },
+      richTextField('body', 'Full description'),
+      { type: 'string', name: 'imageAlt', label: 'Image description (alt text)' },
+    ]),
     seoField,
   ],
 };
@@ -370,7 +481,7 @@ export const events: Collection = {
 /* ------------------------------------------------------------------ */
 export const team: Collection = {
   name: 'team',
-  label: 'Team',
+  label: 'Team · DE + EN',
   path: p('team'),
   format: 'json',
   ui: { filename: { slugify: (values: any) => slugify(values?.name) } as any },
@@ -381,6 +492,10 @@ export const team: Collection = {
     altField(),
     { type: 'string', name: 'bio', label: 'Kurze Beschreibung', ui: { component: 'textarea' } },
     { type: 'string', name: 'email', label: 'E-Mail (optional)' },
+    english([
+      { type: 'string', name: 'role', label: 'Role' },
+      { type: 'string', name: 'bio', label: 'Short bio', ui: { component: 'textarea' } },
+    ]),
     {
       type: 'number',
       name: 'order',
@@ -398,7 +513,7 @@ export const DOCUMENT_CATEGORIES = ['Satzung', 'Protokolle', 'Formulare', 'Infor
 
 export const documents: Collection = {
   name: 'dokument',
-  label: 'Dokumente',
+  label: 'Dokumente · DE + EN',
   path: p('documents'),
   format: 'json',
   ui: { filename: { slugify: (values: any) => slugify(values?.title) } as any },
@@ -422,6 +537,10 @@ export const documents: Collection = {
       uploadDir: () => 'dokumente',
     } as TinaField,
     linkField('externalUrl', 'Externer Link (optional)'),
+    english([
+      { type: 'string', name: 'title', label: 'Title' },
+      { type: 'string', name: 'description', label: 'Description', ui: { component: 'textarea' } },
+    ]),
   ],
 };
 
@@ -430,7 +549,7 @@ export const documents: Collection = {
 /* ------------------------------------------------------------------ */
 export const faq: Collection = {
   name: 'faq',
-  label: 'FAQ',
+  label: 'FAQ · DE + EN',
   path: p('faq'),
   format: 'md',
   ui: { filename: { slugify: (values: any) => slugify(values?.question) } as any },
@@ -444,7 +563,28 @@ export const faq: Collection = {
     },
     { type: 'number', name: 'order', label: 'Reihenfolge', description: 'Kleinere Zahl = weiter oben.' },
     richTextField('body', 'Antwort', true),
+    english(
+      [
+        { type: 'string', name: 'question', label: 'Question' },
+        { type: 'string', name: 'category', label: 'Category' },
+        richTextField('answer', 'Answer'),
+      ],
+      'Für die englische FAQ-Seite. Ohne englische Frage wird der Eintrag dort nicht angezeigt.',
+    ),
   ],
 };
 
-export const collections: Collection[] = [home, pages, news, events, team, documents, faq, settings];
+/** Reihenfolge = Reihenfolge im CMS-Menü (Deutsch und Englisch jeweils nebeneinander). */
+export const collections: Collection[] = [
+  home,
+  homeEn,
+  pages,
+  pagesEn,
+  news,
+  events,
+  team,
+  documents,
+  faq,
+  settings,
+  settingsEn,
+];
