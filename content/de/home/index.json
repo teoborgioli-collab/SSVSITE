@@ -22,7 +22,7 @@
           "variant": "outline"
         }
       ],
-      "image": "/uploads/bilder/hero.jpg",
+      "image": "",
       "imageAlt": "Platzhalterbild – hier ein Foto aus dem Wohnheim einsetzen",
       "_template": "hero"
     },
