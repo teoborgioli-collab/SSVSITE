@@ -22,7 +22,7 @@
           "variant": "outline"
         }
       ],
-      "image": "/uploads/bilder/hero.jpg",
+      "image": "",
       "imageAlt": "Placeholder image – add a photo of the residence here",
       "_template": "hero"
     },
