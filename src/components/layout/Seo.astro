@@ -7,8 +7,10 @@ interface Props {
   type?: 'website' | 'article';
   settings: any;
   publishedTime?: Date;
+  lang?: 'de' | 'en';
+  alternates?: Partial<Record<'de' | 'en', string>>;
 }
-const { title, description, image, noindex, type = 'website', settings, publishedTime } = Astro.props;
+const { title, description, image, noindex, type = 'website', settings, publishedTime, lang = 'de', alternates = {} } = Astro.props;
 const seo = settings.seo || {};
 const siteName = settings.siteName;
 const tpl = seo.titleTemplate || `%s | ${siteName}`;
@@ -24,7 +26,9 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined
 {noindex && <meta name="robots" content="noindex, follow" />}
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={siteName} />
-<meta property="og:locale" content="de_DE" />
+<meta property="og:locale" content={lang === 'en' ? 'en_GB' : 'de_DE'} />
+{Object.entries(alternates).map(([l, href]) => href && <link rel="alternate" hreflang={l} href={new URL(href, Astro.site).toString()} />)}
+{alternates.de && <link rel="alternate" hreflang="x-default" href={new URL(alternates.de, Astro.site).toString()} />}
 <meta property="og:title" content={fullTitle} />
 {desc && <meta property="og:description" content={desc} />}
 <meta property="og:url" content={canonical} />

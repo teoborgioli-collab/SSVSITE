@@ -4,6 +4,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Seo from '../components/layout/Seo.astro';
 import { getSettings } from '../lib/content';
+import type { Lang } from '../i18n';
 
 interface Props {
   title?: string | null;
@@ -14,31 +15,72 @@ interface Props {
   publishedTime?: Date;
   /** Unsichtbare Hauptüberschrift, falls die Seite selbst keine h1 hat */
   srOnlyH1?: string | null;
+  lang?: Lang;
+  /** Adressen dieser Seite in den anderen Sprachen (für Sprachumschalter & hreflang) */
+  alternates?: Partial<Record<Lang, string>>;
+  /** CMS-Eintrag dieser Seite, z. B. "page/ueber-uns" – für den „Bearbeiten“-Button */
+  editPath?: string;
 }
 const props = Astro.props;
-const settings = await getSettings();
+const lang: Lang = props.lang || 'de';
+const settings = await getSettings(lang);
+const alternates = settings.enableEnglish ? props.alternates || {} : {};
 ---
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#CCFF00" />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      // Dunkelmodus vor dem ersten Zeichnen setzen (kein Aufblitzen)
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <Seo {...props} settings={settings} />
+    <Seo {...props} settings={settings} lang={lang} alternates={alternates} />
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body class="flex min-h-screen flex-col">
     <a href="#inhalt" class="sr-only z-[100] bg-ssv-lime px-4 py-3 font-bold brutal-border focus:not-sr-only focus:fixed focus:left-4 focus:top-4">{settings.labels.skipToContent}</a>
-    <Header settings={settings} />
+    <Header settings={settings} lang={lang} alternates={alternates} />
     <main id="inhalt" class="flex-1" tabindex="-1">
       {props.srOnlyH1 && <h1 class="sr-only">{props.srOnlyH1}</h1>}
       <slot />
     </main>
-    <Footer settings={settings} />
+    {props.editPath && (
+      <a
+        href={`/admin/index.html#/collections/edit/${props.editPath}`}
+        class="fixed bottom-4 right-4 z-[60] hidden items-center gap-2 bg-ssv-lime px-4 py-3 text-sm font-bold uppercase tracking-wider text-ink brutal-border shadow-brutal transition-transform hover:-translate-y-0.5"
+        data-edit-link
+      >
+        <span aria-hidden="true">✎</span> {lang === 'en' ? 'Edit page' : 'Seite bearbeiten'}
+      </a>
+    )}
+    <Footer settings={settings} lang={lang} />
 
     <script>
+      // „Bearbeiten“-Button nur für angemeldete Redakteur:innen (bzw. lokal beim Testen)
+      const editLink = document.querySelector<HTMLElement>('[data-edit-link]');
+      if (editLink) {
+        let show = import.meta.env.DEV;
+        try {
+          const s = JSON.parse(localStorage.getItem('ssv-cms-token') || 'null');
+          if (s?.token && s.exp * 1000 > Date.now()) show = true;
+        } catch {}
+        if (show) {
+          editLink.classList.remove('hidden');
+          editLink.classList.add('inline-flex');
+        }
+      }
+
       // Dezente Einblend-Animation
       const els = document.querySelectorAll('[data-reveal]');
       if ('IntersectionObserver' in window) {

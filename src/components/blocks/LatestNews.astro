@@ -3,8 +3,8 @@ import SectionHeading from '../ui/SectionHeading.astro';
 import NewsCard from '../ui/NewsCard.astro';
 import Button from '../ui/Button.astro';
 import { getNews, getSettings } from '../../lib/content';
-const { block } = Astro.props as { block: any };
-const { labels } = await getSettings();
+const { block, lang = 'de' } = Astro.props as { block: any; lang?: 'de' | 'en' };
+const { labels } = await getSettings(lang);
 let posts = await getNews();
 if (block.onlyFeatured) posts = posts.filter((p) => p.data.featured);
 posts = posts.slice(0, block.count || 3);
@@ -17,7 +17,7 @@ posts = posts.slice(0, block.count || 3);
     </div>
     {posts.length ? (
       <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((post) => <li><NewsCard post={post} labels={labels} /></li>)}
+        {posts.map((post) => <li><NewsCard post={post} labels={labels} lang={lang} /></li>)}
       </ul>
     ) : (
       <p class="text-lg font-medium">{labels.noNews}</p>

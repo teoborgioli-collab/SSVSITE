@@ -36,8 +36,8 @@ const endpoint = f.endpoint || '/api/contact';
       <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
     </div>
     <input type="hidden" name="startedAt" value="" />
-    {f.privacyNote && <p class="text-sm font-medium">{f.privacyNote} <a href="/datenschutz" class="font-bold underline underline-offset-4">Datenschutz</a></p>}
-    <p class="text-sm font-medium"><span aria-hidden="true">*</span> Pflichtfeld</p>
+    {f.privacyNote && <p class="text-sm font-medium">{f.privacyNote} <a href={f.privacyHref || '/datenschutz'} class="font-bold underline underline-offset-4">{settings.labels.privacyLink}</a></p>}
+    <p class="text-sm font-medium"><span aria-hidden="true">*</span> {settings.labels.required}</p>
     <Button type="submit" variant="primary" size="lg" class="w-full" arrow>{f.submitLabel || 'Absenden'}</Button>
     <div role="status" aria-live="polite" class="hidden p-4 font-bold brutal-border" data-form-status></div>
   </form>

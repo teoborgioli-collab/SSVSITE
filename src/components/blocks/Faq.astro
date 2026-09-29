@@ -4,17 +4,31 @@ import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import { render } from 'astro:content';
 import { getFaq } from '../../lib/content';
-const { block } = Astro.props as { block: any };
-let items = await getFaq();
+import { richTextToHtml } from '../../lib/richtext';
+const { block, lang = 'de' } = Astro.props as { block: any; lang?: 'de' | 'en' };
+let items = await getFaq(lang);
+// Der Kategorie-Filter bezieht sich immer auf die deutsche Kategorie.
 if (block.category) items = items.filter((i) => (i.data.category || '').toLowerCase() === block.category.toLowerCase());
 if (!block.groupByCategory) items = items.sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999));
 if (block.limit) items = items.slice(0, block.limit);
-const rendered = await Promise.all(items.map(async (i) => ({ item: i, Content: (await render(i)).Content })));
-const groups: [string, typeof rendered][] = block.groupByCategory
+
+const rendered = await Promise.all(
+  items.map(async (i) => {
+    const en: any = (i.data as any).en || {};
+    return {
+      item: i,
+      question: lang === 'en' ? en.question : i.data.question,
+      category: (lang === 'en' ? en.category || i.data.category : i.data.category) || (lang === 'en' ? 'General' : 'Allgemein'),
+      html: lang === 'en' ? richTextToHtml(en.answer) : '',
+      Content: lang === 'en' ? null : (await render(i)).Content,
+    };
+  }),
+);
+type R = (typeof rendered)[number];
+const groups: [string, R[]][] = block.groupByCategory
   ? Object.entries(
-      rendered.reduce<Record<string, typeof rendered>>((acc, r) => {
-        const k = r.item.data.category || 'Allgemein';
-        (acc[k] ||= []).push(r);
+      rendered.reduce<Record<string, R[]>>((acc, r) => {
+        (acc[r.category] ||= []).push(r);
         return acc;
       }, {}),
     )
@@ -31,15 +45,17 @@ const hasHeading = !!block.heading;
             ? <h3 class="mb-5 inline-block border-b-4 border-ink pb-1 text-2xl font-bold uppercase">{cat}</h3>
             : <h2 class="mb-5 inline-block border-b-4 border-ink pb-1 text-2xl font-bold uppercase">{cat}</h2>)}
           <div class="space-y-4">
-            {list.map(({ item, Content }) => (
+            {list.map(({ question, html, Content }) => (
               <details class="group bg-white brutal-border [&_summary::-webkit-details-marker]:hidden" name={`faq-${block.anchor || 'list'}`}>
                 <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-lg font-bold transition-colors hover:bg-ssv-lime md:p-6 md:text-xl">
-                  <span>{item.data.question}</span>
+                  <span>{question}</span>
                   <span class="shrink-0 transition-transform duration-200 group-open:rotate-180"><Icon name="chevron-down" size={26} /></span>
                 </summary>
-                <div class="prose-ssv border-t-[3px] border-ink bg-paper p-5 md:p-6">
-                  <Content />
-                </div>
+                {Content ? (
+                  <div class="prose-ssv border-t-[3px] border-ink bg-paper p-5 md:p-6"><Content /></div>
+                ) : (
+                  <div class="prose-ssv border-t-[3px] border-ink bg-paper p-5 md:p-6" set:html={html} />
+                )}
               </details>
             ))}
           </div>

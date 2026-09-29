@@ -20,7 +20,8 @@ import Contact from './Contact.astro';
 import Gallery from './Gallery.astro';
 import { visibleBlocks, type Block } from '../../lib/content';
 
-interface Props { blocks?: Block[] | null }
+interface Props { blocks?: Block[] | null; lang?: 'de' | 'en' }
+const { lang = 'de' } = Astro.props;
 const blocks = visibleBlocks(Astro.props.blocks);
 
 const map: Record<string, any> = {
@@ -32,5 +33,5 @@ const templateOf = (b: Block) => (b._template || '').replace(/^.*[.:]/, '');
 ---
 {blocks.map((block, i) => {
   const Component = map[templateOf(block)];
-  return Component ? <Component block={block} isFirst={i === 0} /> : null;
+  return Component ? <Component block={block} isFirst={i === 0} lang={lang} /> : null;
 })}

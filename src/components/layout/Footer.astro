@@ -2,7 +2,7 @@
 import Button from '../ui/Button.astro';
 import SocialLinks from '../ui/SocialLinks.astro';
 import { fill, isExternal } from '../../lib/content';
-interface Props { settings: any }
+interface Props { settings: any; lang?: 'de' | 'en' }
 const { settings } = Astro.props;
 const f = settings.footer || {};
 const ext = (href: string) => (isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {});

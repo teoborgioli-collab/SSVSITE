@@ -2,41 +2,72 @@
 import Icon from '../ui/Icon.astro';
 import Button from '../ui/Button.astro';
 import { isExternal } from '../../lib/content';
-interface Props { settings: any }
-const { settings } = Astro.props;
+import { A11Y, ROUTES, type Lang } from '../../i18n';
+interface Props { settings: any; lang: Lang; alternates?: Partial<Record<Lang, string>> }
+const { settings, lang, alternates = {} } = Astro.props;
+const a11y = A11Y[lang];
 const nav = (settings.navigation || []).filter((n: any) => n?.label && n?.href);
 const cta = settings.navCta?.enabled && settings.navCta?.label && settings.navCta?.href ? settings.navCta : null;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const home = ROUTES[lang].home;
 const isActive = (href: string) => {
   const h = href.replace(/\/$/, '') || '/';
-  return h === '/' ? path === '/' : path === h || path.startsWith(`${h}/`);
+  if (h === '/' || h === '/en') return path === h;
+  return path === h || path.startsWith(`${h}/`);
 };
 const extAttrs = (href: string) => (isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+
+// Sprachumschalter: Link zur anderen Sprache (passende Seite, sonst Startseite)
+const other: Lang = lang === 'de' ? 'en' : 'de';
+const showLang = settings.enableEnglish;
+const otherHref = alternates[other] || ROUTES[other].home;
+const otherLabel = A11Y[other].switchLang;
 ---
 <header class="sticky top-0 z-50 border-b-[3px] border-ink bg-white" data-site-header>
-  <div class="container-page flex h-18 items-center justify-between gap-4 md:h-20">
-    <a href="/" class="group flex items-center gap-3 font-bold uppercase tracking-tighter" aria-label={`${settings.siteName} – Startseite`}>
-      <span class="inline-flex h-10 w-10 items-center justify-center bg-ssv-lime text-lg brutal-border shadow-brutal-sm transition-transform group-hover:-rotate-6" aria-hidden="true">S</span>
-      <span class="text-lg leading-none sm:text-xl xl:text-2xl">{settings.siteName}</span>
+  <div class="container-page flex h-18 items-center justify-between gap-3 md:h-20">
+    <a href={home} class="group flex min-w-0 items-center gap-3 font-bold uppercase tracking-tighter" aria-label={`${settings.siteName} – ${a11y.homeSuffix}`}>
+      <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center bg-ssv-lime text-lg brutal-border shadow-brutal-sm transition-transform group-hover:-rotate-6" aria-hidden="true">S</span>
+      <span class="text-lg leading-none sm:text-xl 2xl:text-2xl">{settings.siteName}</span>
     </a>
 
-    <nav aria-label="Hauptnavigation" class="hidden xl:block">
-      <ul class="flex items-center gap-1">
+    <nav aria-label={a11y.mainNav} class="hidden xl:block">
+      <ul class="flex items-center">
         {nav.map((item: any) => (
           <li>
             <a
               href={item.href}
               {...extAttrs(item.href)}
               aria-current={isActive(item.href) ? 'page' : undefined}
-              class="block px-3 py-2 text-sm font-bold uppercase tracking-wide transition-colors hover:bg-ssv-lime aria-[current=page]:bg-ink aria-[current=page]:text-white aria-[current=page]:hover:text-ink"
+              class="block px-2.5 py-2 text-sm font-bold uppercase tracking-wide transition-colors hover:bg-ssv-lime aria-[current=page]:bg-ink aria-[current=page]:text-white aria-[current=page]:hover:text-ink"
             >{item.label}</a>
           </li>
         ))}
       </ul>
     </nav>
 
-    <div class="flex items-center gap-3">
+    <div class="flex shrink-0 items-center gap-2">
       {cta && <span class="hidden sm:block"><Button href={cta.href} variant="secondary" size="sm">{cta.label}</Button></span>}
+      {showLang && (
+        <a
+          href={otherHref}
+          hreflang={other}
+          lang={other}
+          class="inline-flex h-11 min-w-11 items-center justify-center bg-white px-2 text-sm font-bold uppercase brutal-border transition-colors hover:bg-ssv-lime"
+          aria-label={otherLabel}
+          title={otherLabel}
+        >{other.toUpperCase()}</a>
+      )}
+      <button
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center bg-white brutal-border transition-colors hover:bg-ssv-lime"
+        aria-label={settings.labels.themeToggle}
+        title={settings.labels.themeToggle}
+        aria-pressed="false"
+        data-theme-toggle
+      >
+        <span class="dark:hidden"><Icon name="moon" size={20} /></span>
+        <span class="hidden dark:inline"><Icon name="sun" size={20} /></span>
+      </button>
       <button
         type="button"
         class="inline-flex h-11 w-11 items-center justify-center bg-white brutal-border xl:hidden"
@@ -51,7 +82,7 @@ const extAttrs = (href: string) => (isExternal(href) ? { target: '_blank', rel: 
     </div>
   </div>
 
-  <nav id="mobile-menu" aria-label="Hauptnavigation (mobil)" class="hidden border-t-[3px] border-ink bg-white xl:hidden" data-mobile-menu>
+  <nav id="mobile-menu" aria-label={a11y.mobileNav} class="hidden border-t-[3px] border-ink bg-white xl:hidden" data-mobile-menu>
     <ul class="container-page flex max-h-[calc(100dvh-5rem)] flex-col overflow-y-auto py-4">
       {nav.map((item: any) => (
         <li>
@@ -59,7 +90,7 @@ const extAttrs = (href: string) => (isExternal(href) ? { target: '_blank', rel: 
             href={item.href}
             {...extAttrs(item.href)}
             aria-current={isActive(item.href) ? 'page' : undefined}
-            class="flex items-center justify-between border-b-2 border-ink/10 px-2 py-4 text-2xl font-bold uppercase tracking-tight hover:bg-ssv-lime aria-[current=page]:text-ssv-blue"
+            class="flex items-center justify-between border-b-2 border-ink/10 px-2 py-4 text-2xl font-bold uppercase tracking-tight hover:bg-ssv-lime aria-[current=page]:text-ssv-blue dark:aria-[current=page]:text-ssv-lime"
           >{item.label}<Icon name="arrow-right" size={22} /></a>
         </li>
       ))}
@@ -71,6 +102,21 @@ const extAttrs = (href: string) => (isExternal(href) ? { target: '_blank', rel: 
 </header>
 
 <script>
+  // Hell/Dunkel-Modus: Auswahl wird im Browser gespeichert, sonst Systemeinstellung.
+  const themeBtn = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const root = document.documentElement;
+  const sync = () => themeBtn?.setAttribute('aria-pressed', String(root.classList.contains('dark')));
+  sync();
+  themeBtn?.addEventListener('click', () => {
+    const dark = !root.classList.contains('dark');
+    root.classList.toggle('dark', dark);
+    try {
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    } catch {}
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#0b0b0c' : '#CCFF00');
+    sync();
+  });
+
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
   const label = document.querySelector<HTMLElement>('[data-menu-label]');

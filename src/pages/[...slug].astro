@@ -1,21 +1,16 @@
 ---
 /** Alle im CMS unter „Seiten“ angelegten Seiten – z. B. /ueber-uns, /wohnheim. */
-import BaseLayout from '../layouts/BaseLayout.astro';
-import BlockRenderer from '../components/blocks/BlockRenderer.astro';
-import { getPages, blocksProvideH1 } from '../lib/content';
+import PageView from '../components/views/PageView.astro';
+import { getPages, getPageTranslations } from '../lib/content';
 
 export async function getStaticPaths() {
-  const pages = await getPages();
-  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+  const pages = await getPages('de');
+  const { deToEn } = await getPageTranslations();
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page, en: deToEn.get(page.slug) },
+  }));
 }
-const { page } = Astro.props as { page: any };
+const { page, en } = Astro.props as { page: any; en?: string };
 ---
-<BaseLayout
-  title={page.seo?.title || page.title}
-  description={page.seo?.description}
-  image={page.seo?.image}
-  noindex={page.seo?.noindex}
-  srOnlyH1={blocksProvideH1(page.blocks) ? null : page.title}
->
-  <BlockRenderer blocks={page.blocks} />
-</BaseLayout>
+<PageView page={page} slug={page.slug} lang="de" alternates={{ de: `/${page.slug}`, en: en ? `/en/${en}` : undefined }} />

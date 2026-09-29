@@ -2,12 +2,16 @@
 import CmsImage from './CmsImage.astro';
 import Icon from './Icon.astro';
 import { dayParts, formatDate } from '../../lib/dates';
-interface Props { event: any; labels: Record<string, string>; past?: boolean; headingLevel?: 'h2' | 'h3' }
-const { event, labels, past = false, headingLevel: H = 'h3' } = Astro.props;
+import { eventText } from '../../lib/content';
+import { eventUrl, type Lang } from '../../i18n';
+interface Props { event: any; labels: Record<string, string>; past?: boolean; headingLevel?: 'h2' | 'h3'; lang?: Lang }
+const { event, labels, past = false, headingLevel: H = 'h3', lang = 'de' } = Astro.props;
 const d = event.data;
-const p = dayParts(event.start);
-const time = d.startTime ? `${d.startTime}${d.endTime ? `–${d.endTime}` : ''} ${labels.oClock}` : '';
-const href = `/veranstaltungen/${event.id}`;
+const t = eventText(event, lang);
+const p = dayParts(event.start, lang);
+const time = d.startTime ? `${d.startTime}${d.endTime ? `–${d.endTime}` : ''}${labels.oClock ? ` ${labels.oClock}` : ''}` : '';
+const href = eventUrl(lang, event.id);
+const de = t.translated ? undefined : 'de';
 ---
 <article
   class={`group relative flex h-full flex-col overflow-hidden brutal-border brutal-press ${past ? 'bg-white text-ink' : 'bg-ssv-blue text-white'}`}
@@ -17,7 +21,7 @@ const href = `/veranstaltungen/${event.id}`;
 >
   {d.image && (
     <div class="relative aspect-[16/9] overflow-hidden border-b-[3px] border-ink bg-ink">
-      <CmsImage src={d.image} alt={d.imageAlt} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" maxWidth={960} class={`h-full w-full object-cover transition duration-500 group-hover:scale-105 ${past ? 'grayscale' : ''}`} />
+      <CmsImage src={d.image} alt={t.imageAlt} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" maxWidth={960} class={`h-full w-full object-cover transition duration-500 group-hover:scale-105 ${past ? 'grayscale' : ''}`} />
     </div>
   )}
   <div class="pointer-events-none absolute -bottom-6 -right-6 opacity-15 transition-transform duration-700 group-hover:scale-125" aria-hidden="true">
@@ -31,14 +35,14 @@ const href = `/veranstaltungen/${event.id}`;
       </span>
     </div>
     {past && <span class="mb-2 text-xs font-bold uppercase tracking-widest text-ink/60">{labels.past}</span>}
-    <H class="mb-3 text-2xl font-bold uppercase leading-tight tracking-tight md:text-3xl">
-      <a href={href} class="after:absolute after:inset-0 focus-visible:outline-none">{d.title}</a>
+    <H class="mb-3 text-2xl font-bold uppercase leading-tight tracking-tight md:text-3xl" lang={de}>
+      <a href={href} class="after:absolute after:inset-0 focus-visible:outline-none">{t.title}</a>
     </H>
     <ul class={`mb-4 space-y-1.5 text-sm font-bold ${past ? 'text-ink/70' : 'text-ssv-lime'}`}>
-      <li class="flex items-center gap-2"><span class="sr-only">{labels.date}:</span><time datetime={event.start.toISOString()}>{formatDate(event.start, { weekday: 'long', day: 'numeric', month: 'long' })}</time></li>
+      <li class="flex items-center gap-2"><span class="sr-only">{labels.date}:</span><time datetime={event.start.toISOString()}>{formatDate(event.start, { weekday: 'long', day: 'numeric', month: 'long' }, lang)}</time></li>
       {time && <li class="flex items-center gap-2"><Icon name="clock" size={16} /><span class="sr-only">{labels.time}:</span>{time}</li>}
-      {d.location && <li class="flex items-center gap-2"><Icon name="map-pin" size={16} /><span class="sr-only">{labels.location}:</span>{d.location}</li>}
+      {t.location && <li class="flex items-center gap-2"><Icon name="map-pin" size={16} /><span class="sr-only">{labels.location}:</span>{t.location}</li>}
     </ul>
-    {d.excerpt && <p class={`font-medium ${past ? 'text-ink/80' : 'text-white/90'}`}>{d.excerpt}</p>}
+    {t.excerpt && <p class={`font-medium ${past ? 'text-ink/80' : 'text-white/90'}`} lang={de}>{t.excerpt}</p>}
   </div>
 </article>

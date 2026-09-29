@@ -5,6 +5,9 @@
 @import "@fontsource/space-grotesk/latin-700.css";
 @plugin "@tailwindcss/typography";
 
+/* Dunkelmodus wird über die Klasse .dark auf <html> gesteuert (Umschalter im Header) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-ink: #0a0a0a;
   --color-paper: #fafafa;
@@ -15,6 +18,42 @@
   --shadow-brutal: 6px 6px 0 0 var(--color-ink);
   --shadow-brutal-sm: 3px 3px 0 0 var(--color-ink);
   --shadow-brutal-lg: 10px 10px 0 0 var(--color-ink);
+}
+
+/* ------------------------------------------------------------------ */
+/* Dunkelmodus: neutrale Flächen werden dunkel, Farbflächen bleiben.   */
+/* ------------------------------------------------------------------ */
+.dark {
+  --color-ink: #f3f3ee;
+  --color-white: #17171a;
+  --color-paper: #0e0e10;
+  color-scheme: dark;
+}
+/* Auf farbigen Flächen (Lime, Blau, Schwarz) gelten die hellen Originalfarben */
+.dark :is(.bg-ssv-lime, .bg-ssv-blue, .bg-ssv-blue-dark, .bg-ink, .eyebrow),
+.dark :is([class~='hover:bg-ssv-lime'], [class~='hover:bg-ssv-blue']):hover,
+.dark .prose-ssv a:hover {
+  --color-ink: #0a0a0a;
+  --color-white: #ffffff;
+  --color-paper: #fafafa;
+}
+.dark .prose-ssv {
+  --tw-prose-links: var(--color-ssv-lime);
+}
+.dark .bg-ssv-lime .prose-ssv {
+  --tw-prose-links: var(--color-ssv-blue);
+}
+.dark .bg-ssv-blue .prose-ssv {
+  --tw-prose-links: var(--color-ssv-lime);
+}
+.dark img {
+  filter: brightness(0.92);
+}
+/* Text auf Lime-Flächen immer dunkel (auch wenn er nur geerbt ist) */
+@layer base {
+  .dark :is(.bg-ssv-lime, [class~='hover:bg-ssv-lime']:hover) {
+    color: var(--color-ink);
+  }
 }
 
 @layer base {
@@ -53,16 +92,16 @@
   .brutal-card {
     @apply bg-white;
     border: 3px solid var(--color-ink);
-    box-shadow: var(--shadow-brutal);
+    box-shadow: 6px 6px 0 0 var(--color-ink);
   }
   /* Karten, die beim Hover „eingedrückt“ werden */
   .brutal-press {
-    box-shadow: var(--shadow-brutal);
+    box-shadow: 6px 6px 0 0 var(--color-ink);
     transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
   }
   .brutal-press:hover,
   .brutal-press:focus-within {
-    box-shadow: var(--shadow-brutal-sm);
+    box-shadow: 3px 3px 0 0 var(--color-ink);
     transform: translate(3px, 3px);
   }
   .display {
@@ -71,7 +110,7 @@
   .eyebrow {
     @apply inline-block bg-ssv-lime px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-ink sm:text-sm;
     border: 3px solid var(--color-ink);
-    box-shadow: var(--shadow-brutal-sm);
+    box-shadow: 3px 3px 0 0 var(--color-ink);
   }
   /* Rich-Text aus dem CMS */
   .prose-ssv {

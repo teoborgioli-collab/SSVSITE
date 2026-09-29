@@ -1,0 +1,24 @@
+---
+/** Eine im CMS angelegte Seite (Startseite oder Unterseite) in einer Sprache. */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlockRenderer from '../blocks/BlockRenderer.astro';
+import { blocksProvideH1, getSettings } from '../../lib/content';
+import type { Lang } from '../../i18n';
+interface Props { page: any; lang: Lang; alternates?: Partial<Record<Lang, string>>; isHome?: boolean; slug?: string }
+const { page, lang, alternates, isHome = false, slug } = Astro.props;
+const editPath = isHome ? `${lang === 'en' ? 'homeEn' : 'home'}/index` : `${lang === 'en' ? 'pageEn' : 'page'}/${slug}`;
+const settings = await getSettings(lang);
+const fallbackTitle = isHome ? settings.siteName : page?.title;
+---
+<BaseLayout
+  lang={lang}
+  alternates={alternates}
+  editPath={editPath}
+  title={page?.seo?.title || fallbackTitle}
+  description={page?.seo?.description}
+  image={page?.seo?.image}
+  noindex={page?.seo?.noindex || (lang === 'en' && !settings.enableEnglish)}
+  srOnlyH1={blocksProvideH1(page?.blocks) ? null : fallbackTitle}
+>
+  <BlockRenderer blocks={page?.blocks} lang={lang} />
+</BaseLayout>

@@ -20,12 +20,13 @@ const variants: Record<string, string> = {
 const sizes = { sm: 'px-4 py-2 text-sm', md: 'px-6 py-3.5 text-sm sm:text-base', lg: 'px-8 py-4 text-base sm:text-lg' };
 const classes = `inline-flex items-center justify-center gap-2 font-bold uppercase tracking-wider brutal-border brutal-press select-none ${variants[variant || 'primary'] || variants.primary} ${sizes[size]} ${cls}`;
 const ext = isExternal(href || '');
+const newTab = Astro.currentLocale === 'en' ? '(opens in a new tab)' : '(öffnet in neuem Tab)';
 ---
 {href ? (
   <a href={href} class={classes} {...(ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})} {...rest}>
     <slot />
     {arrow && <Icon name="arrow-right" size={18} />}
-    {ext && <span class="sr-only">(öffnet in neuem Tab)</span>}
+    {ext && <span class="sr-only">{newTab}</span>}
   </a>
 ) : (
   <button type={type} class={classes} {...rest}>

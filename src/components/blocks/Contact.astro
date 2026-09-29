@@ -3,8 +3,8 @@ import Icon from '../ui/Icon.astro';
 import SocialLinks from '../ui/SocialLinks.astro';
 import ContactForm from '../ui/ContactForm.astro';
 import { getSettings } from '../../lib/content';
-const { block, isFirst } = Astro.props as { block: any; isFirst?: boolean };
-const settings = await getSettings();
+const { block, isFirst, lang = 'de' } = Astro.props as { block: any; isFirst?: boolean; lang?: 'de' | 'en' };
+const settings = await getSettings(lang);
 const H = isFirst ? 'h1' : 'h2';
 ---
 <section id={block.anchor || undefined} class="bg-paper py-14 md:py-20">
@@ -34,7 +34,7 @@ const H = isFirst ? 'h1' : 'h2';
         </ul>
       )}
       {block.showSocial && settings.social?.length > 0 && (
-        <div class="mt-10"><SocialLinks social={settings.social} showLabels /></div>
+        <div class="mt-10"><SocialLinks social={settings.social} showLabels labels={settings.labels} /></div>
       )}
     </div>
     {block.showForm !== false && <ContactForm settings={settings} heading={block.formHeading} />}

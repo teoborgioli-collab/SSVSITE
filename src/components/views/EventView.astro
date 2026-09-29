@@ -1,0 +1,90 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CmsImage from '../ui/CmsImage.astro';
+import Icon from '../ui/Icon.astro';
+import Button from '../ui/Button.astro';
+import { getSettings, eventText } from '../../lib/content';
+import { richTextToHtml } from '../../lib/richtext';
+import { formatDate } from '../../lib/dates';
+import { ROUTES, eventUrl, type Lang } from '../../i18n';
+interface Props { event: any; lang: Lang }
+const { event, lang } = Astro.props;
+const { labels } = await getSettings(lang);
+const { Content } = await render(event);
+const d = event.data;
+const t = eventText(event, lang);
+const enHtml = lang === 'en' ? richTextToHtml(t.enBody) : '';
+const de = t.translated ? undefined : 'de';
+const isPast = event.end.getTime() < Date.now();
+const time = d.startTime ? `${d.startTime}${d.endTime ? `–${d.endTime}` : ''}${labels.oClock ? ` ${labels.oClock}` : ''}` : '';
+const multiDay = d.endDate && formatDate(d.endDate) !== formatDate(event.start);
+const full = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' } as const;
+
+// Kalender-Datei (.ics) zum Herunterladen
+const icsDate = (dt: Date) => dt.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+const ics = [
+  'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//SSV Potsdamer Strasse//Website//DE', 'BEGIN:VEVENT',
+  `UID:${event.id}@ssvpotsdamerstr.de`, `DTSTAMP:${icsDate(new Date())}`,
+  `DTSTART:${icsDate(event.start)}`, `DTEND:${icsDate(event.end)}`,
+  `SUMMARY:${(t.title || '').replace(/[,;\n]/g, ' ')}`,
+  t.location ? `LOCATION:${t.location.replace(/[,;\n]/g, ' ')}` : '',
+  `URL:${new URL(Astro.url.pathname, Astro.site)}`,
+  'END:VEVENT', 'END:VCALENDAR',
+].filter(Boolean).join('\r\n');
+const icsHref = `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`;
+---
+<BaseLayout
+  lang={lang}
+  alternates={{ de: eventUrl('de', event.id), en: eventUrl('en', event.id) }}
+  title={(lang === 'de' && d.seo?.title) || t.title}
+  description={(lang === 'de' && d.seo?.description) || t.excerpt}
+  image={d.seo?.image || d.image}
+  noindex={d.seo?.noindex}
+  editPath={`event/${event.id}`}
+>
+  <article>
+    <header class={`border-b-[3px] border-ink ${isPast ? 'bg-white' : 'bg-ssv-blue text-white'}`}>
+      <div class="container-page grid gap-10 py-12 md:grid-cols-[1.3fr_1fr] md:py-16">
+        <div>
+          <a href={ROUTES[lang].events} class="mb-8 inline-flex items-center gap-2 font-bold uppercase tracking-wider hover:underline"><Icon name="arrow-left" size={18} /> {labels.backToEvents}</a>
+          {isPast && <p class="eyebrow mb-5">{labels.past}</p>}
+          <h1 class="display text-4xl sm:text-5xl md:text-7xl text-balance" lang={de}>{t.title}</h1>
+          {t.excerpt && <p class={`mt-6 text-xl font-medium md:text-2xl ${isPast ? 'text-ink/80' : 'text-white/90'}`} lang={de}>{t.excerpt}</p>}
+        </div>
+        <dl class="self-start bg-ssv-lime p-6 text-ink brutal-border shadow-brutal md:p-8">
+          <div class="mb-4">
+            <dt class="text-xs font-bold uppercase tracking-widest">{labels.date}</dt>
+            <dd class="text-xl font-bold">
+              <time datetime={event.start.toISOString()}>{formatDate(event.start, full, lang)}</time>
+              {multiDay && <> – {formatDate(d.endDate, undefined, lang)}</>}
+            </dd>
+          </div>
+          {time && <div class="mb-4"><dt class="text-xs font-bold uppercase tracking-widest">{labels.time}</dt><dd class="text-xl font-bold">{time}</dd></div>}
+          {t.location && <div class="mb-6"><dt class="text-xs font-bold uppercase tracking-widest">{labels.location}</dt><dd class="text-xl font-bold">{t.location}</dd></div>}
+          <div class="flex flex-col gap-3">
+            {d.registrationUrl && !isPast && <Button href={d.registrationUrl} variant="primary" arrow>{t.registrationLabel || labels.register}</Button>}
+            {!isPast && <Button href={icsHref} variant="outline" size="sm" download={`${event.id}.ics`}><Icon name="calendar-plus" size={16} /> {labels.addToCalendar}</Button>}
+          </div>
+        </dl>
+      </div>
+    </header>
+    {d.image && (
+      <div class="container-page max-w-5xl pt-10 md:pt-14">
+        <div class="aspect-video overflow-hidden bg-ink brutal-border shadow-brutal-lg">
+          <CmsImage src={d.image} alt={t.imageAlt} eager sizes="(min-width: 1024px) 1024px, 100vw" class={`h-full w-full object-cover ${isPast ? 'grayscale' : ''}`} />
+        </div>
+      </div>
+    )}
+    <div class="container-page max-w-3xl py-12 md:py-16">
+      {enHtml ? (
+        <div class="prose-ssv" set:html={enHtml} />
+      ) : (
+        <>
+          {lang === 'en' && <p class="mb-8 inline-block bg-ssv-lime px-3 py-2 text-sm font-bold brutal-border">{labels.onlyGerman}</p>}
+          <div class="prose-ssv" lang={lang === 'en' ? 'de' : undefined}><Content /></div>
+        </>
+      )}
+    </div>
+  </article>
+</BaseLayout>

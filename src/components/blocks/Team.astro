@@ -3,8 +3,8 @@ import SectionHeading from '../ui/SectionHeading.astro';
 import CmsImage from '../ui/CmsImage.astro';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
-import { getTeam } from '../../lib/content';
-const { block } = Astro.props as { block: any };
+import { getTeam, tr } from '../../lib/content';
+const { block, lang = 'de' } = Astro.props as { block: any; lang?: 'de' | 'en' };
 let members = await getTeam();
 if (block.limit) members = members.slice(0, block.limit);
 ---
@@ -12,7 +12,7 @@ if (block.limit) members = members.slice(0, block.limit);
   <div class="container-page">
     <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} />
     <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {members.map((m) => (
+      {members.map((m) => { const t = tr(m.data, lang, ['role', 'bio']); return (
         <li data-reveal>
           <article class="group flex h-full flex-col bg-white p-5 brutal-border brutal-press transition-colors hover:bg-ssv-lime">
             <div class="mb-5 aspect-square overflow-hidden bg-ink brutal-border">
@@ -23,8 +23,8 @@ if (block.limit) members = members.slice(0, block.limit);
               )}
             </div>
             <h3 class="text-xl font-bold uppercase leading-tight tracking-tight">{m.data.name}</h3>
-            {m.data.role && <p class="mb-3 font-bold text-ssv-blue">{m.data.role}</p>}
-            {m.data.bio && <p class="font-medium text-ink/80">{m.data.bio}</p>}
+            {t.role && <p class="mb-3 font-bold text-ssv-blue dark:text-ssv-lime group-hover:text-ssv-blue">{t.role}</p>}
+            {t.bio && <p class="font-medium text-ink/80">{t.bio}</p>}
             {m.data.email && (
               <a href={`mailto:${m.data.email}`} class="mt-4 inline-flex items-center gap-2 break-all font-bold underline decoration-2 underline-offset-4">
                 <Icon name="mail" size={18} /> {m.data.email}
@@ -32,7 +32,7 @@ if (block.limit) members = members.slice(0, block.limit);
             )}
           </article>
         </li>
-      ))}
+      ); })}
     </ul>
     {block.buttonLabel && block.buttonHref && <div class="mt-12"><Button href={block.buttonHref} variant="outline" arrow>{block.buttonLabel}</Button></div>}
   </div>

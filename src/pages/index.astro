@@ -1,16 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import BlockRenderer from '../components/blocks/BlockRenderer.astro';
-import { getHome, blocksProvideH1, getSettings } from '../lib/content';
-const home = await getHome();
-const settings = await getSettings();
+import PageView from '../components/views/PageView.astro';
+import { getHome } from '../lib/content';
+const home = await getHome('de');
 ---
-<BaseLayout
-  title={home?.seo?.title || settings.siteName}
-  description={home?.seo?.description}
-  image={home?.seo?.image}
-  noindex={home?.seo?.noindex}
-  srOnlyH1={blocksProvideH1(home?.blocks) ? null : settings.siteName}
->
-  <BlockRenderer blocks={home?.blocks} />
-</BaseLayout>
+<PageView page={home} lang="de" isHome alternates={{ de: '/', en: '/en/' }} />

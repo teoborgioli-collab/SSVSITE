@@ -1,0 +1,71 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CmsImage from '../ui/CmsImage.astro';
+import Icon from '../ui/Icon.astro';
+import NewsCard from '../ui/NewsCard.astro';
+import { getNews, getSettings, newsText } from '../../lib/content';
+import { richTextToHtml } from '../../lib/richtext';
+import { formatDate } from '../../lib/dates';
+import { ROUTES, newsUrl, type Lang } from '../../i18n';
+interface Props { post: any; lang: Lang }
+const { post, lang } = Astro.props;
+const { labels } = await getSettings(lang);
+const d = post.data;
+const t = newsText(post, lang);
+const enHtml = lang === 'en' ? richTextToHtml(t.enBody) : '';
+const { Content } = await render(post);
+const more = (await getNews()).filter((p) => p.id !== post.id).slice(0, 3);
+const de = t.translated ? undefined : 'de';
+---
+<BaseLayout
+  lang={lang}
+  alternates={{ de: newsUrl('de', post.id), en: newsUrl('en', post.id) }}
+  title={(lang === 'de' && d.seo?.title) || t.title}
+  description={(lang === 'de' && d.seo?.description) || t.excerpt}
+  image={d.seo?.image || d.image}
+  noindex={d.seo?.noindex}
+  type="article"
+  editPath={`news/${post.id}`}
+  publishedTime={d.date}
+>
+  <article>
+    <header class="border-b-[3px] border-ink bg-white">
+      <div class="container-page max-w-4xl py-12 md:py-16">
+        <a href={ROUTES[lang].news} class="mb-8 inline-flex items-center gap-2 font-bold uppercase tracking-wider hover:underline"><Icon name="arrow-left" size={18} /> {labels.backToNews}</a>
+        <div class="mb-6 flex flex-wrap items-center gap-3">
+          <time datetime={d.date.toISOString()} class="bg-ink px-3 py-1 text-sm font-bold text-white">{formatDate(d.date, undefined, lang)}</time>
+          {d.featured && <span class="bg-ssv-lime px-2.5 py-1 text-xs font-bold uppercase tracking-wider brutal-border">{labels.featured}</span>}
+          {d.author && <span class="text-sm font-bold uppercase tracking-wider text-ink/60">{d.author}</span>}
+        </div>
+        <h1 class="display text-4xl sm:text-5xl md:text-6xl text-balance" lang={de}>{t.title}</h1>
+        {t.excerpt && <p class="mt-6 text-xl font-medium text-ink/80 md:text-2xl" lang={de}>{t.excerpt}</p>}
+      </div>
+    </header>
+    {d.image && (
+      <div class="container-page max-w-5xl pt-10 md:pt-14">
+        <div class="aspect-video overflow-hidden bg-ink brutal-border shadow-brutal-lg">
+          <CmsImage src={d.image} alt={t.imageAlt} eager sizes="(min-width: 1024px) 1024px, 100vw" class="h-full w-full object-cover" />
+        </div>
+      </div>
+    )}
+    <div class="container-page max-w-3xl py-12 md:py-16">
+      {enHtml ? (
+        <div class="prose-ssv" set:html={enHtml} />
+      ) : (
+        <>
+          {lang === 'en' && <p class="mb-8 inline-block bg-ssv-lime px-3 py-2 text-sm font-bold brutal-border">{labels.onlyGerman}</p>}
+          <div class="prose-ssv" lang={lang === 'en' ? 'de' : undefined}><Content /></div>
+        </>
+      )}
+    </div>
+  </article>
+  {more.length > 0 && (
+    <section class="border-t-[3px] border-ink bg-paper py-16" aria-labelledby="more-news">
+      <div class="container-page">
+        <h2 id="more-news" class="display mb-10 text-3xl md:text-4xl">{labels.moreNews}</h2>
+        <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">{more.map((p) => <li><NewsCard post={p} labels={labels} lang={lang} /></li>)}</ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>

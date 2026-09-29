@@ -22,14 +22,20 @@ export function berlinDateTime(day: string, time = '00:00'): Date {
   return new Date(guess - (asBerlin - guess));
 }
 
-export const formatDate = (d: Date | string, opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' }) =>
-  new Intl.DateTimeFormat(LOCALE, { timeZone: TZ, ...opts }).format(typeof d === 'string' ? new Date(d) : d);
+const LOCALES: Record<string, string> = { de: 'de-DE', en: 'en-GB' };
 
-export const formatShort = (d: Date | string) => formatDate(d, { day: '2-digit', month: '2-digit', year: 'numeric' });
+export const formatDate = (
+  d: Date | string,
+  opts: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'long', year: 'numeric' },
+  lang: string = 'de',
+) => new Intl.DateTimeFormat(LOCALES[lang] || LOCALE, { timeZone: TZ, ...opts }).format(typeof d === 'string' ? new Date(d) : d);
 
-export const dayParts = (d: Date | string) => ({
-  day: formatDate(d, { day: '2-digit' }),
-  month: formatDate(d, { month: 'short' }).replace('.', ''),
-  weekday: formatDate(d, { weekday: 'short' }).replace('.', ''),
-  year: formatDate(d, { year: 'numeric' }),
+export const formatShort = (d: Date | string, lang = 'de') =>
+  formatDate(d, { day: '2-digit', month: '2-digit', year: 'numeric' }, lang);
+
+export const dayParts = (d: Date | string, lang = 'de') => ({
+  day: formatDate(d, { day: '2-digit' }, lang),
+  month: formatDate(d, { month: 'short' }, lang).replace('.', ''),
+  weekday: formatDate(d, { weekday: 'short' }, lang).replace('.', ''),
+  year: formatDate(d, { year: 'numeric' }, lang),
 });
