@@ -5,6 +5,13 @@
   "address": "",
   "contactNote": "Die SSV ist im Wohnheim Potsdamer Straße in Berlin aktiv. Für Treffen oder persönliche Anliegen teilen wir den genauen Treffpunkt gern per E-Mail mit.",
   "enableEnglish": true,
+  "social": [
+    {
+      "platform": "instagram",
+      "label": "@ssv.potsdamerstr",
+      "url": "https://www.instagram.com/ssv.potsdamerstr"
+    }
+  ],
   "navigation": [
     {
       "label": "Über uns",
