@@ -33,6 +33,10 @@
     {
       "label": "Kontakt",
       "href": "/kontakt"
+    },
+    {
+      "label": "Spenden",
+      "href": "/spenden"
     }
   ],
   "navCta": {
