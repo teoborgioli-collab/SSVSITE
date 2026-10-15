@@ -20,6 +20,11 @@
           "label": "Kontakt aufnehmen",
           "href": "/kontakt",
           "variant": "primary"
+        },
+        {
+          "label": "Hier anmelden",
+          "href": "https://member.ssvpotsdamerstr.de/",
+          "variant": "primary"
         }
       ],
       "color": "blue",
