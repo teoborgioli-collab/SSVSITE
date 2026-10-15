@@ -3,7 +3,9 @@
   "blocks": [
     {
       "enabled": true,
-      "heading": "Überschrift",
+      "badge": "UNTERSTÜTZEN",
+      "heading": "Gemeinsam mehr möglich machen",
+      "body": "",
       "width": "narrow",
       "color": "light",
       "_template": "richText"
