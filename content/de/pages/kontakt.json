@@ -7,15 +7,15 @@
   },
   "blocks": [
     {
-      "_template": "contact",
       "enabled": true,
       "badge": "Kontakt",
-      "heading": "Sag hallo",
-      "text": "Du hast eine Frage, ein Problem oder eine Idee? Schreib uns eine E-Mail oder nutze das Formular.",
+      "heading": "Kontakt",
+      "text": "Du erreichst uns per E-Mail oder über das Formular. Persönlich findest du uns im Wohnheim Potsdamer Straße; den genauen Treffpunkt teilen wir dir gern per E-Mail mit.",
       "showDetails": true,
       "showSocial": true,
       "showForm": true,
-      "formHeading": "Schreib uns"
+      "formHeading": "Schreib uns",
+      "_template": "contact"
     }
   ]
 }
