@@ -12,7 +12,16 @@
     },
     {
       "enabled": true,
-      "heading": "Mach mit!",
+      "badge": "KONTAKT",
+      "heading": "Du möchtest uns unterstützen?",
+      "text": "Schreib uns. Wir senden dir die aktuellen, offiziell bestätigten Möglichkeiten für eine Spende.",
+      "buttons": [
+        {
+          "label": "Kontakt aufnehmen",
+          "href": "/kontakt",
+          "variant": "primary"
+        }
+      ],
       "color": "blue",
       "_template": "cta"
     }
