@@ -3,7 +3,7 @@
   "tagline": "Die studentische Selbstverwaltung im Wohnheim Potsdamer Straße, Berlin.",
   "email": "info@ssvpotsdamerstr.de",
   "address": "",
-  "contactNote": "[Platzhalter] Hier z. B. Sprechzeiten oder den Ort des SSV-Briefkastens eintragen.",
+  "contactNote": "Die SSV ist im Wohnheim Potsdamer Straße in Berlin aktiv. Für Treffen oder persönliche Anliegen teilen wir den genauen Treffpunkt gern per E-Mail mit.",
   "enableEnglish": true,
   "navigation": [
     {
@@ -40,13 +40,6 @@
     "label": "Mitmachen",
     "href": "/mitmachen"
   },
-  "social": [
-    {
-      "platform": "instagram",
-      "label": "@platzhalter",
-      "url": "https://www.instagram.com/"
-    }
-  ],
   "footer": {
     "text": "Gemeinsam wohnen. Gemeinsam gestalten. Wir sind die gewählte Vertretung der Bewohner:innen.",
     "ctaLabel": "Schreib uns",
@@ -121,9 +114,9 @@
     "messageLabel": "Nachricht",
     "submitLabel": "Absenden",
     "privacyNote": "Mit dem Absenden werden deine Angaben zur Beantwortung deiner Anfrage verarbeitet. Mehr dazu in der Datenschutzerklärung.",
+    "privacyHref": "/datenschutz",
     "successMessage": "Danke! Deine Nachricht ist bei uns angekommen. Wir melden uns so schnell wie möglich.",
-    "errorMessage": "Das hat leider nicht geklappt. Bitte versuche es später noch einmal oder schreib uns direkt eine E-Mail.",
-    "privacyHref": "/datenschutz"
+    "errorMessage": "Das hat leider nicht geklappt. Bitte versuche es später noch einmal oder schreib uns direkt eine E-Mail."
   },
   "labels": {
     "readMore": "Weiterlesen",
