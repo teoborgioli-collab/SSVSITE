@@ -57,11 +57,11 @@
     {
       "enabled": true,
       "badge": "Vertretung",
-      "heading": "Wie ihr vertreten werdet",
+      "heading": "So vertreten wir euch",
       "body": "Die Mitglieder der SSV werden von den Bewohner:innen gewählt. \\[Platzhalter] Hier beschreiben, wann und wie gewählt wird (z. B. auf der Vollversammlung) und wie lange eine Amtszeit dauert.\n\n* Regelmäßige, offene Sitzungen\n* Protokolle im Bereich [Dokumente](/dokumente)\n* Vollversammlung für alle Bewohner:innen\n",
       "buttons": [],
-      "image": "/uploads/bilder/versammlung.jpg",
-      "imageAlt": "Platzhalterbild – Vollversammlung",
+      "image": "",
+      "imageAlt": "",
       "imagePosition": "left",
       "color": "light",
       "_template": "imageText"
