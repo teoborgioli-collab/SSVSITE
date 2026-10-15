@@ -41,8 +41,8 @@
   ],
   "navCta": {
     "enabled": true,
-    "label": "Mitmachen",
-    "href": "/mitmachen"
+    "label": "Anmelden",
+    "href": "https://member.ssvpotsdamerstr.de/"
   },
   "footer": {
     "text": "Gemeinsam wohnen. Gemeinsam gestalten. Wir sind die gewählte Vertretung der Bewohner:innen.",
