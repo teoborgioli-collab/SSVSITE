@@ -4,8 +4,8 @@ date: 2026-11-20T10:00:00.000Z
 startTime: '20:00'
 endTime: '23:59'
 location: Wohnheim Potsdamer Straße – genauer Treffpunkt folgt
-image: /uploads/bilder/event-spiele.jpg
-imageAlt: Wohnheimparty der SSV Potsdamer Straße
+image: ''
+imageAlt: ''
 excerpt: 'Gemeinsam feiern, tanzen und neue Nachbar:innen kennenlernen – alle Bewohner:innen sind willkommen.'
 registrationUrl: ''
 registrationLabel: ''
@@ -22,6 +22,4 @@ en:
   imageAlt: Placeholder image – event image
 ---
 
-*Beispielveranstaltung – bitte im CMS anpassen.*
-
-Ein entspannter Abend für alle. Keine Anmeldung nötig.
+Kommt zur Wohnheimparty und verbringt einen entspannten Abend mit euren Nachbar:innen. Musik, Getränke und weitere Details geben wir rechtzeitig bekannt. Keine Anmeldung nötig.
