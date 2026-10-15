@@ -69,11 +69,11 @@
     {
       "enabled": true,
       "badge": "Team",
-      "heading": "Die Crew",
-      "intro": "Diese Menschen engagieren sich aktuell in der SSV.",
+      "heading": "Das SSV-Team",
+      "intro": "Wir sind Bewohner:innen, die sich ehrenamtlich für das Zusammenleben im Wohnheim engagieren. Namen und Fotos veröffentlichen wir nur mit Zustimmung der jeweiligen Person.",
       "limit": 0,
-      "buttonLabel": "",
-      "buttonHref": "",
+      "buttonLabel": "Kontakt aufnehmen",
+      "buttonHref": "/kontakt",
       "_template": "team"
     },
     {
