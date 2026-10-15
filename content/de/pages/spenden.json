@@ -9,6 +9,12 @@
       "width": "narrow",
       "color": "light",
       "_template": "richText"
+    },
+    {
+      "enabled": true,
+      "heading": "Mach mit!",
+      "color": "blue",
+      "_template": "cta"
     }
   ]
 }
