@@ -38,12 +38,12 @@
       "href": "/kontakt"
     },
     {
-      "label": "Spenden",
+      "label": "Unterstützen",
       "href": "/spenden"
     }
   ],
   "navCta": {
-    "enabled": true,
+    "enabled": false,
     "label": "Anmelden",
     "href": "https://member.ssvpotsdamerstr.de/"
   },
