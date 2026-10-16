@@ -1,0 +1,34 @@
+---
+/** Von Hand gezeichnet wirkende Vektorformen – scharf auf jedem Bildschirm (kein Filter). */
+interface Props { kind: string; fill?: string; cls?: string; depth?: number; delay?: string; shadow?: boolean; spin?: boolean }
+const P: Record<string, string> = {
+  circle: 'M50 6C74 4 95 24 94 49C93 75 73 95 49 94C25 93 5 74 6 50C7 27 27 7 50 6Z',
+  square: 'M9 9L91 6Q94 50 92 92L7 94Q5 50 9 9Z',
+  diamond: 'M50 5L95 49L51 95L5 51Z',
+  tri: 'M50 7L94 90L7 92Z',
+  star: 'M50 2L59 37L92 14L67 46L98 51L66 55L94 86L57 63L49 98L43 62L6 84L34 54L2 49L35 45L8 16L41 38Z',
+  plus: 'M38 5L62 4L63 37L95 38L96 62L62 63L61 95L38 96L37 62L4 61L5 37L38 36Z',
+  blob: 'M20 40C18 18 45 8 65 14C88 20 96 45 85 66C74 88 42 94 25 78C14 68 21 52 20 40Z',
+  squiggle: 'M5 20Q20 0 35 20T65 20T95 20T115 20',
+};
+const { kind, fill = 'var(--color-ssv-lime)', cls = '', depth = 0, delay, shadow = false, spin = false } = Astro.props;
+const squig = kind === 'squiggle';
+---
+<svg
+  data-depth={depth}
+  class={`${spin ? 'spin-slow' : 'float-slow'} absolute ${cls}`}
+  viewBox={squig ? '0 0 120 40' : '0 0 100 100'}
+  style={`overflow:visible;${delay ? `animation-delay:${delay};` : ''}`}
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  {squig ? (
+    <path d={P.squiggle} stroke={fill} stroke-width="9" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+  ) : (
+    <>
+      {shadow && <path d={P[kind]} transform="translate(5 5)" fill="var(--color-ink)" />}
+      <path d={P[kind]} fill={fill} stroke="var(--color-ink)" stroke-width="3" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+    </>
+  )}
+</svg>

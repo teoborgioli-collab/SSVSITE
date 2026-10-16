@@ -7,7 +7,8 @@ const { settings } = Astro.props;
 const f = settings.footer || {};
 const ext = (href: string) => (isExternal(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {});
 ---
-<footer class="border-t-[3px] border-ink bg-ink text-white">
+<footer class="relative mt-10 bg-ink text-white">
+  <svg class="absolute inset-x-0 -top-[29px] h-8 w-full text-ink" viewBox="0 0 1440 32" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 32V16C180 -4 360 -4 540 14s360 18 540 0 270-14 360 2V32Z"/></svg>
   <div class="container-page grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-4">
     <div class="lg:col-span-2">
       <p class="display mb-5 text-4xl text-ssv-lime md:text-5xl">{settings.siteName}</p>

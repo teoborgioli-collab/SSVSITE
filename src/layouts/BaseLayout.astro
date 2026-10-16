@@ -31,7 +31,7 @@ const alternates = settings.enableEnglish ? props.alternates || {} : {};
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#CCFF00" />
+    <meta name="theme-color" content="#FBF8F0" />
     <meta name="color-scheme" content="light dark" />
     <script is:inline>
       // Dunkelmodus vor dem ersten Zeichnen setzen (kein Aufblitzen)
@@ -115,6 +115,26 @@ const alternates = settings.enableEnglish ? props.alternates || {} : {};
         const empty = (section || archive)?.querySelector('[data-empty]');
         empty?.classList.toggle('hidden', remaining.length > 0);
       });
+    </script>
+    <script>
+      // Dekorative Formen reagieren auf Maus und Scrollen (nur mit Maus, nicht bei „weniger Bewegung“)
+      const shapes = Array.from(document.querySelectorAll<HTMLElement>('[data-depth]'));
+      if (shapes.length && matchMedia('(pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        let tx = 0, ty = 0, cx = 0, cy = 0;
+        addEventListener('pointermove', (e) => { tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; }, { passive: true });
+        const tick = () => {
+          cx += (tx - cx) * 0.08; cy += (ty - cy) * 0.08;
+          for (const el of shapes) {
+            const d = Number(el.dataset.depth) || 0;
+            const host = el.closest('section, header') as HTMLElement | null;
+            let sy = 0;
+            if (host) { const r = host.getBoundingClientRect(); sy = Math.max(-1, Math.min(1, (r.top + r.height / 2 - innerHeight / 2) / 600)) * d * 0.6; }
+            el.style.translate = `${Math.round(cx * d)}px ${Math.round(cy * d + sy)}px`;
+          }
+          requestAnimationFrame(tick);
+        };
+        tick();
+      }
     </script>
   </body>
 </html>
