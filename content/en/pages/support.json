@@ -1,0 +1,40 @@
+{
+  "title": "Support",
+  "dePage": "content/de/pages/spenden.json",
+  "hideFromSitemap": false,
+  "seo": {
+    "title": "",
+    "description": "Support community projects of SSV Potsdamer Straße."
+  },
+  "blocks": [
+    {
+      "enabled": true,
+      "badge": "SUPPORT",
+      "heading": "Making more possible together",
+      "body": "With a donation you support community projects in the Potsdamer Straße residence – for example events, equipment for the common rooms and small activities for residents.\n\nOur official payment and donation options are currently being prepared. If you'd like to support us already, write to us via the contact page and we'll get back to you with the latest information.\n",
+      "width": "narrow",
+      "color": "light",
+      "_template": "richText"
+    },
+    {
+      "enabled": true,
+      "badge": "CONTACT",
+      "heading": "Would you like to support us?",
+      "text": "Write to us. We'll send you the current, officially confirmed ways to donate.",
+      "buttons": [
+        {
+          "label": "Get in touch",
+          "href": "/en/contact",
+          "variant": "primary"
+        },
+        {
+          "label": "Sign up here",
+          "href": "https://member.ssvpotsdamerstr.de/",
+          "variant": "primary"
+        }
+      ],
+      "color": "blue",
+      "_template": "cta"
+    }
+  ]
+}
