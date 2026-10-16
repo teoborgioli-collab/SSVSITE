@@ -8,32 +8,29 @@
   },
   "blocks": [
     {
-      "_template": "pageHeader",
       "enabled": true,
       "badge": "About us",
       "title": "Who we are",
       "intro": "The SSV is the student self-government of the Potsdamer Straße residence – by residents, for residents.",
       "image": "",
       "imageAlt": "",
-      "color": "white"
+      "color": "white",
+      "_template": "pageHeader"
     },
     {
-      "_template": "richText",
       "enabled": true,
       "badge": "",
       "heading": "What is the SSV?",
+      "body": "The student self-government (SSV) is the elected representation of the residents of the Potsdamer Straße residence. It gathers concerns from the house, raises them with the residence management and organises community activities. All residents can contribute ideas, take part in open meetings and get involved.\n",
       "width": "narrow",
       "color": "white",
-      "body": "The student self-government (SSV) is the elected body of the residents. Everyone living in the residence can have a say, take part in decisions and stand for election.\n\n[Placeholder] Add here since when the SSV exists and on what basis (e.g. statutes) it works.\n"
+      "_template": "richText"
     },
     {
-      "_template": "features",
       "enabled": true,
       "badge": "",
       "heading": "What we do",
       "intro": "",
-      "style": "light",
-      "columns": "3",
       "cards": [
         {
           "title": "Being your contact",
@@ -53,32 +50,34 @@
           "icon": "party-popper",
           "accent": "lime"
         }
-      ]
+      ],
+      "style": "light",
+      "columns": "3",
+      "_template": "features"
     },
     {
-      "_template": "imageText",
       "enabled": true,
       "badge": "Representation",
       "heading": "How you are represented",
-      "body": "The members of the SSV are elected by the residents. [Placeholder] Describe when and how elections take place (e.g. at the general assembly) and how long a term lasts.\n\n* Regular, open meetings\n* Minutes in the [documents](/en/documents) section\n* General assembly for all residents\n",
+      "body": "The SSV takes up the concerns of residents and raises them in talks with the residence management. Decisions and current topics are discussed in open meetings. Anyone who lives in the residence can ask questions, make suggestions and take part in joint projects.\n\n* Regular, open meetings\n* Minutes in the [documents](/en/documents) section\n* General assembly for all residents\n",
       "buttons": [],
-      "image": "/uploads/bilder/versammlung.jpg",
-      "imageAlt": "Placeholder image – general assembly",
+      "image": "",
+      "imageAlt": "",
       "imagePosition": "left",
-      "color": "light"
+      "color": "light",
+      "_template": "imageText"
     },
     {
-      "_template": "team",
       "enabled": true,
       "badge": "Team",
-      "heading": "The crew",
-      "intro": "These people are currently active in the SSV.",
+      "heading": "The SSV team",
+      "intro": "We are residents who volunteer to make living together in the residence better. We only publish names and photos with the consent of the person concerned.",
       "limit": 0,
-      "buttonLabel": "",
-      "buttonHref": ""
+      "buttonLabel": "Get in touch",
+      "buttonHref": "/en/contact",
+      "_template": "team"
     },
     {
-      "_template": "cta",
       "enabled": true,
       "badge": "",
       "heading": "Want to join?",
@@ -92,7 +91,8 @@
       ],
       "color": "blue",
       "image": "",
-      "imageAlt": ""
+      "imageAlt": "",
+      "_template": "cta"
     }
   ]
 }
