@@ -11,15 +11,13 @@ registrationUrl: ''
 registrationLabel: ''
 draft: false
 en:
-  title: Game night
-  location: '[Placeholder: location]'
-  excerpt: 'Board games, card games, good company. Feel free to bring your own games!'
+  title: Dorm Party
+  location: Potsdamer Straße residence – exact meeting point to follow
+  excerpt: 'Party, dance and meet new neighbours – all residents are welcome!'
   registrationLabel: ''
   body: |
-    *Sample event – please adjust in the CMS.*
-
-    A relaxed evening for everyone. No registration needed.
-  imageAlt: Placeholder image – event image
+    Come to the dorm party and spend a relaxed evening with your neighbours. We'll announce music, drinks and further details in good time. No registration needed.
+  imageAlt: ''
 ---
 
 Kommt zur Wohnheimparty und verbringt einen entspannten Abend mit euren Nachbar:innen. Musik, Getränke und weitere Details geben wir rechtzeitig bekannt. Keine Anmeldung nötig.
