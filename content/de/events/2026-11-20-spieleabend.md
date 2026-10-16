@@ -13,10 +13,12 @@ draft: false
 en:
   title: Dorm Party
   location: Potsdamer Straße residence – exact meeting point to follow
-  excerpt: 'Party, dance and meet new neighbours – all residents are welcome!'
+  excerpt: 'Party, dance and meet your neighbours – all residents are welcome!'
   registrationLabel: ''
   body: |
-    Come to the dorm party and spend a relaxed evening with your neighbours. We'll announce music, drinks and further details in good time. No registration needed.
+    *Sample event – please adjust in the CMS.*
+
+    A relaxed evening for everyone. NCome to the dorm party and spend a relaxed evening with your neighbours. We'll announce music, drinks and further details in good time. No registration needed.o registration needed.
   imageAlt: ''
 ---
 
