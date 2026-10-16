@@ -11,7 +11,7 @@ const endpoint = f.endpoint || '/api/contact';
 ---
 <div class="bg-ssv-lime p-6 brutal-border shadow-brutal-lg sm:p-8 md:p-10">
   {heading && <h2 class="display mb-6 text-3xl md:text-4xl">{heading}</h2>}
-  <form class="space-y-5" action={endpoint} method="post" data-contact-form data-success={f.successMessage} data-error={f.errorMessage} novalidate>
+  <form class="space-y-5" action={endpoint} method="post" data-contact-form data-success={f.successMessage} data-error={f.errorMessage} data-email={settings.email} novalidate>
     <div class="grid gap-5 sm:grid-cols-2">
       <div>
         <label for="cf-name" class="mb-2 block font-bold">{f.nameLabel || 'Name'} <span aria-hidden="true">*</span></label>
@@ -69,12 +69,24 @@ const endpoint = f.endpoint || '/api/contact';
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(data),
         });
-        if (!res.ok) throw new Error(String(res.status));
+        if (!res.ok) {
+          const info = await res.json().catch(() => ({}));
+          throw new Error(info.reason || String(res.status));
+        }
         form.reset();
         if (started) started.value = String(Date.now());
         show(form.dataset.success || 'Danke für deine Nachricht!', true);
-      } catch {
+      } catch (err) {
+        console.warn('Kontaktformular:', err instanceof Error ? err.message : err);
         show(form.dataset.error || 'Senden fehlgeschlagen.', false);
+        const email = form.dataset.email;
+        if (email) {
+          const a = document.createElement('a');
+          a.href = `mailto:${email}`;
+          a.textContent = email;
+          a.className = 'underline underline-offset-4';
+          status.append(' ', a);
+        }
       } finally {
         btn?.removeAttribute('disabled');
         btn?.removeAttribute('aria-busy');

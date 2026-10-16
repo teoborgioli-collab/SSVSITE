@@ -18,7 +18,8 @@ const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 
 async function viaResend(m: Msg) {
   const to = process.env.CONTACT_TO_EMAIL || 'info@ssvpotsdamerstr.de';
-  const from = process.env.CONTACT_FROM_EMAIL || 'Website <website@ssvpotsdamerstr.de>';
+  // Absender muss zu einer in Resend bestätigten Domain gehören (dieselbe wie im Mitgliederportal).
+  const from = process.env.CONTACT_FROM_EMAIL || process.env.MAIL_FROM || 'SSV Website <info@ssvpotsdamerstr.de>';
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
@@ -31,7 +32,10 @@ async function viaResend(m: Msg) {
       html: `<p><strong>Name:</strong> ${esc(m.name)}<br><strong>E-Mail:</strong> ${esc(m.email)}<br><strong>Betreff:</strong> ${esc(m.subject)}</p><p style="white-space:pre-wrap">${esc(m.message)}</p>`,
     }),
   });
-  if (!r.ok) throw new Error(`Resend ${r.status}: ${await r.text()}`);
+  if (!r.ok) {
+    const detail = (await r.text()).slice(0, 300);
+    throw Object.assign(new Error(`Resend ${r.status}: ${detail}`), { status: r.status });
+  }
 }
 
 async function viaWebhook(m: Msg) {
@@ -66,10 +70,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     if (process.env.RESEND_API_KEY) await viaResend(msg);
     else if (process.env.CONTACT_WEBHOOK_URL) await viaWebhook(msg);
-    else return res.status(503).json({ error: 'Der Versand ist noch nicht eingerichtet.' });
+    else {
+      console.error('Kontaktformular: weder RESEND_API_KEY noch CONTACT_WEBHOOK_URL ist im Vercel-Projekt der Website gesetzt.');
+      return res.status(503).json({ error: 'Der Versand ist noch nicht eingerichtet.', reason: 'not_configured' });
+    }
     return res.status(200).json({ ok: true });
   } catch (e) {
-    console.error(e);
-    return res.status(502).json({ error: 'Versand fehlgeschlagen.' });
+    // Grund ohne Inhalt der Nachricht protokollieren (in Vercel unter „Logs“ sichtbar).
+    const status = (e as { status?: number }).status;
+    console.error('Kontaktformular: Versand fehlgeschlagen –', (e as Error).message);
+    const reason = status === 401 ? 'api_key_invalid' : status === 403 || status === 422 ? 'sender_not_allowed' : 'provider_error';
+    return res.status(502).json({ error: 'Versand fehlgeschlagen.', reason });
   }
 }
