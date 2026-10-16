@@ -7,23 +7,23 @@
   },
   "blocks": [
     {
-      "_template": "pageHeader",
       "enabled": true,
       "badge": "",
       "title": "Impressum",
       "intro": "",
       "image": "",
       "imageAlt": "",
-      "color": "white"
+      "color": "white",
+      "_template": "pageHeader"
     },
     {
-      "_template": "richText",
       "enabled": true,
       "badge": "",
       "heading": "",
+      "body": "## Angaben gemäß § 5 DDG\n\nSSV Potsdamer Str. e.V.\n\n\\[Platzhalter: Straße Hausnummer, PLZ Berlin]\n\n## Vertreten durch\n\nDen vertretungsberechtigten Vorstand: Matteo Borgioli, Mohamed Amine Ben Jalloul, Alex Atanasov, Mia Gonzalez Hofmann\n\n## Kontakt\n\nE-Mail: [info@ssvpotsdamerstr.de](mailto:info@ssvpotsdamerstr.de)\n\n## Registereintrag\n\nEintragung im Vereinsregister\n\nRegistergericht: Amtsgericht Charlottenburg\n\nRegisternummer: VR 41632\n\n## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV\n\nMatteo Borgioli, Anschrift wie oben\n",
       "width": "narrow",
       "color": "white",
-      "body": "**⚠️ Platzhalter – bitte vor der Veröffentlichung vollständig ausfüllen und rechtlich prüfen lassen.**\n\n## Angaben gemäß § 5 DDG\n\nSSV Potsdamer Straße\n\n\\[Platzhalter: vollständige, ladungsfähige Anschrift]\n\n## Vertreten durch\n\n\\[Platzhalter: Name(n) der vertretungsberechtigten Person(en)]\n\n## Kontakt\n\nE-Mail: info\\@ssvpotsdamerstr.de\n\n## Verantwortlich für den Inhalt\n\n\\[Platzhalter: Name und Anschrift der verantwortlichen Person]\n"
+      "_template": "richText"
     }
   ]
 }
