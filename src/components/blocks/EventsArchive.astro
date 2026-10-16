@@ -11,7 +11,7 @@ const pastList = block.pastCount ? past.slice(0, block.pastCount) : past;
     <div class="container-page">
       <h2 id="upcoming-heading" class="display mb-10 text-4xl md:text-5xl">{block.upcomingHeading || labels.upcoming}</h2>
       <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" data-upcoming-list>
-        {upcoming.map((event) => <li data-event-item><EventCard event={event} labels={labels} headingLevel="h3" lang={lang} /></li>)}
+        {upcoming.map((event, i) => <li data-event-item><EventCard event={event} labels={labels} headingLevel="h3" lang={lang} tone={['blue', 'lime', 'ink'][i % 3]} /></li>)}
       </ul>
       <p class={`bg-white p-6 text-lg font-medium brutal-border ${upcoming.length ? 'hidden' : ''}`} data-empty>{block.emptyText || labels.noEvents}</p>
     </div>

@@ -1,4 +1,5 @@
 ---
+import Decor from '../ui/Decor.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import NewsCard from '../ui/NewsCard.astro';
 import Button from '../ui/Button.astro';
@@ -9,7 +10,8 @@ let posts = await getNews();
 if (block.onlyFeatured) posts = posts.filter((p) => p.data.featured);
 posts = posts.slice(0, block.count || 3);
 ---
-<section id={block.anchor || undefined} class="bg-paper py-16 md:py-24">
+<section id={block.anchor || undefined} class="decor-host relative overflow-hidden bg-paper py-16 md:py-24">
+  <Decor variant="c" />
   <div class="container-page">
     <div class="flex flex-wrap items-end justify-between gap-6">
       <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} />

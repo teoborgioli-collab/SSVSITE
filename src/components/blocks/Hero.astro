@@ -1,9 +1,16 @@
 ---
+import Shape from '../ui/Shape.astro';
 import CmsImage from '../ui/CmsImage.astro';
 import Buttons from '../ui/Buttons.astro';
 const { block } = Astro.props as { block: any };
 ---
 <section id={block.anchor || undefined} class="relative overflow-hidden border-b-[3px] border-ink bg-paper">
+  <div class="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
+    <Shape kind="star" fill="var(--color-ssv-blue)" depth={40} cls="right-[4%] top-[8%] h-16 w-16" />
+    <Shape kind="circle" fill="var(--color-ssv-lime)" depth={-30} delay="-2s" cls="bottom-8 left-[47%] h-12 w-12" />
+    <Shape kind="square" fill="var(--color-ssv-blue)" depth={26} shadow delay="-4s" cls="bottom-[8%] left-[3%] h-12 w-12 rotate-12" />
+    <Shape kind="squiggle" fill="var(--color-ink)" depth={-46} cls="left-[38%] top-6 h-6 w-20" />
+  </div>
   <div class="container-page grid items-center gap-10 py-12 md:grid-cols-2 md:gap-12 md:py-20 lg:py-24">
     <div class="relative z-10 space-y-7">
       {block.badge && <p class="eyebrow">{block.badge}</p>}
@@ -11,6 +18,18 @@ const { block } = Astro.props as { block: any };
       {block.text && <p class="max-w-xl text-lg font-medium sm:text-xl md:text-2xl">{block.text}</p>}
       <Buttons buttons={block.buttons} class="pt-2" />
     </div>
+    {!block.image && (
+      <div class="relative hidden h-[26rem] md:block" aria-hidden="true">
+        <Shape kind="circle" fill="var(--color-ssv-blue)" depth={38} cls="right-10 top-4 h-52 w-52" />
+        <Shape kind="square" fill="var(--color-ssv-lime)" depth={-48} shadow delay="-1.5s" cls="bottom-6 left-12 h-36 w-36 rotate-12" />
+        <Shape kind="circle" fill="var(--color-white)" depth={58} delay="-3s" cls="bottom-0 right-6 h-24 w-24" />
+        <Shape kind="star" fill="var(--color-ink)" depth={-32} spin cls="left-4 top-0 h-24 w-24" />
+        <Shape kind="circle" fill="none" depth={22} cls="left-[38%] top-[44%] h-20 w-20" />
+        <Shape kind="tri" fill="var(--color-ssv-lime)" depth={52} delay="-2s" cls="left-[46%] top-0 h-16 w-16" />
+        <Shape kind="blob" fill="var(--color-ssv-lime)" depth={-26} cls="right-0 top-[58%] h-16 w-20" />
+        <Shape kind="plus" fill="var(--color-ssv-blue)" depth={30} delay="-5s" cls="bottom-24 left-0 h-14 w-14" />
+      </div>
+    )}
     {block.image && (
       <div class="relative">
         <div class="absolute -right-4 -top-4 hidden h-24 w-24 bg-ssv-lime brutal-border md:block" aria-hidden="true"></div>

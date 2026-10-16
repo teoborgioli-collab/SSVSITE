@@ -1,0 +1,32 @@
+---
+/** Dekorative Formen (weich: rund / hart: eckig). Reagieren auf Maus und Scrollen (siehe Skript im Layout). */
+import Shape from './Shape.astro';
+interface Props { variant?: 'a' | 'b' | 'c' | 'd' }
+const { variant = 'a' } = Astro.props;
+---
+<div class="pointer-events-none absolute inset-0 z-0 hidden overflow-hidden md:block" aria-hidden="true">
+  {variant === 'a' && (<>
+    <Shape kind="circle" fill="var(--color-ssv-lime)" depth={30} cls="left-[8%] top-4 h-14 w-14" />
+    <Shape kind="square" fill="var(--color-ssv-blue)" depth={-36} shadow delay="-2s" cls="bottom-5 right-[12%] h-12 w-12 rotate-12" />
+    <Shape kind="squiggle" fill="var(--color-ssv-blue)" depth={46} delay="-4s" cls="left-[55%] top-5 h-6 w-20" />
+    <Shape kind="circle" fill="none" depth={20} cls="-right-10 top-1/3 h-28 w-28" />
+  </>)}
+  {variant === 'b' && (<>
+    <Shape kind="tri" fill="var(--color-ssv-lime)" depth={-40} cls="bottom-4 left-[14%] h-14 w-14" />
+    <Shape kind="blob" fill="var(--color-ssv-blue)" depth={34} delay="-3s" cls="right-[7%] top-4 h-14 w-16" />
+    <Shape kind="star" fill="var(--color-ssv-lime)" depth={28} spin cls="bottom-3 left-[62%] h-12 w-12" />
+    <Shape kind="circle" fill="var(--color-white)" depth={-22} cls="-left-10 top-1/3 h-24 w-24" />
+  </>)}
+  {variant === 'c' && (<>
+    <Shape kind="plus" fill="var(--color-ssv-blue)" depth={38} cls="bottom-4 left-[10%] h-14 w-14" />
+    <Shape kind="circle" fill="var(--color-ssv-lime)" depth={-30} delay="-1s" cls="right-[10%] top-4 h-14 w-14" />
+    <Shape kind="diamond" fill="var(--color-white)" depth={24} shadow delay="-5s" cls="left-[48%] top-4 h-10 w-10" />
+    <Shape kind="squiggle" fill="var(--color-ink)" depth={-44} cls="bottom-6 right-[30%] h-6 w-20" />
+  </>)}
+  {variant === 'd' && (<>
+    <Shape kind="blob" fill="var(--color-ssv-lime)" depth={-34} cls="left-[6%] top-4 h-12 w-16" />
+    <Shape kind="tri" fill="var(--color-ssv-blue)" depth={42} delay="-2s" cls="bottom-4 right-[9%] h-14 w-14" />
+    <Shape kind="circle" fill="none" depth={26} cls="-left-8 bottom-10 h-20 w-20" />
+    <Shape kind="star" fill="var(--color-ink)" depth={-26} spin cls="right-[44%] top-3 h-10 w-10" />
+  </>)}
+</div>

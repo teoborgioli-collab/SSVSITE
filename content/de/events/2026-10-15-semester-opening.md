@@ -11,13 +11,15 @@ registrationUrl: ''
 registrationLabel: ''
 draft: false
 en:
-  title: Semester Opening
-  location: Potsdamer Straße residence – exact meeting point to follow
+  title: Semester opening
+  location: '[Placeholder: location]'
   excerpt: Let’s start the new semester together – meet your neighbours!
   registrationLabel: ''
   body: |
-    At the start of the semester we invite all residents. There will be music, snacks and a chance to get to know your neighbours and the SSV. Just drop by – no registration needed.
-  imageAlt: ''
+    *Sample event – please adjust in the CMS.*
+
+    At the start of the semester we invite all residents. There will be music, snacks and a chance to get to know the SSV.
+  imageAlt: Placeholder image – event image
 ---
 
 Zum Semesterstart laden wir alle Bewohner:innen ein. Es gibt Musik, Snacks und die Gelegenheit, Nachbar:innen und die SSV kennenzulernen. Kommt vorbei – eine Anmeldung ist nicht nötig.

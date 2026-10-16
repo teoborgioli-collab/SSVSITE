@@ -1,4 +1,5 @@
 ---
+import Decor from '../ui/Decor.astro';
 import CmsImage from '../ui/CmsImage.astro';
 const { block } = Astro.props as { block: any };
 const colors: Record<string, string> = {
@@ -7,7 +8,8 @@ const colors: Record<string, string> = {
 const c = colors[block.color] || colors.white;
 const dark = ['blue', 'black'].includes(block.color);
 ---
-<header id={block.anchor || undefined} class={`border-b-[3px] border-ink ${c}`}>
+<header id={block.anchor || undefined} class={`decor-host relative overflow-hidden border-b-[3px] border-ink ${c}`}>
+  <Decor variant="a" />
   <div class={`container-page grid gap-10 py-14 md:py-20 ${block.image ? 'md:grid-cols-[1.2fr_1fr] md:items-center' : ''}`}>
     <div class="max-w-4xl">
       {block.badge && <p class={`eyebrow mb-6 ${block.color === 'lime' ? 'bg-white' : ''}`}>{block.badge}</p>}

@@ -1,4 +1,5 @@
 ---
+import Decor from '../ui/Decor.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
@@ -35,7 +36,8 @@ const groups: [string, R[]][] = block.groupByCategory
   : [['', rendered]];
 const hasHeading = !!block.heading;
 ---
-<section id={block.anchor || undefined} class="bg-paper py-16 md:py-24">
+<section id={block.anchor || undefined} class="decor-host relative overflow-hidden bg-paper py-16 md:py-24">
+  <Decor variant="b" />
   <div class="container-page max-w-4xl">
     <SectionHeading badge={block.badge} heading={block.heading} intro={block.intro} />
     <div class="space-y-12">

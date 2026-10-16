@@ -4,17 +4,18 @@ import Icon from './Icon.astro';
 import { dayParts, formatDate } from '../../lib/dates';
 import { eventText } from '../../lib/content';
 import { eventUrl, type Lang } from '../../i18n';
-interface Props { event: any; labels: Record<string, string>; past?: boolean; headingLevel?: 'h2' | 'h3'; lang?: Lang }
-const { event, labels, past = false, headingLevel: H = 'h3', lang = 'de' } = Astro.props;
+interface Props { event: any; labels: Record<string, string>; past?: boolean; tone?: 'blue' | 'lime' | 'ink'; headingLevel?: 'h2' | 'h3'; lang?: Lang }
+const { event, labels, past = false, tone = 'blue', headingLevel: H = 'h3', lang = 'de' } = Astro.props;
 const d = event.data;
 const t = eventText(event, lang);
 const p = dayParts(event.start, lang);
 const time = d.startTime ? `${d.startTime}${d.endTime ? `–${d.endTime}` : ''}${labels.oClock ? ` ${labels.oClock}` : ''}` : '';
 const href = eventUrl(lang, event.id);
 const de = t.translated ? undefined : 'de';
+const tones = { blue: 'bg-ssv-blue text-white', lime: 'bg-ssv-lime text-ink', ink: 'bg-ink text-white' };
 ---
 <article
-  class={`group relative flex h-full flex-col overflow-hidden brutal-border brutal-press ${past ? 'bg-white text-ink' : 'bg-ssv-blue text-white'}`}
+  class={`group relative flex h-full flex-col overflow-hidden brutal-border brutal-press ${past ? 'bg-white text-ink' : tones[tone]}`}
   data-event-card
   data-end={event.end.toISOString()}
   data-reveal
@@ -28,7 +29,7 @@ const de = t.translated ? undefined : 'de';
     <Icon name="calendar" size={140} />
   </div>
   <div class="relative flex flex-1 flex-col p-6">
-    <div class={`mb-5 flex w-max items-stretch brutal-border font-bold ${past ? 'bg-paper text-ink' : 'bg-ssv-lime text-ink'}`}>
+    <div class={`mb-5 flex w-max items-stretch brutal-border font-bold ${past ? 'bg-paper text-ink' : tone === 'lime' ? 'bg-white text-ink' : 'bg-ssv-lime text-ink'}`}>
       <span class="px-3 py-2 text-2xl leading-none">{p.day}</span>
       <span class="flex flex-col justify-center border-l-[3px] border-ink px-3 text-xs uppercase leading-tight">
         <span>{p.month} {p.year}</span><span>{p.weekday}</span>
@@ -38,11 +39,11 @@ const de = t.translated ? undefined : 'de';
     <H class="mb-3 text-2xl font-bold uppercase leading-tight tracking-tight md:text-3xl" lang={de}>
       <a href={href} class="after:absolute after:inset-0 focus-visible:outline-none">{t.title}</a>
     </H>
-    <ul class={`mb-4 space-y-1.5 text-sm font-bold ${past ? 'text-ink/70' : 'text-ssv-lime'}`}>
+    <ul class={`mb-4 space-y-1.5 text-sm font-bold ${past ? 'text-ink/70' : tone === 'lime' ? 'text-ink/80' : 'text-ssv-lime'}`}>
       <li class="flex items-center gap-2"><span class="sr-only">{labels.date}:</span><time datetime={event.start.toISOString()}>{formatDate(event.start, { weekday: 'long', day: 'numeric', month: 'long' }, lang)}</time></li>
       {time && <li class="flex items-center gap-2"><Icon name="clock" size={16} /><span class="sr-only">{labels.time}:</span>{time}</li>}
       {t.location && <li class="flex items-center gap-2"><Icon name="map-pin" size={16} /><span class="sr-only">{labels.location}:</span>{t.location}</li>}
     </ul>
-    {t.excerpt && <p class={`font-medium ${past ? 'text-ink/80' : 'text-white/90'}`} lang={de}>{t.excerpt}</p>}
+    {t.excerpt && <p class={`font-medium ${past ? 'text-ink/80' : tone === 'lime' ? 'text-ink/85' : 'text-white/90'}`} lang={de}>{t.excerpt}</p>}
   </div>
 </article>
