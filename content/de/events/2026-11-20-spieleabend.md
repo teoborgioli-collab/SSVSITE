@@ -16,8 +16,6 @@ en:
   excerpt: 'Party, dance and meet your neighbours – all residents are welcome!'
   registrationLabel: ''
   body: |
-    *Sample event – please adjust in the CMS.*
-
     A relaxed evening for everyone. NCome to the dorm party and spend a relaxed evening with your neighbours. We'll announce music, drinks and further details in good time. No registration needed.o registration needed.
   imageAlt: ''
 ---
