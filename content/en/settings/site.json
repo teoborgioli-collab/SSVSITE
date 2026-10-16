@@ -24,12 +24,16 @@
     {
       "label": "Contact",
       "href": "/en/contact"
+    },
+    {
+      "label": "Support",
+      "href": "/en/support"
     }
   ],
   "navCta": {
-    "enabled": true,
-    "label": "Get involved",
-    "href": "/en/get-involved"
+    "enabled": false,
+    "label": "Sign in",
+    "href": "https://member.ssvpotsdamerstr.de/"
   },
   "footer": {
     "text": "Living together. Shaping together. We are the elected representatives of the residents.",
