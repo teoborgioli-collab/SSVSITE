@@ -7,32 +7,29 @@
   },
   "blocks": [
     {
-      "_template": "pageHeader",
       "enabled": true,
       "badge": "Wohnheim",
       "title": "Unser Zuhause",
       "intro": "Alles Wichtige rund ums Wohnen – besonders für alle, die neu eingezogen sind.",
       "image": "/uploads/bilder/wohnheim.jpg",
       "imageAlt": "Platzhalterbild – Außenansicht des Wohnheims",
-      "color": "white"
+      "color": "white",
+      "_template": "pageHeader"
     },
     {
-      "_template": "richText",
       "enabled": true,
       "badge": "Neu hier?",
       "heading": "Willkommen im Wohnheim!",
+      "body": "Schön, dass du da bist! Hier sammeln wir Infos, die dir den Start erleichtern.\n\n\\[Platzhalter] Bitte hier die wichtigsten Punkte für neue Bewohner:innen ergänzen, z. B. Ansprechpersonen, Hausordnung, Mülltrennung.\n",
       "width": "narrow",
       "color": "white",
-      "body": "Schön, dass du da bist! Hier sammeln wir Infos, die dir den Start erleichtern.\n\n\\[Platzhalter] Bitte hier die wichtigsten Punkte für neue Bewohner\\:innen ergänzen, z. B. Ansprechpersonen, Hausordnung, Mülltrennung.\n"
+      "_template": "richText"
     },
     {
-      "_template": "features",
       "enabled": true,
       "badge": "",
       "heading": "Gemeinschaftliche Angebote",
       "intro": "[Platzhalter] Passe die Karten an die tatsächlich vorhandenen Räume und Angebote an.",
-      "style": "light",
-      "columns": "3",
       "cards": [
         {
           "title": "Gemeinschaftsraum",
@@ -42,20 +39,22 @@
         },
         {
           "title": "Waschen",
-          "text": "[Platzhalter] Wo und wie die Waschmaschinen funktionieren.",
+          "text": "Der Waschraum ist im Keller von Haus 63. Zum Bezahlen brauchst du deine Mensakarte.",
           "icon": "washing-machine",
           "accent": "blue"
         },
         {
           "title": "Fahrräder",
-          "text": "[Platzhalter] Infos zu Fahrradstellplätzen.",
+          "text": "Im Innenhof gibt es überdachte Fahrradständer.",
           "icon": "bike",
           "accent": "lime"
         }
-      ]
+      ],
+      "style": "light",
+      "columns": "3",
+      "_template": "features"
     },
     {
-      "_template": "faq",
       "enabled": true,
       "badge": "",
       "heading": "Fragen zum Wohnheim",
@@ -64,10 +63,10 @@
       "limit": 0,
       "groupByCategory": false,
       "buttonLabel": "Alle Fragen",
-      "buttonHref": "/faq"
+      "buttonHref": "/faq",
+      "_template": "faq"
     },
     {
-      "_template": "gallery",
       "enabled": true,
       "badge": "",
       "heading": "Eindrücke",
@@ -93,7 +92,8 @@
           "alt": "Platzhalterbild 4",
           "caption": ""
         }
-      ]
+      ],
+      "_template": "gallery"
     }
   ]
 }
