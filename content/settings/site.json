@@ -107,7 +107,7 @@
     "siteUrl": "https://www.ssvpotsdamerstr.de",
     "titleTemplate": "%s | SSV Potsdamer Straße",
     "description": "Die SSV Potsdamer Straße vertritt die Interessen der Bewohner:innen, organisiert Veranstaltungen und gestaltet das Leben im Wohnheim gemeinsam.",
-    "image": "/uploads/bilder/og-standard.jpg"
+    "image": "/uploads/bilder/gemini_generated_image_xpoq7dxpoq7dxpoq.jpeg"
   },
   "contactForm": {
     "endpoint": "/api/contact",
