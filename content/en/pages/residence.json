@@ -1,5 +1,5 @@
 {
-  "title": "Residence",
+  "title": "Dorm",
   "dePage": "content/de/pages/wohnheim.json",
   "hideFromSitemap": false,
   "seo": {
@@ -9,10 +9,10 @@
   "blocks": [
     {
       "enabled": true,
-      "badge": "Residence",
+      "badge": "Dorm",
       "title": "Our home",
       "intro": "Everything you need to know about living here – especially if you just moved in.",
-      "image": "/uploads/bilder/wohnheim.jpg",
+      "image": "/uploads/bilder/gemini_generated_image_xpoq7dxpoq7dxpoq.jpeg",
       "imageAlt": "Placeholder image – outside view of the residence",
       "color": "white",
       "_template": "pageHeader"
