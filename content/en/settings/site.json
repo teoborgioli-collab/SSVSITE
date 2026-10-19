@@ -92,9 +92,10 @@
     "copyright": "© {jahr} SSV Potsdamer Straße"
   },
   "seo": {
+    "siteUrl": "https://www.ssvpotsdamerstr.de/en",
     "titleTemplate": "%s | SSV Potsdamer Straße",
     "description": "SSV Potsdamer Straße represents the residents, organises events and shapes life in the student residence together.",
-    "image": "/uploads/bilder/og-standard.jpg"
+    "image": "/uploads/bilder/gemini_generated_image_xpoq7dxpoq7dxpoq.jpeg"
   },
   "contactForm": {
     "nameLabel": "Name",
